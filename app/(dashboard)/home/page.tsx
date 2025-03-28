@@ -7,6 +7,11 @@ import Hero from "./_components/Hero/Hero";
 import { HomeService } from "@/services/home.service";
 import { useEffect, useState } from "react";
 import { ILandingPage } from "@/app/types/api/response/home.response";
+import Vision from "./_components/Vision/Vision";
+import Mission from "./_components/Mission/Mission";
+import Testimonial from "./_components/Testimonial/Testimonial";
+import Gallery from "./_components/Gallery/Gallery";
+import Meta from "./_components/Meta/Meta";
 
 const HomePage = () => {
 
@@ -49,6 +54,21 @@ const HomePage = () => {
             </div>
             <div className="flex flex-row mt-5">
                 <Hero />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Vision />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Mission />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Testimonial />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Gallery />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Meta />
             </div>
         </div>
     )

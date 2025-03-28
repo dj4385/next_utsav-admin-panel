@@ -5,6 +5,5 @@ export const menuItems = [
     { name: "About", href: "/about", icon: User2 },
     { name: "Contact", href: "/contact", icon: Contact },
     { name: "Destination", href: "/destination", icon: MapPin },
-    { name: "Landing Page", href: "/landing-page", icon: PanelsTopLeft },
     { name: "Venue", href: "/venue", icon: MapPinHouse }
 ];

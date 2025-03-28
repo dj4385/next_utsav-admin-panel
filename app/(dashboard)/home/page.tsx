@@ -12,24 +12,95 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
+import { IBrandData, IGalleryData, IHeroData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
 
 const HomePage = () => {
 
     const [homePageData, setHomePageData] = useState<ILandingPage | null>(null);
-    const [brandData, setBrandData] = useState<any>()
+    const [brandData, setBrandData] = useState<IBrandData>({
+        brandAlt: "",
+        brandLogo: "",
+        brandName: ""
+    });
+    const [heroData, setHeroData] = useState<IHeroData>({
+        backgroundImg: "",
+        heading: "",
+        headingImg: "",
+        headingImgAlt: "",
+        story: "",
+        storyHeading: "",
+        subHeading: ""
+    });
+    const [visionData, setVisionData] = useState<IVisionData>({
+        vision: "",
+        visionHeading: ""
+    });
+    const [missionData, setMissionData] = useState<IMissionData>({
+        mission: "",
+        missionHeading: ""
+    });
+    const [testimonialData, setTestimonianlData] = useState<ITestimonialData>({
+        testimonial: ""
+    });
+    const [galleryData, setGalleryData] = useState<IGalleryData>({
+        galleryHeading: "",
+        gallerySection: ""
+    });
+    const [metaData, setMetaData] = useState<IMetaData>({
+        metaDescription: "",
+        metaImageUrl: "",
+        metaTitle: ""
+    });
 
     const getHomepage = async () => {
         try {
             const res: any = await HomeService.getLandingPage();
-            console.log(res);
+            console.log(res.data);
             if(res && res.status == 200 && res.data) {
-                const {brand_name, brand_logo, alt_brand_logo} = res.data;
+                const {
+                    brand_name, brand_logo, alt_brand_logo, heading, heading_image,
+                    alt_heading_image, background_image, story, story_heading,
+                    sub_heading, vision, vision_heading, mission, mission_heading,
+                    testimonial_section, gallery_heading, gallery_section,
+                    meta_description, meta_image, meta_title
+                } = res.data;
+
                 setHomePageData(res.data);
                 setBrandData({
                     brandName: brand_name,
                     brandLogo: brand_logo,
                     brandAlt: alt_brand_logo
+                });
+                setHeroData({
+                    backgroundImg: background_image,
+                    heading,
+                    headingImg: heading_image,
+                    headingImgAlt: alt_heading_image,
+                    story,
+                    storyHeading: story_heading,
+                    subHeading: sub_heading
                 })
+                setVisionData({
+                    vision,
+                    visionHeading: vision_heading
+                })
+                setMissionData({
+                    mission,
+                    missionHeading: mission_heading
+                })
+                setTestimonianlData({
+                    testimonial: testimonial_section
+                })
+                setGalleryData({
+                    galleryHeading: gallery_heading,
+                    gallerySection: gallery_section
+                })
+                setMetaData({
+                    metaDescription: meta_description,
+                    metaImageUrl: meta_image,
+                    metaTitle: meta_title
+                })
+
             }
         } catch (error) {
             
@@ -53,22 +124,22 @@ const HomePage = () => {
                 <Brand brandData={brandData} setBrandData={setBrandData}  />
             </div>
             <div className="flex flex-row mt-5">
-                <Hero />
+                <Hero heroData={heroData} setHeroData={setHeroData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Vision />
+                <Vision visionData={visionData} setVisionData={setVisionData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Mission />
+                <Mission missionData={missionData} setMissionData={setMissionData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Testimonial />
+                <Testimonial setTestimonialData={setTestimonianlData} testimonialData={testimonialData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Gallery />
+                <Gallery galleryData={galleryData} setGalleryData={setGalleryData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Meta />
+                <Meta metaData={metaData} setMetaData={setMetaData} />
             </div>
         </div>
     )

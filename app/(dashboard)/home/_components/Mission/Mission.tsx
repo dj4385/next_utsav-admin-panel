@@ -1,10 +1,14 @@
 "use client"
 
+import { IMission } from "@/app/types/components/Home";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Home } from "lucide-react";
 
-const Mission = () => {
+const Mission = ({
+    missionData,
+    setMissionData
+}: IMission) => {
     return (
         <div className="border-[2px] rounded-lg p-2 w-full">
             <h2 className="flex flex-row gap-2 items-center text-lg font-medium mb-3"> <Home /> Mission Section</h2>

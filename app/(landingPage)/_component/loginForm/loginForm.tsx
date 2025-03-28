@@ -45,8 +45,10 @@ const LoginForm = () => {
                     variant: "destructive",
                 })     
             }
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
             setLoading(false)
-            console.log(res); 
         } catch (error: any) {
             setLoading(false)
             toast({
@@ -55,16 +57,6 @@ const LoginForm = () => {
                 variant: "destructive",
             })     
         }
-        // console.log("Login Data:", data);
-        // toast({
-        //     title: "Scheduled: Catch up",
-        //     description: "Friday, February 10, 2023 at 5:57 PM",
-        //     variant: "destructive",
-        // })
-        // router.push('/home');
-        // setTimeout(() => {
-        //     setLoading(false);
-        // }, 200);
     }
 
     return (

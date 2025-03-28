@@ -3,9 +3,10 @@
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const token = sessionStorage.getItem('token')
+  const { token } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 

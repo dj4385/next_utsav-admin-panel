@@ -1,4 +1,4 @@
-import { ILoginRequest, IRegisterRequest } from "@/app/types/api/request/auth";
+import { ILoginRequest, IRegisterRequest } from "@/app/types/api/request/auth.request";
 import api from "@/lib/axios.interceptor"
 
 export class AuthService {

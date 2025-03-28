@@ -1,12 +1,12 @@
 "use client";
 
-import { ILoginRequest } from "@/app/types/api/request/auth";
+import { ILoginRequest } from "@/app/types/api/request/auth.request";
 import { ILoginFormData } from "@/app/types/components/loginForm/ILoginForm";
 import { useAuth } from "@/components/context/AuthContext";
 import ButtonComponent from "@/components/core/Button/Button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { AuthService } from "@/services/auth";
+import { AuthService } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

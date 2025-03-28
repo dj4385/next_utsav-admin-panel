@@ -1,4 +1,4 @@
-import { IContactRequest } from "@/app/types/api/request/contact";
+import { IContactRequest } from "@/app/types/api/request/contact.request";
 import api from "@/lib/axios.interceptor"
 
 export class ContactService {

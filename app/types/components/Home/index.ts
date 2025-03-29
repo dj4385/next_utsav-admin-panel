@@ -126,3 +126,17 @@ export interface IEventData {
     alt_icon: string;
     _id: string;
 }
+
+export interface IContact {
+    contactData: IContactData;
+    setContactData: any;
+}
+
+export interface IContactData {
+    heading: string;
+    sub_heading: string;
+    email: string;
+    phone: string;
+    button: string;
+    _id: string;
+}

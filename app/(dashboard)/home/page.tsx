@@ -12,13 +12,16 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
-import { IBrandData, IEventData, IGalleryData, IGalleryList, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, ITestimonialList, IVisionData } from "@/app/types/components/Home";
+import { IBrandData, IContactData, IEventData, IGalleryData, IGalleryList, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, ITestimonialList, IVisionData } from "@/app/types/components/Home";
 import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
 import { Separator } from "@/components/ui/separator";
 import Event from "./_components/Event/Event";
+import ButtonComponent from "@/components/core/Button/Button";
+import Contact from "./_components/Contact/Contact";
 
 const HomePage = () => {
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [homePageData, setHomePageData] = useState<ILandingPage | null>(null);
     const [brandData, setBrandData] = useState<IBrandData>({
         brandAlt: "",
@@ -66,7 +69,15 @@ const HomePage = () => {
         _id: "",
         videoHeading: ""
     });
-    const [eventData, setEventData] = useState<IEventData[]>([])
+    const [eventData, setEventData] = useState<IEventData[]>([]);
+    const [contactData, setContactData] = useState<IContactData>({
+        _id: "",
+        button: "",
+        email: "",
+        heading: "",
+        phone: "",
+        sub_heading: ""
+    })
 
     const getHomepage = async () => {
         try {
@@ -79,7 +90,7 @@ const HomePage = () => {
                     sub_heading, vision, vision_heading, mission, mission_heading,
                     testimonial_section, gallery_heading, gallery_section,
                     meta_description, meta_image, meta_title, landing_video,
-                    card_events, the_gallery, the_testimonial
+                    card_events, the_gallery, the_testimonial, contact_us
                 } = res.data;
 
                 const { alt, image, video, video_landing, _id } = landing_video[0];
@@ -131,12 +142,15 @@ const HomePage = () => {
                 setEventData(card_events)
                 setGalleryList(the_gallery)
                 setTestimonialList(the_testimonial)
-
+                debugger
+                setContactData(contact_us)
             }
         } catch (error) {
             
         }
     }
+
+    const onSaveChanges = () => {}
 
     useEffect(() => {
         getHomepage()
@@ -179,7 +193,12 @@ const HomePage = () => {
             <div className="flex flex-row mt-5">
                 <Event eventData={eventData} setEventData={setEventData} />
             </div>
-            
+            <div className="flex flex-row mt-5">
+                <Contact contactData={contactData} setContactData={setContactData} />
+            </div>
+            <div className="flex justify-center items-center mt-5">
+                <ButtonComponent label="Save Changes" onClick={() => onSaveChanges()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />
+            </div>
         </div>
     )
 }

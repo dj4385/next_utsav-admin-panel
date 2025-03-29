@@ -2,7 +2,7 @@
 
 import { IGallery, IGalleryData } from "@/app/types/components/Home";
 import { Input } from "@/components/ui/input";
-import { Home } from "lucide-react";
+import { Home, Image } from "lucide-react";
 import { ChangeEvent } from "react";
 
 const Gallery = ({
@@ -21,7 +21,7 @@ const Gallery = ({
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
-            <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Home /> Gallery Section</h2>
+            <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Image /> Gallery Section</h2>
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Gallery Section</label>

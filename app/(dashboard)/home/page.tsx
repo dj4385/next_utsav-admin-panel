@@ -12,7 +12,7 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
-import { IBrandData, IGalleryData, IHeroData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
+import { IBrandData, IGalleryData, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
 import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
 import { Separator } from "@/components/ui/separator";
 
@@ -53,6 +53,15 @@ const HomePage = () => {
         metaImageUrl: "",
         metaTitle: ""
     });
+    const [landingVideoPageData, setLandingVideoPageData] = useState<ILandingVideoPageData>({
+        heading: "",
+        subHeading: "",
+        image: "",
+        alt: "",
+        video: "",
+        _id: "",
+        videoHeading: ""
+    })
 
     const getHomepage = async () => {
         try {
@@ -64,8 +73,10 @@ const HomePage = () => {
                     alt_heading_image, background_image, story, story_heading,
                     sub_heading, vision, vision_heading, mission, mission_heading,
                     testimonial_section, gallery_heading, gallery_section,
-                    meta_description, meta_image, meta_title
+                    meta_description, meta_image, meta_title, landing_video
                 } = res.data;
+
+                const { alt, image, video, video_landing, _id } = landing_video[0];
 
                 setHomePageData(res.data);
                 setBrandData({
@@ -101,6 +112,15 @@ const HomePage = () => {
                     metaDescription: meta_description,
                     metaImageUrl: meta_image,
                     metaTitle: meta_title
+                })
+                setLandingVideoPageData({
+                    heading: landing_video[0].heading,
+                    subHeading: landing_video[0].sub_heading,
+                    image,
+                    alt,
+                    video,
+                    _id,
+                    videoHeading: video_landing
                 })
 
             }
@@ -145,7 +165,7 @@ const HomePage = () => {
             </div>
             <Separator className="mt-5" />
             <div className="flex flex-row mt-5">
-                <LandingVideoPage />
+                <LandingVideoPage landingVideoPageData={landingVideoPageData} setLandingVideoPageData={setLandingVideoPageData} />
             </div>
             
         </div>

@@ -3,7 +3,7 @@
 import { IMeta, IMetaData } from "@/app/types/components/Home";
 import FileUploader from "@/components/FileUploader/FileUploader";
 import { Input } from "@/components/ui/input";
-import { Home } from "lucide-react";
+import { Home, Search } from "lucide-react";
 import { ChangeEvent } from "react";
 
 const Meta = ({
@@ -22,7 +22,7 @@ const Meta = ({
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
-            <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Home /> Meta Section</h2>
+            <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Search /> Meta Section</h2>
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Title</label>

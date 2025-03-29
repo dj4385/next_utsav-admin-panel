@@ -74,3 +74,18 @@ export interface IMetaData {
     metaDescription: string;
     metaImageUrl: string;
 }
+
+export interface ILandingVideoPage {
+    landingVideoPageData: ILandingVideoPageData;
+    setLandingVideoPageData: any;
+}
+
+export interface ILandingVideoPageData {
+    heading: string;
+    subHeading: string;
+    image: string;
+    alt: string;
+    video: string;
+    videoHeading: string;
+    _id: string;
+}

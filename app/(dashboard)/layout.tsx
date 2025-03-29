@@ -2,6 +2,8 @@
 
 import { ReduxProvider } from "@/components/context/ReduxContext";
 import EventModal from "@/components/Modals/EventModal";
+import GalleryModal from "@/components/Modals/GalleryModal";
+import TestimonialModal from "@/components/Modals/TestimonialModal";
 import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
 import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
@@ -31,6 +33,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
           <ReduxProvider>
             <ProtectedRoute>
               <EventModal />
+              <GalleryModal />
+              <TestimonialModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

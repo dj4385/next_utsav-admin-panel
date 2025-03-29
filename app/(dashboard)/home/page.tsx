@@ -13,6 +13,8 @@ import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
 import { IBrandData, IGalleryData, IHeroData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
+import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
+import { Separator } from "@/components/ui/separator";
 
 const HomePage = () => {
 
@@ -141,6 +143,11 @@ const HomePage = () => {
             <div className="flex flex-row mt-5">
                 <Meta metaData={metaData} setMetaData={setMetaData} />
             </div>
+            <Separator className="mt-5" />
+            <div className="flex flex-row mt-5">
+                <LandingVideoPage />
+            </div>
+            
         </div>
     )
 }

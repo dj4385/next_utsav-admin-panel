@@ -36,9 +36,7 @@ export default function FileUploader({
     }
   };
 
-  useEffect(() => {
-    console.log(imageUrl);
-    
+  useEffect(() => {    
     if(imageUrl) {
         setPreview(imageUrl)
     }
@@ -46,10 +44,9 @@ export default function FileUploader({
 
   return (
     <div className="p-4 border rounded-xl shadow-md w-full">
-      <input type="file" onChange={handleFileChange} className="mb-4" />
-      {console.log(imageUrl, preview)}
+      <input type="file" onChange={handleFileChange} className="mb-4" />      
       {preview && (
-        <div className="mb-4">
+        <div className="mb-4 h-15 w-15">
           <Image
             src={preview}
             alt="Preview"

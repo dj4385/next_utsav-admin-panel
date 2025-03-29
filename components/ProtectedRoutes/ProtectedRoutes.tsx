@@ -12,12 +12,12 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   useEffect(() => {
     if (!token) {
-      toast({
-        title: "Error",
-        description: "UnAuthorized Access",
-        variant: "destructive"
-      })
-      router.push("/"); // Redirect if not authenticated
+      // toast({
+      //   title: "Error",
+      //   description: "UnAuthorized Access",
+      //   variant: "destructive"
+      // })
+      // router.push("/"); // Redirect if not authenticated
     }
   }, [token, router]);
 

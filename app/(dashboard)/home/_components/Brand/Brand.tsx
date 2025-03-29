@@ -20,9 +20,9 @@ const Brand = ({
     }
 
     return (
-        <div className="border-[2px] rounded-lg p-2 w-full">
-            <h2 className="flex flex-row gap-2 items-center text-lg font-medium mb-3"> <Tag /> Brand Section</h2>
-            <div className="grid grid-cols-3 gap-4">
+        <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
+            <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <Tag /> Brand Section</h2>
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Brand Name</label>
                     <Input type="text" placeholder="Enter Brand Name" name="brandName" onChange={handleChange} value={brandData?.brandName || ''} className="mt-1 w-full" />

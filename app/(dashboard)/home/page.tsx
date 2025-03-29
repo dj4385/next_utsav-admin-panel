@@ -12,7 +12,7 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
-import { IBrandData, IEventData, IGalleryData, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
+import { IBrandData, IEventData, IGalleryData, IGalleryList, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
 import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
 import { Separator } from "@/components/ui/separator";
 import Event from "./_components/Event/Event";
@@ -49,6 +49,8 @@ const HomePage = () => {
         galleryHeading: "",
         gallerySection: ""
     });
+    const [galleryList, setGalleryList] = useState<IGalleryList[]>([])
+
     const [metaData, setMetaData] = useState<IMetaData>({
         metaDescription: "",
         metaImageUrl: "",
@@ -76,7 +78,7 @@ const HomePage = () => {
                     sub_heading, vision, vision_heading, mission, mission_heading,
                     testimonial_section, gallery_heading, gallery_section,
                     meta_description, meta_image, meta_title, landing_video,
-                    card_events
+                    card_events, the_gallery
                 } = res.data;
 
                 const { alt, image, video, video_landing, _id } = landing_video[0];
@@ -126,6 +128,8 @@ const HomePage = () => {
                     videoHeading: video_landing
                 })
                 setEventData(card_events)
+                debugger
+                setGalleryList(the_gallery)
 
             }
         } catch (error) {
@@ -162,7 +166,7 @@ const HomePage = () => {
                 <Testimonial setTestimonialData={setTestimonianlData} testimonialData={testimonialData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Gallery galleryData={galleryData} setGalleryData={setGalleryData} />
+                <Gallery galleryData={galleryData} setGalleryData={setGalleryData} galleryList={galleryList} setGalleryList={setGalleryList} />
             </div>
             <div className="flex flex-row mt-5">
                 <Meta metaData={metaData} setMetaData={setMetaData} />

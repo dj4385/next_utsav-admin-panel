@@ -56,7 +56,16 @@ export interface ITestimonialData {
 
 export interface IGallery {
     galleryData: IGalleryData;
-    setGalleryData: any
+    setGalleryData: any;
+    galleryList: IGalleryList[],
+    setGalleryList: any
+}
+
+export interface IGalleryList {
+    gallery: string;
+    image: string;
+    alt: string;
+    _id: string;
 }
 
 export interface IGalleryData {

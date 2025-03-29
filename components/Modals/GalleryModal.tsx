@@ -35,20 +35,11 @@ const GalleryModal = () => {
         <Dialog open={isOpen} onOpenChange={handleClose}>
             <DialogContent className="w-[50%]">
                 <DialogHeader>
-                    <DialogTitle>Add/Update Event Card</DialogTitle>
+                    <DialogTitle>Add/Update Gallery</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4 overflow-y-scroll h-[500px]">
+                <div className="grid gap-4 py-4">
                     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid lg:grid-cols-1 grid-cols-1 gap-4 p-2">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Client</label>
-                                <Input type="text" {...register("client", { required: "Client is required"})} placeholder="Enter Client Name" className="mt-1 w-full" />
-                                {/* {errors.heading && <p className="text-red-500 mt-2 text-sm">{errors.heading.message}</p>} */}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Text</label>
-                                <Textarea {...register("text", { required: "Heading is required"})} placeholder="Enter text here..." />
-                            </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Alt</label>
                                 <Input type="text" {...register("alt", { required: "Alt is required"})} placeholder="Enter Image Alt" className="mt-1 w-full" />

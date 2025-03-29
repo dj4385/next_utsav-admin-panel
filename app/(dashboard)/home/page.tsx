@@ -12,9 +12,10 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
-import { IBrandData, IGalleryData, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
+import { IBrandData, IEventData, IGalleryData, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
 import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
 import { Separator } from "@/components/ui/separator";
+import Event from "./_components/Event/Event";
 
 const HomePage = () => {
 
@@ -61,7 +62,8 @@ const HomePage = () => {
         video: "",
         _id: "",
         videoHeading: ""
-    })
+    });
+    const [eventData, setEventData] = useState<IEventData[]>([])
 
     const getHomepage = async () => {
         try {
@@ -73,7 +75,8 @@ const HomePage = () => {
                     alt_heading_image, background_image, story, story_heading,
                     sub_heading, vision, vision_heading, mission, mission_heading,
                     testimonial_section, gallery_heading, gallery_section,
-                    meta_description, meta_image, meta_title, landing_video
+                    meta_description, meta_image, meta_title, landing_video,
+                    card_events
                 } = res.data;
 
                 const { alt, image, video, video_landing, _id } = landing_video[0];
@@ -122,6 +125,7 @@ const HomePage = () => {
                     _id,
                     videoHeading: video_landing
                 })
+                setEventData(card_events)
 
             }
         } catch (error) {
@@ -166,6 +170,9 @@ const HomePage = () => {
             <Separator className="mt-5" />
             <div className="flex flex-row mt-5">
                 <LandingVideoPage landingVideoPageData={landingVideoPageData} setLandingVideoPageData={setLandingVideoPageData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Event eventData={eventData} setEventData={setEventData} />
             </div>
             
         </div>

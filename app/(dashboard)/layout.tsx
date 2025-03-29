@@ -1,5 +1,7 @@
 "use client"
 
+import { ReduxProvider } from "@/components/context/ReduxContext";
+import EventModal from "@/components/Modals/EventModal";
 import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
 import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
@@ -26,9 +28,12 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
       <main className="flex-1 h-screen overflow-y-auto relative">
         <Toolbar />
         <div className="p-6 mt-16">
-          <ProtectedRoute>
-            {children}
-          </ProtectedRoute>
+          <ReduxProvider>
+            <ProtectedRoute>
+              <EventModal />
+              {children}
+            </ProtectedRoute>
+          </ReduxProvider>
         </div>
       </main>
     </div>

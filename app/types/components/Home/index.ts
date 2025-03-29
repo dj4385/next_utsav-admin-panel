@@ -89,3 +89,20 @@ export interface ILandingVideoPageData {
     videoHeading: string;
     _id: string;
 }
+
+export interface IEvent {
+    eventData: IEventData[];
+    setEventData: any;
+}
+
+export interface IEventData {
+    event_card: string;
+    event_ui_type: string;
+    heading: string;
+    text: string;
+    image: string;
+    alt: string;
+    icon: string;
+    alt_icon: string;
+    _id: string;
+}

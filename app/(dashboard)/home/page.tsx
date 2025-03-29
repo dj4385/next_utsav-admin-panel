@@ -12,7 +12,7 @@ import Mission from "./_components/Mission/Mission";
 import Testimonial from "./_components/Testimonial/Testimonial";
 import Gallery from "./_components/Gallery/Gallery";
 import Meta from "./_components/Meta/Meta";
-import { IBrandData, IEventData, IGalleryData, IGalleryList, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, IVisionData } from "@/app/types/components/Home";
+import { IBrandData, IEventData, IGalleryData, IGalleryList, IHeroData, ILandingVideoPageData, IMetaData, IMissionData, ITestimonialData, ITestimonialList, IVisionData } from "@/app/types/components/Home";
 import LandingVideoPage from "./_components/LandingVideoPage/LandingVideoPage";
 import { Separator } from "@/components/ui/separator";
 import Event from "./_components/Event/Event";
@@ -45,6 +45,7 @@ const HomePage = () => {
     const [testimonialData, setTestimonianlData] = useState<ITestimonialData>({
         testimonial: ""
     });
+    const [testimonialList, setTestimonialList] = useState<ITestimonialList[]>([]);
     const [galleryData, setGalleryData] = useState<IGalleryData>({
         galleryHeading: "",
         gallerySection: ""
@@ -78,7 +79,7 @@ const HomePage = () => {
                     sub_heading, vision, vision_heading, mission, mission_heading,
                     testimonial_section, gallery_heading, gallery_section,
                     meta_description, meta_image, meta_title, landing_video,
-                    card_events, the_gallery
+                    card_events, the_gallery, the_testimonial
                 } = res.data;
 
                 const { alt, image, video, video_landing, _id } = landing_video[0];
@@ -128,8 +129,8 @@ const HomePage = () => {
                     videoHeading: video_landing
                 })
                 setEventData(card_events)
-                debugger
                 setGalleryList(the_gallery)
+                setTestimonialList(the_testimonial)
 
             }
         } catch (error) {
@@ -163,7 +164,7 @@ const HomePage = () => {
                 <Mission missionData={missionData} setMissionData={setMissionData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Testimonial setTestimonialData={setTestimonianlData} testimonialData={testimonialData} />
+                <Testimonial setTestimonialData={setTestimonianlData} testimonialData={testimonialData} testimonialList={testimonialList} setTestimonialList={setTestimonialList} />
             </div>
             <div className="flex flex-row mt-5">
                 <Gallery galleryData={galleryData} setGalleryData={setGalleryData} galleryList={galleryList} setGalleryList={setGalleryList} />

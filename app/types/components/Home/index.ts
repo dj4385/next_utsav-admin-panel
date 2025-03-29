@@ -47,7 +47,18 @@ export interface IMissionData {
 
 export interface ITestimonial {
     testimonialData: ITestimonialData;
-    setTestimonialData: any
+    setTestimonialData: any,
+    testimonialList: ITestimonialList[],
+    setTestimonialList: any
+}
+
+export interface ITestimonialList {
+    testimonial: string;
+    client: string;
+    text: string;
+    image: string;
+    alt: string;
+    _id: string;
 }
 
 export interface ITestimonialData {

@@ -55,7 +55,7 @@ const TestimonialModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                                <FileUploader imageUrl={''} />
+                                <FileUploader url={''} urlType="image" />
                             </div>
                             <ButtonComponent label="Save Changes" onClick={() => {}} loading={false} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>

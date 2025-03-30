@@ -34,7 +34,7 @@ const Meta = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Image</label>
-                    <FileUploader imageUrl={metaData.meta_image || ''} />
+                    <FileUploader url={metaData.meta_image || ''} urlType="image" />
                 </div>
             </div>
         </div>

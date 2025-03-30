@@ -5,10 +5,12 @@ import { IFileUploader } from "@/app/types/components/fileUploader/fileUploader"
 import { UploadService } from "@/services/upload.service";
 
 export default function FileUploader({
-    imageUrl
+  url,
+  urlType
 }: IFileUploader) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState<any>(null);
+  const [allowedFileExt, setAllowedFileExt] = useState<string>('')
 
   const handleFileChange = (event: any) => {
     const selectedFile = event.target.files[0];
@@ -37,23 +39,41 @@ export default function FileUploader({
   };
 
   useEffect(() => {    
-    if(imageUrl) {
-        setPreview(imageUrl)
+    if(url) {
+      setPreview(url)
     }
-  }, [imageUrl])
+  }, [url])
+
+  useEffect(() => {
+    if(urlType == 'image') {
+      const imageExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
+      if(imageExtension) {
+        setAllowedFileExt(imageExtension)
+      }
+    } 
+    if(urlType == 'video') {
+      const videoExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
+      if(videoExtension) {
+        setAllowedFileExt(videoExtension)
+      }
+    }
+  }, [urlType])
 
   return (
     <div className="p-4 border rounded-xl shadow-md w-full">
-      <input type="file" onChange={handleFileChange} className="mb-4" />      
+      <input type="file" accept={allowedFileExt} onChange={handleFileChange} className="mb-4" />      
       {preview && (
         <div className="mb-4 h-15 w-15">
-          <Image
+          {
+            urlType == 'image' ? <Image
             src={preview}
             alt="Preview"
             width={200}
             height={200}
             className="rounded-md"
-          />
+          /> : <video src={preview} className="rounded-md" controls></video>
+          }
+          
         </div>
       )}
       <Button onClick={handleUpload} disabled={!file}>

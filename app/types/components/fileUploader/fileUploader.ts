@@ -1,3 +1,4 @@
 export interface IFileUploader {
-    imageUrl: string
+    url: string,
+    urlType: string
 }

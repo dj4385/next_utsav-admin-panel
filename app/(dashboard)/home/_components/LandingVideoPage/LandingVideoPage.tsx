@@ -41,11 +41,11 @@ const LandingVideoPage = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                    <FileUploader imageUrl={landingVideoPageData.image || ""} />
+                    <FileUploader url={landingVideoPageData.image || ""} urlType="image" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Video</label>
-                    <FileUploader imageUrl="" />
+                    <FileUploader url="" urlType="video" />
                 </div>
             </div>
         </div>

@@ -49,11 +49,11 @@ const Hero = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 mt-4 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
-                    <FileUploader imageUrl={heroData.background_image || ''} />
+                    <FileUploader url={heroData.background_image || ''} urlType="image" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Heading Image</label>
-                    <FileUploader imageUrl={heroData.heading_image} />
+                    <FileUploader url={heroData.heading_image} urlType="image" />
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://utsav.nsightech.com/v1/api", // Replace with your API URL
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // Replace with your API URL
   headers: {
     "Content-Type": "application/json",
   },

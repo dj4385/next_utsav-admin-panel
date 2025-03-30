@@ -181,7 +181,21 @@ const AboutForm = () => {
 
         const req: IAddAboutPageRequest | any = {
             "_id": id,
+            ...bannerData,
+            realWeddingData,
+            ...legacyData,
+            ...experienceData,
+            ...countriesData,
+            ...eventData,
+            ...venueData,
+            ...celebrationData,
+            ...awardData,
+            about_awards: awardList,
+            ...teamData,
+            managing_team: teamList,
+            ...preFooterData,
             ...metaData,
+            about_gallery: aboutGalleryData
         }
 
         const res: any = await AboutService.updateAboutPage(id, req);
@@ -245,12 +259,6 @@ const AboutForm = () => {
             <div className="flex flex-row mt-5">
                 <AboutGallery aboutGalleryData={aboutGalleryData} setAboutGalleryData={setAboutGalleryData} />
             </div>
-            {/* <div className="flex flex-row mt-5">
-                <Event eventData={eventData} setEventData={setEventData} />
-            </div>
-            <div className="flex flex-row mt-5">
-                <Contact contactData={contactData} setContactData={setContactData} />
-            </div> */}
             <div className="flex justify-center items-center mt-5">
                 <ButtonComponent label="Save Changes" onClick={() => onSaveChanges()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />
             </div>

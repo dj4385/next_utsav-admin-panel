@@ -27,7 +27,6 @@ const EventModal = () => {
     const [iconUrl, setIconUrl] = useState<string>('');
 
     const onSubmit = (data: any) => {
-        debugger
         setLoading(true);
 
         let eventData: IEventData;
@@ -70,7 +69,6 @@ const EventModal = () => {
 
     useEffect(() => {
         if (eventListItem) {
-            debugger
             setValue("event_ui_type", eventListItem.event_ui_type);
             setValue("heading", eventListItem.heading);
             setValue("text", eventListItem.text);

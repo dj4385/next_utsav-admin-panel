@@ -20,6 +20,13 @@ const Meta = ({
         }));
     }
 
+    const onFileUpload = (url: string) => {
+        setMetaData((prev: IMetaData) => ({
+            ...prev,
+            meta_image: url
+        }));
+    }
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Search /> Meta Section</h2>
@@ -34,7 +41,7 @@ const Meta = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Image</label>
-                    <FileUploader url={metaData.meta_image || ''} urlType="image" />
+                    <FileUploader url={metaData.meta_image || ''} urlType="image" onFileUpload={(url: string) => onFileUpload(url)} />
                 </div>
             </div>
         </div>

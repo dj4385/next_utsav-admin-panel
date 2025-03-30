@@ -21,6 +21,20 @@ const Hero = ({
         }));
     }
 
+    const onBackgroundImageUpload = (url: string) => {
+        setHeroData((prev: IHeroData) => ({
+            ...prev,
+            "background_image": url,
+        }));
+    }
+
+    const onHeadingImageUpload = (url: string) => {
+        setHeroData((prev: IHeroData) => ({
+            ...prev,
+            "heading_image": url,
+        }));
+    }
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 items-center p-2 bg-purple-700 text-white text-lg font-medium mb-3"> <Home /> Hero Section</h2>
@@ -49,11 +63,11 @@ const Hero = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 mt-4 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
-                    <FileUploader url={heroData.background_image || ''} urlType="image" />
+                    <FileUploader url={heroData.background_image || ''} urlType="image" onFileUpload={(url: string) => onBackgroundImageUpload(url)} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Heading Image</label>
-                    <FileUploader url={heroData.heading_image} urlType="image" />
+                    <FileUploader url={heroData.heading_image} urlType="image" onFileUpload={(url: string) => onHeadingImageUpload(url)} />
                 </div>
             </div>
         </div>

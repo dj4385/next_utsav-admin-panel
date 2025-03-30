@@ -34,12 +34,22 @@ const EventModal = () => {
     const { isOpen } = useAppSelector((state) => state.EventSlice);
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<any>();
+    const [imageUrl, setImageUrl] = useState<string>('');
+    const [iconUrl, setIconUrl] = useState<string>('');
 
     const onSubmit = (data: any) => {
         console.log(data, 'data');
     }
 
     const handleClose = () => dispatch(setEventModal(false));
+
+    const onImageUpload = (url: string) => {
+        setImageUrl(url)
+    }
+
+    const onIconUpload = (url: string) => {
+        setIconUrl(url);
+    }
 
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -81,7 +91,7 @@ const EventModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                                <FileUploader url={''} urlType="image" />
+                                <FileUploader url={''} urlType="image" onFileUpload={(url: string) => onImageUpload(url)} />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Icon Alt</label>
@@ -89,7 +99,7 @@ const EventModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Icon</label>
-                                <FileUploader url={''} urlType="image" />
+                                <FileUploader url={''} urlType="image" onFileUpload={(url: string) => onIconUpload(url)} />
                             </div>
                             <ButtonComponent label="Save Changes" onClick={() => {}} loading={false} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>

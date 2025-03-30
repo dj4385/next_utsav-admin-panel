@@ -21,6 +21,20 @@ const LandingVideoPage = ({
         }));
     }
 
+    const onImageUpload = (url: string) => {
+        setLandingVideoPageData((prev: ILandingVideoPageData) => ({
+            ...prev,
+            "image": url,
+        }));
+    }
+
+    const onVideoUpload = (url: string) => {
+        setLandingVideoPageData((prev: ILandingVideoPageData) => ({
+            ...prev,
+            "video": url,
+        }));
+    }
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 items-center text-lg p-2 bg-purple-700 text-white font-medium mb-3"> <Video /> Landing Video Page Section</h2>
@@ -41,11 +55,11 @@ const LandingVideoPage = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                    <FileUploader url={landingVideoPageData.image || ""} urlType="image" />
+                    <FileUploader url={landingVideoPageData.image || ""} urlType="image" onFileUpload={(url: string) => onImageUpload(url) } />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Video</label>
-                    <FileUploader url="" urlType="video" />
+                    <FileUploader url={landingVideoPageData.video} urlType="video" onFileUpload={(url: string) => onVideoUpload(url) } />
                 </div>
             </div>
         </div>

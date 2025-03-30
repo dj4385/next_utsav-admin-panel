@@ -4,7 +4,7 @@ import { IBrand, IBrandData } from "@/app/types/components/Home";
 import FileUploader from "@/components/FileUploader/FileUploader";
 import { Input } from "@/components/ui/input";
 import { Tag } from "lucide-react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 const Brand = ({
     brandData, setBrandData
@@ -18,6 +18,16 @@ const Brand = ({
             [name]: value,
         }));
     }
+
+    const onFileUpload = (url: string) => {
+        setBrandData((prev: IBrandData) => ({
+            ...prev,
+            brand_logo: url,
+        }));
+    }
+
+    useEffect(() => {console.log(brandData, 'bd');
+    }, [brandData])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -33,7 +43,7 @@ const Brand = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Brand Logo</label>
-                    <FileUploader url={brandData?.brand_logo || ''} urlType="image"  />
+                    <FileUploader url={brandData?.brand_logo || ''} urlType="image" onFileUpload={(url: string) => onFileUpload(url)}  />
                 </div>
                 
             </div>

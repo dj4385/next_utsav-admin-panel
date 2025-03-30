@@ -6,7 +6,8 @@ import { UploadService } from "@/services/upload.service";
 
 export default function FileUploader({
   url,
-  urlType
+  urlType,
+  onFileUpload
 }: IFileUploader) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState<any>(null);
@@ -30,8 +31,8 @@ export default function FileUploader({
         const res: any = await UploadService.uploadFile(formData);
         console.log(res);
         
-        if(res && res.status == 200) {
-
+        if(res && res.status == 200 && res?.data?.imageUrl) {
+          onFileUpload(res.data.imageUrl)
         }
     } catch (error) {
       console.error("Error uploading file:", error);

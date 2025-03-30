@@ -9,6 +9,7 @@ interface AuthContextType {
   login: (userData: any) => void;
   logout: () => void;
   setTokenData: (token: string) => void;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
   // Simulate checking authentication (You should replace this with real API call)
@@ -28,6 +30,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if(tokenData) {
       setToken(tokenData);
     }
+
+    setLoading(false);
   }, []);
 
   const setTokenData = (token: string) => {
@@ -49,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, setTokenData, login, logout }}>
+    <AuthContext.Provider value={{ token, user, setTokenData, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

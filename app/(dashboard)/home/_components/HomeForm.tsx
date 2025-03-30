@@ -23,50 +23,50 @@ const HomeForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [homePageData, setHomePageData] = useState<ILandingPage | null>(null);
     const [brandData, setBrandData] = useState<IBrandData>({
-        brandAlt: "",
-        brandLogo: "",
-        brandName: ""
+        alt_brand_logo: "",
+        brand_logo: "",
+        brand_name: ""
     });
     const [heroData, setHeroData] = useState<IHeroData>({
-        backgroundImg: "",
+        background_image: "",
         heading: "",
-        headingImg: "",
-        headingImgAlt: "",
+        heading_image: "",
+        alt_heading_image: "",
         story: "",
-        storyHeading: "",
-        subHeading: ""
+        story_heading: "",
+        sub_heading: ""
     });
     const [visionData, setVisionData] = useState<IVisionData>({
         vision: "",
-        visionHeading: ""
+        vision_heading: ""
     });
     const [missionData, setMissionData] = useState<IMissionData>({
         mission: "",
-        missionHeading: ""
+        mission_heading: ""
     });
     const [testimonialData, setTestimonianlData] = useState<ITestimonialData>({
-        testimonial: ""
+        testimonial_section: ""
     });
     const [testimonialList, setTestimonialList] = useState<ITestimonialList[]>([]);
     const [galleryData, setGalleryData] = useState<IGalleryData>({
-        galleryHeading: "",
-        gallerySection: ""
+        gallery_heading: "",
+        gallery_section: ""
     });
     const [galleryList, setGalleryList] = useState<IGalleryList[]>([])
 
     const [metaData, setMetaData] = useState<IMetaData>({
-        metaDescription: "",
-        metaImageUrl: "",
-        metaTitle: ""
+        meta_description: "",
+        meta_image: "",
+        meta_title: ""
     });
     const [landingVideoPageData, setLandingVideoPageData] = useState<ILandingVideoPageData>({
         heading: "",
-        subHeading: "",
+        sub_heading: "",
         image: "",
         alt: "",
         video: "",
         _id: "",
-        videoHeading: ""
+        video_landing: ""
     });
     const [eventData, setEventData] = useState<IEventData[]>([]);
     const [contactData, setContactData] = useState<IContactData>({
@@ -96,52 +96,51 @@ const HomeForm = () => {
 
                 setHomePageData(res.data);
                 setBrandData({
-                    brandName: brand_name,
-                    brandLogo: brand_logo,
-                    brandAlt: alt_brand_logo
+                    brand_name,
+                    brand_logo,
+                    alt_brand_logo
                 });
                 setHeroData({
-                    backgroundImg: background_image,
+                    background_image,
                     heading,
-                    headingImg: heading_image,
-                    headingImgAlt: alt_heading_image,
+                    heading_image,
+                    alt_heading_image,
                     story,
-                    storyHeading: story_heading,
-                    subHeading: sub_heading
+                    story_heading,
+                    sub_heading
                 })
                 setVisionData({
                     vision,
-                    visionHeading: vision_heading
+                    vision_heading 
                 })
                 setMissionData({
                     mission,
-                    missionHeading: mission_heading
+                    mission_heading 
                 })
                 setTestimonianlData({
-                    testimonial: testimonial_section
+                    testimonial_section 
                 })
                 setGalleryData({
-                    galleryHeading: gallery_heading,
-                    gallerySection: gallery_section
+                    gallery_heading,
+                    gallery_section
                 })
                 setMetaData({
-                    metaDescription: meta_description,
-                    metaImageUrl: meta_image,
-                    metaTitle: meta_title
+                    meta_description,
+                    meta_image,
+                    meta_title
                 })
                 setLandingVideoPageData({
                     heading: landing_video[0].heading,
-                    subHeading: landing_video[0].sub_heading,
+                    sub_heading: landing_video[0].sub_heading,
                     image,
                     alt,
                     video,
                     _id,
-                    videoHeading: video_landing
+                    video_landing 
                 })
                 setEventData(card_events)
                 setGalleryList(the_gallery)
                 setTestimonialList(the_testimonial)
-                debugger
                 setContactData(contact_us)
             }
         } catch (error) {

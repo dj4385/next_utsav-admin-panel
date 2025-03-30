@@ -5,9 +5,9 @@ export interface IBrand {
 }
 
 export interface IBrandData {
-    brandName: string;
-    brandLogo: string;
-    brandAlt: string;
+    brand_name: string;
+    brand_logo: string;
+    alt_brand_logo: string;
 }
 
 export interface IHero {
@@ -17,12 +17,12 @@ export interface IHero {
 
 export interface IHeroData {
     heading: string;
-    subHeading: string;
-    headingImgAlt: string;
-    storyHeading: string;
+    sub_heading: string;
+    alt_heading_image: string;
+    story_heading: string;
     story: string;
-    headingImg: string;
-    backgroundImg: string;
+    heading_image: string;
+    background_image: string;
 }
 
 export interface IVision {
@@ -31,7 +31,7 @@ export interface IVision {
 }
 
 export interface IVisionData {
-    visionHeading: string;
+    vision_heading: string;
     vision: string;
 }
 
@@ -41,7 +41,7 @@ export interface IMission {
 }
 
 export interface IMissionData {
-    missionHeading: string;
+    mission_heading: string;
     mission: string;
 }
 
@@ -62,7 +62,7 @@ export interface ITestimonialList {
 }
 
 export interface ITestimonialData {
-    testimonial: string;
+    testimonial_section: string;
 }
 
 export interface IGallery {
@@ -80,8 +80,8 @@ export interface IGalleryList {
 }
 
 export interface IGalleryData {
-    gallerySection: string;
-    galleryHeading: string;
+    gallery_section: string;
+    gallery_heading: string;
 }
 
 export interface IMeta {
@@ -90,9 +90,9 @@ export interface IMeta {
 }
 
 export interface IMetaData {
-    metaTitle: string;
-    metaDescription: string;
-    metaImageUrl: string;
+    meta_title: string;
+    meta_description: string;
+    meta_image: string;
 }
 
 export interface ILandingVideoPage {
@@ -102,11 +102,11 @@ export interface ILandingVideoPage {
 
 export interface ILandingVideoPageData {
     heading: string;
-    subHeading: string;
+    sub_heading: string;
     image: string;
     alt: string;
     video: string;
-    videoHeading: string;
+    video_landing: string;
     _id: string;
 }
 

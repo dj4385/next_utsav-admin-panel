@@ -25,15 +25,15 @@ const Brand = ({
             <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Brand Name</label>
-                    <Input type="text" placeholder="Enter Brand Name" name="brandName" onChange={handleChange} value={brandData?.brandName || ''} className="mt-1 w-full" />
+                    <Input type="text" placeholder="Enter Brand Name" name="brand_name" onChange={handleChange} value={brandData?.brand_name || ''} className="mt-1 w-full" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Alt Brand Logo</label>
-                    <Input type="text" placeholder="Enter Brand Name" name="brandAlt" onChange={handleChange} value={brandData?.brandAlt || ''} className="mt-1 w-full" />
+                    <Input type="text" placeholder="Enter Brand Name" name="alt_brand_logo" onChange={handleChange} value={brandData?.alt_brand_logo || ''} className="mt-1 w-full" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Brand Logo</label>
-                    <FileUploader imageUrl={brandData?.brandLogo || ''}  />
+                    <FileUploader imageUrl={brandData?.brand_logo || ''}  />
                 </div>
                 
             </div>

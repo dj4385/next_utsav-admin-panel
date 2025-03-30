@@ -26,7 +26,7 @@ const Vision = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Vision Heading</label>
-                    <Input type="text" placeholder="Enter Vision Heading" className="mt-1 w-full" onChange={handleChange} name="visionHeading" value={visionData.visionHeading} />
+                    <Input type="text" placeholder="Enter Vision Heading" className="mt-1 w-full" onChange={handleChange} name="vision_heading" value={visionData.vision_heading} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Vision</label>

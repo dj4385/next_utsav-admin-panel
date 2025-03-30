@@ -26,7 +26,7 @@ const Mission = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Mission Heading</label>
-                    <Input type="text" placeholder="Enter Mission Heading" className="mt-1 w-full" onChange={handleChange} name="missionHeading" value={missionData.missionHeading} />
+                    <Input type="text" placeholder="Enter Mission Heading" className="mt-1 w-full" onChange={handleChange} name="mission_heading" value={missionData.mission_heading} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Mission</label>

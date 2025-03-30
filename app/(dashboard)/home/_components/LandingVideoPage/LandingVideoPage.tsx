@@ -31,7 +31,7 @@ const LandingVideoPage = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Sub Heading</label>
-                    <Input type="text" placeholder="Enter Sub Heading" className="mt-1 w-full" onChange={handleChange} name="subHeading" value={landingVideoPageData.subHeading} />
+                    <Input type="text" placeholder="Enter Sub Heading" className="mt-1 w-full" onChange={handleChange} name="sub_heading" value={landingVideoPageData.sub_heading} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Image Alt</label>

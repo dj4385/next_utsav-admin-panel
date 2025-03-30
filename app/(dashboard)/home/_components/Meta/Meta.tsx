@@ -26,15 +26,15 @@ const Meta = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Title</label>
-                    <Input type="text" placeholder="Enter Meta Title" className="mt-1 w-full" onChange={handleChange} name="metaTitle" value={metaData.metaTitle} />
+                    <Input type="text" placeholder="Enter Meta Title" className="mt-1 w-full" onChange={handleChange} name="meta_title" value={metaData.meta_title} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Description</label>
-                    <Input type="text" placeholder="Enter Meta Description" className="mt-1 w-full" onChange={handleChange} name="metaDescription" value={metaData.metaDescription} />
+                    <Input type="text" placeholder="Enter Meta Description" className="mt-1 w-full" onChange={handleChange} name="meta_description" value={metaData.meta_description} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Meta Image</label>
-                    <FileUploader imageUrl={metaData.metaImageUrl || ''} />
+                    <FileUploader imageUrl={metaData.meta_image || ''} />
                 </div>
             </div>
         </div>

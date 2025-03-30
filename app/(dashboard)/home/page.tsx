@@ -2,8 +2,6 @@
 
 import HomeForm from "./_components/HomeForm";
 
-
-
 const HomePage = () => {
 
     return (

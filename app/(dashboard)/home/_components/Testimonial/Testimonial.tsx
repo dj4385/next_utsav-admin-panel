@@ -46,7 +46,7 @@ const Testimonial = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Testimonial Section</label>
-                    <Input type="text" placeholder="Enter Mission Heading" className="mt-1 w-full" onChange={handleChange} name="testimonial" value={testimonialData.testimonial} />
+                    <Input type="text" placeholder="Enter Mission Heading" className="mt-1 w-full" onChange={handleChange} name="testimonial_section" value={testimonialData.testimonial_section} />
                 </div>
             </div>
             <Separator className="mt-4" />

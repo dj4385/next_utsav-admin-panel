@@ -46,11 +46,11 @@ const Gallery = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Gallery Section</label>
-                    <Input type="text" placeholder="Enter Gallery Section" className="mt-1 w-full" onChange={handleChange} name="gallerySection" value={galleryData.gallerySection} />
+                    <Input type="text" placeholder="Enter Gallery Section" className="mt-1 w-full" onChange={handleChange} name="gallery_section" value={galleryData.gallery_section} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Gallery Heading</label>
-                    <Input type="text" placeholder="Enter Gallery Heading" className="mt-1 w-full" onChange={handleChange} name="galleryHeading" value={galleryData.galleryHeading} />
+                    <Input type="text" placeholder="Enter Gallery Heading" className="mt-1 w-full" onChange={handleChange} name="gallery_heading" value={galleryData.gallery_heading} />
                 </div>
             </div>
             <Separator className="mt-4" />

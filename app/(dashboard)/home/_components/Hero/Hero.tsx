@@ -31,15 +31,15 @@ const Hero = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Sub Heading</label>
-                    <Input type="text" placeholder="Enter Sub Heading" className="mt-1 w-full" onChange={handleChange} name="subHeading" value={heroData.subHeading} />
+                    <Input type="text" placeholder="Enter Sub Heading" className="mt-1 w-full" onChange={handleChange} name="sub_heading" value={heroData.sub_heading} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Heading Image Alt</label>
-                    <Input type="text" placeholder="Enter Heading Image Alt" className="mt-1 w-full" onChange={handleChange} name="headingImgAlt" value={heroData.headingImgAlt} />
+                    <Input type="text" placeholder="Enter Heading Image Alt" className="mt-1 w-full" onChange={handleChange} name="alt_heading_image" value={heroData.alt_heading_image} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Story Heading</label>
-                    <Input type="text" placeholder="Enter Story Heading" className="mt-1 w-full" onChange={handleChange} name="storyHeading" value={heroData.storyHeading} />
+                    <Input type="text" placeholder="Enter Story Heading" className="mt-1 w-full" onChange={handleChange} name="story_heading" value={heroData.story_heading} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Story</label>
@@ -49,11 +49,11 @@ const Hero = ({
             <div className="grid lg:grid-cols-2 grid-cols-1 mt-4 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
-                    <FileUploader imageUrl={heroData.backgroundImg || ''} />
+                    <FileUploader imageUrl={heroData.background_image || ''} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Heading Image</label>
-                    <FileUploader imageUrl={heroData.headingImg} />
+                    <FileUploader imageUrl={heroData.heading_image} />
                 </div>
             </div>
         </div>

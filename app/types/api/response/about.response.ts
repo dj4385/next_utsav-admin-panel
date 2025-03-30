@@ -1,4 +1,4 @@
-export interface IAddAboutPageRequest {
+export interface IAddAboutPageResponse {
     _id: string,
     id: number;
     banner: string,

@@ -1,9 +1,11 @@
 "use server"
 
+import AboutForm from "./_components/AboutForm";
+
 const AboutPage = async () => {
     return (
         <>
-            About Page
+            <AboutForm />
         </>
     )
 }

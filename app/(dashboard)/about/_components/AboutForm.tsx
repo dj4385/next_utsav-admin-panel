@@ -9,7 +9,7 @@ import { IAddAboutPageRequest } from "@/app/types/api/request/about.request";
 import ContentHeader from "@/components/ContentHeader/ContentHeader";
 import { User2 } from "lucide-react";
 import Meta from "./Meta/Meta";
-import { IAboutGalleryData, IBannerData, ILegacyData, IRealWeddingData } from "@/app/types/components/About";
+import { IAboutGalleryData, IAwardList, IBannerData, ILegacyData, IRealWeddingData, ITeamList } from "@/app/types/components/About";
 import Banner from "./Banner/Banner";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import ButtonComponent from "@/components/core/Button/Button";
@@ -94,6 +94,8 @@ const AboutForm = () => {
         pre_footer_text: "",
     })
     const [aboutGalleryData, setAboutGalleryData] = useState<IAboutGalleryData[]>([]);
+    const [awardList, setAwardList] = useState<IAwardList[]>([]);
+    const [teamList, setTeamList] = useState<ITeamList[]>([]);
 
     const { toast } = useToast();
 
@@ -161,7 +163,8 @@ const AboutForm = () => {
                     meta_title
                 })
                 setAboutGalleryData(about_gallery)
-
+                setAwardList(about_awards);
+                setTeamList(managing_team);
             }
         } catch (error) {
 
@@ -227,10 +230,10 @@ const AboutForm = () => {
                 <Celebration celebrationData={celebrationData} setCelebrationData={setCelebrationData} />
             </div>
             <div className="flex flex-row mt-5">
-                <Award awardData={awardData} setAwardData={setAwardData} />
+                <Award awardData={awardData} setAwardData={setAwardData} awardList={awardList} setAwardList={setAwardList} />
             </div>
             <div className="flex flex-row mt-5">
-                <Team setTeamData={setTeamData} teamData={teamData} />
+                <Team setTeamData={setTeamData} teamData={teamData} teamList={teamList} setTeamList={setTeamList} />
             </div>
             <div className="flex flex-row mt-5">
                 <PreFooter preFooterData={preFooterData} setPreFooterData={setPreFooterData} />

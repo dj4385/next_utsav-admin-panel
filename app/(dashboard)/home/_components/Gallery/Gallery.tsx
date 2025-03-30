@@ -65,18 +65,18 @@ const Gallery = ({
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Icon Alt</TableHead>
-                            <TableHead className="text-white">Action</TableHead>
+                            <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {galleryList.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
-                                    {data && data.image ? <Image src={data.image} alt="icon" className="rounded-md" width={50} height={50} /> : null}
+                                    {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>
                                 <TableCell>{data.alt}</TableCell>
-                                <TableCell>
-                                    <div className="flex items-center justify-center gap-2">
+                                <TableCell className="text-right">
+                                    <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon">
                                             <Edit2 />
                                         </Button>

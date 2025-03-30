@@ -1,9 +1,9 @@
 "use client"
 
-import { ITestimonial, ITestimonialData } from "@/app/types/components/Home";
+import { ITestimonial, ITestimonialData, ITestimonialList } from "@/app/types/components/Home";
 import { Input } from "@/components/ui/input";
 import { CirclePlus, Edit2, Home, Trash2 } from "lucide-react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
     Table,
     TableBody,
@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/lib/store";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { setTestimonialModal } from "@/lib/features/TestimonialSlice";
 
 const Testimonial = ({
@@ -25,7 +25,9 @@ const Testimonial = ({
     testimonialList
 }: ITestimonial) => {
 
+    const [testimonialDataList, setTestimonialDataList] = useState<ITestimonialList[]>(testimonialList)
     const dispatch = useAppDispatch();
+    const { testimonialModalList } = useAppSelector((state) => state.TestimonialSlice)
 
     const openModal = () => {
         dispatch(setTestimonialModal(true));
@@ -39,6 +41,19 @@ const Testimonial = ({
             [name]: value,
         }));
     }
+
+    useEffect(() => {
+        if(testimonialModalList?.length) {
+            setTestimonialDataList([...testimonialList, ...testimonialModalList])
+            setTestimonialList([...testimonialList, ...testimonialModalList])
+        }
+    }, [testimonialModalList])
+
+    useEffect(() => {
+        if(testimonialList?.length) {
+            setTestimonialDataList([...testimonialList])
+        }
+    }, [testimonialList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -67,10 +82,10 @@ const Testimonial = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {testimonialList.map((data, index) => (
+                        {testimonialDataList.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
-                                    {data && data.image ? <Image src={data.image} alt="icon" className="rounded-md" width={50} height={50} /> : null}
+                                    {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>
                                 <TableCell>{data.alt}</TableCell>
                                 <TableCell>{data.client}</TableCell>

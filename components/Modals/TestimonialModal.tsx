@@ -17,17 +17,28 @@ import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useState } from "react"
-import { setTestimonialModal } from "@/lib/features/TestimonialSlice"
+import { setTestimonialModal, setTestimonialModalData } from "@/lib/features/TestimonialSlice"
 
 const TestimonialModal = () => {
-
+    const [loading, setLoading] = useState<boolean>(false);
     const { isOpen } = useAppSelector((state) => state.TestimonialSlice);
     const dispatch = useDispatch();
-    const { register, handleSubmit, formState: { errors } } = useForm<any>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<any>();
     const [imageUrl, setImageUrl] = useState<string>('');
 
     const onSubmit = (data: any) => {
-        console.log(data, 'data');
+        setLoading(true);
+        dispatch(setTestimonialModalData([{
+            ...data,
+            testimonial: "",
+            _id: "",
+            image: imageUrl || ""       
+        }]))
+        setTimeout(() => {
+            setLoading(false)
+            reset();
+            handleClose();            
+        }, 1000);
     }
 
     const handleClose = () => dispatch(setTestimonialModal(false));
@@ -62,7 +73,7 @@ const TestimonialModal = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
                                 <FileUploader url={''} urlType="image" onFileUpload={(url: string) => onFileUpload(url)} />
                             </div>
-                            <ButtonComponent label="Save Changes" onClick={() => {}} loading={false} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
+                            <ButtonComponent label="Save Changes" onClick={() => {}} loading={loading} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>
                     </form>
                 </div>

@@ -1,8 +1,10 @@
+import { ITestimonialList } from "@/app/types/components/Home";
 import { TestimonialInitialData } from "@/app/types/feature";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TestimonialInitialData = {
-    isOpen: false
+    isOpen: false,
+    testimonialModalList: []
 };
 
 const TestimonialSlice = createSlice({
@@ -11,9 +13,13 @@ const TestimonialSlice = createSlice({
     reducers: {
         setTestimonialModal: (state: TestimonialInitialData = initialState, action: PayloadAction<boolean>) => {
             state.isOpen = action.payload;
+        },
+        setTestimonialModalData: (state: TestimonialInitialData = initialState, action: PayloadAction<ITestimonialList[]>) => {
+            state.testimonialModalList = action.payload
         }
+
     }
 });
 
-export const { setTestimonialModal } = TestimonialSlice.actions;
+export const { setTestimonialModal, setTestimonialModalData } = TestimonialSlice.actions;
 export default TestimonialSlice.reducer;

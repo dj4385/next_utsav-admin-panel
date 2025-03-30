@@ -52,11 +52,11 @@ const Event = ({
                         {eventData.map((event, index) => (
                             <TableRow key={index}>
                                 <TableCell>
-                                    {event && event.icon ? <Image src={event.icon} alt="icon" className="rounded-md" width={50} height={50} /> : null}
+                                    {event && event.icon ? <div className="h-[50px] w-[50px]"> <Image src={event.icon} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>
                                 <TableCell>
                                     {
-                                        event && event.image ? <Image src={event.image} alt="image" width={50} height={50} className="rounded-md" /> : null
+                                        event && event.image ? <div className="h-[50px] w-[50px]"> <Image src={event.image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
                                 <TableCell>{event.event_ui_type}</TableCell>

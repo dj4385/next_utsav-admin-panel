@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { IFileUploader } from "@/app/types/components/fileUploader/fileUploader";
 import { UploadService } from "@/services/upload.service";
+import { useToast } from "@/hooks/use-toast";
+import ButtonComponent from "../core/Button/Button";
 
 export default function FileUploader({
   url,
@@ -12,6 +14,8 @@ export default function FileUploader({
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState<any>(null);
   const [allowedFileExt, setAllowedFileExt] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
+  const {toast} = useToast();
 
   const handleFileChange = (event: any) => {
     const selectedFile = event.target.files[0];
@@ -28,14 +32,31 @@ export default function FileUploader({
     formData.append("image", file);
 
     try {
+      setLoading(true);
         const res: any = await UploadService.uploadFile(formData);
         console.log(res);
         
         if(res && res.status == 200 && res?.data?.imageUrl) {
           onFileUpload(res.data.imageUrl)
+          toast({
+            title: "Success",
+            description: "File Uploaded Successfully"
+          })
+        } else {
+          toast({
+            title: "Error",
+            description: "Unable to upload file",
+            variant: "destructive",
+          })
         }
+        setLoading(false);
     } catch (error) {
-      console.error("Error uploading file:", error);
+      setLoading(false);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Unable to upload file",
+        variant: "destructive",
+      })
     }
   };
 
@@ -64,22 +85,20 @@ export default function FileUploader({
     <div className="p-4 border rounded-xl shadow-md w-full">
       <input type="file" accept={allowedFileExt} onChange={handleFileChange} className="mb-4" />      
       {preview && (
-        <div className="mb-4 h-15 w-15">
+        <div className="mb-4 h-[150px] w-full">
           {
             urlType == 'image' ? <Image
             src={preview}
             alt="Preview"
             width={200}
             height={200}
-            className="rounded-md"
+            className="h-[100%] w-[100%] rounded-md"
           /> : <video src={preview} className="rounded-md" controls></video>
           }
           
         </div>
       )}
-      <Button onClick={handleUpload} disabled={!file}>
-        Upload File
-      </Button>
+      <ButtonComponent label="Upload File" type="button" loading={loading} onClick={handleUpload}></ButtonComponent>
     </div>
   );
 }

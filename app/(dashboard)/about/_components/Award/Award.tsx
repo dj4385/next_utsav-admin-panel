@@ -3,7 +3,7 @@
 import { IAward, IAwardData, IAwardList } from "@/app/types/components/About";
 import { Input } from "@/components/ui/input";
 import { AwardIcon, CirclePlus, Edit2, Trash2 } from "lucide-react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import {
     Table,
     TableBody,
@@ -14,10 +14,15 @@ import {
 } from "@/components/ui/table"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { setAwardListItem, setAwardModal } from "@/lib/features/about/AwardSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
 
 const Award = ({
     awardData, setAwardData, awardList, setAwardList
 }: IAward) => {
+
+    const dispatch = useAppDispatch();
+    const { awardModalList } = useAppSelector((state) => state.AwardSlice)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -28,15 +33,37 @@ const Award = ({
         }));
     }
 
-    const openModal = () => {}
+    const openModal = () => {
+        dispatch(setAwardModal(true));
+    }
 
     const edit = (data: IAwardList) => {
-
+        dispatch(setAwardListItem(data))
+        openModal();
     }
 
     const deleteData = (id: string) => {
-
+        const data = awardList.filter((d) => d._id !== id);
+        setAwardList(data);
     }
+
+    useEffect(() => {
+        if(awardModalList?.length) {
+            if(awardModalList[0]._id) {
+                const data = awardList.map((d) =>
+                    d._id == awardModalList[0]._id ? {
+                        ...d,
+                        heading: awardModalList[0].heading,
+                        name: awardModalList[0].name,
+                        title: awardModalList[0].title,
+                    } : d
+                );
+                setAwardList([...data]);
+            } else {
+                setAwardList([...awardList, ...awardModalList])
+            }
+        }
+    }, [awardModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

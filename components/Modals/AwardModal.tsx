@@ -68,7 +68,7 @@ const AwardModal = () => {
                 <DialogHeader>
                     <DialogTitle>Add/Update Award</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4 overflow-y-scroll h-[500px]">
+                <div className="grid gap-4 py-4 overflow-y-auto">
                     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid lg:grid-cols-1 grid-cols-1 gap-4 p-2">
                             <div>

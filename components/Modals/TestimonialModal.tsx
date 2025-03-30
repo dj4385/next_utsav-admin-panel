@@ -30,8 +30,6 @@ const TestimonialModal = () => {
         setLoading(true);
         dispatch(setTestimonialModalData([{
             ...data,
-            testimonial: "",
-            _id: "",
             image: imageUrl || ""       
         }]))
         setTimeout(() => {

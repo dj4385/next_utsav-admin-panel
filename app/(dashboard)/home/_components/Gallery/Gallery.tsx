@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/table"
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { setGalleryListItem, setGalleryModal } from "@/lib/features/GallerySlice";
+import { setGalleryListItem, setGalleryModal } from "@/lib/features/home/GallerySlice";
 
 const Gallery = ({
     galleryData,

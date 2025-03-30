@@ -16,7 +16,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { setTestimonialListItem, setTestimonialModal } from "@/lib/features/TestimonialSlice";
+import { setTestimonialListItem, setTestimonialModal } from "@/lib/features/home/TestimonialSlice";
 
 const Testimonial = ({
     setTestimonialData,

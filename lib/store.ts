@@ -3,14 +3,20 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import EventSlice from "./features/EventSlice";
-import TestimonialSlice from "./features/TestimonialSlice";
-import GallerySlice from "./features/GallerySlice";
+import EventSlice from "./features/home/EventSlice";
+import TestimonialSlice from "./features/home/TestimonialSlice";
+import GallerySlice from "./features/home/GallerySlice";
+import AboutGallerySlice from "./features/about/AboutGallerySlice";
+import AwardSlice from "./features/about/AwardSlice";
+import TeamSlice from "./features/about/TeamSlice";
 
 const rootReducer = combineReducers({
     "EventSlice": EventSlice,
     "TestimonialSlice": TestimonialSlice,
-    "GallerySlice": GallerySlice
+    "GallerySlice": GallerySlice,
+    "AboutGallerySlice": AboutGallerySlice,
+    "AwardSlice": AwardSlice,
+    "TeamSlice": TeamSlice,
 })
 
 export const store = configureStore({

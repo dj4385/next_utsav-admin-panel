@@ -17,7 +17,7 @@ import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
-import { setTestimonialListItem, setTestimonialModal, setTestimonialModalData } from "@/lib/features/TestimonialSlice"
+import { setTestimonialListItem, setTestimonialModal, setTestimonialModalData } from "@/lib/features/home/TestimonialSlice"
 import { ITestimonialList } from "@/app/types/components/Home"
 
 const TestimonialModal = () => {

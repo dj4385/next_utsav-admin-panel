@@ -13,7 +13,7 @@ import { IEvent, IEventData } from "@/app/types/components/Home";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { setEventListItem, setEventModal } from "@/lib/features/EventSlice";
+import { setEventListItem, setEventModal } from "@/lib/features/home/EventSlice";
 import { useEffect } from "react";
 
 const Event = ({

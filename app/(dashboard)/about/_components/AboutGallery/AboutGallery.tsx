@@ -12,53 +12,49 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { setEventListItem, setEventModal } from "@/lib/features/EventSlice";
 import { useEffect } from "react";
 import { IAboutGallery, IAboutGalleryData } from "@/app/types/components/About";
+import { setAboutGalleryListItem, setAboutGalleryModal } from "@/lib/features/about/AboutGallerySlice";
 
 const AboutGallery = ({
     aboutGalleryData,
     setAboutGalleryData
 }: IAboutGallery) => {
 
-    // const dispatch = useAppDispatch();
-    // const { eventModalList } = useAppSelector((state) => state.EventSlice)
+    const dispatch = useAppDispatch();
+    const { aboutGalleryModalList } = useAppSelector((state) => state.AboutGallerySlice)
 
     const openModal = () => {
-        // dispatch(setEventModal(true));
+        dispatch(setAboutGalleryModal(true));
     }
 
     const editModal = (data: IAboutGalleryData) => {
-        // dispatch(setEventListItem(data))
-        // openModal();
+        dispatch(setAboutGalleryListItem(data))
+        openModal();
     }
 
     const deleteData = (id: string) => {
-        // const data = eventData.filter((d) => d._id !== id);
-        // setEventData(data);
+        const data = aboutGalleryData.filter((d) => d._id !== id);
+        setAboutGalleryData(data);
     }
 
-    // useEffect(() => {
-    //     if(eventModalList?.length) {
-    //         if(eventModalList[0]._id) {
-    //             const data = eventData.map((d) =>
-    //                 d._id == eventModalList[0]._id ? {
-    //                     ...d,
-    //                     event_ui_type: eventModalList[0].event_ui_type,
-    //                     heading: eventModalList[0].heading,
-    //                     text: eventModalList[0].text,
-    //                     alt_icon: eventModalList[0].alt_icon,
-    //                     icon: eventModalList[0].icon,
-    //                     alt: eventModalList[0].alt,
-    //                     image: eventModalList[0].image,
-    //                 } : d
-    //             );
-    //             setEventData([...data]);
-    //         } else {
-    //             setEventData([...eventData, ...eventModalList])
-    //         }
-    //     }
-    // }, [eventModalList])
+    useEffect(() => {
+        if(aboutGalleryModalList?.length) {
+            if(aboutGalleryModalList[0]._id) {
+                const data = aboutGalleryData.map((d) =>
+                    d._id == aboutGalleryModalList[0]._id ? {
+                        ...d,
+                        isWide: aboutGalleryModalList[0].isWide,
+                        alt: aboutGalleryModalList[0].alt,
+                        image: aboutGalleryModalList[0].image,
+                    } : d
+                );
+                setAboutGalleryData([...data]);
+            } else {
+                setAboutGalleryData([...aboutGalleryData, ...aboutGalleryModalList])
+            }
+        }
+    }, [aboutGalleryModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -75,7 +71,7 @@ const AboutGallery = ({
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Alt</TableHead>
                             <TableHead className="text-white">Wide</TableHead>
-                            <TableHead className="text-white">Action</TableHead>
+                            <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -89,7 +85,7 @@ const AboutGallery = ({
                                 <TableCell>{item.alt}</TableCell>
                                 <TableCell>{item.isWide ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>
-                                    <div className="flex items-center justify-center gap-2">
+                                    <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>
                                             <Edit2 />
                                         </Button>

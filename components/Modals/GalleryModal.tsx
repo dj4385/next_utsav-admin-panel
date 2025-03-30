@@ -17,7 +17,7 @@ import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
-import { setGalleryListItem, setGalleryModal, setGalleryModalList } from "@/lib/features/GallerySlice"
+import { setGalleryListItem, setGalleryModal, setGalleryModalList } from "@/lib/features/home/GallerySlice"
 import { IGalleryList } from "@/app/types/components/Home"
 
 const GalleryModal = () => {

@@ -2,7 +2,6 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-import AboutPage from "../page";
 import { AboutService } from "@/services/about.service";
 import { IAddAboutPageResponse } from "@/app/types/api/response/about.response";
 import { IMetaData } from "@/app/types/components/Home";
@@ -10,7 +9,7 @@ import { IAddAboutPageRequest } from "@/app/types/api/request/about.request";
 import ContentHeader from "@/components/ContentHeader/ContentHeader";
 import { User2 } from "lucide-react";
 import Meta from "./Meta/Meta";
-import { IBannerData, ILegacy, ILegacyData, IRealWeddingData } from "@/app/types/components/About";
+import { IBannerData, ILegacyData, IRealWeddingData } from "@/app/types/components/About";
 import Banner from "./Banner/Banner";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import ButtonComponent from "@/components/core/Button/Button";

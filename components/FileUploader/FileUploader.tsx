@@ -74,7 +74,7 @@ export default function FileUploader({
       }
     } 
     if(urlType == 'video') {
-      const videoExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
+      const videoExtension: any = process.env.NEXT_PUBLIC_VIDEO_EXTENSION;
       if(videoExtension) {
         setAllowedFileExt(videoExtension)
       }
@@ -93,7 +93,7 @@ export default function FileUploader({
             width={200}
             height={200}
             className="h-[100%] w-[100%] rounded-md"
-          /> : <video src={preview} className="rounded-md" controls></video>
+          /> : <video src={preview} className="rounded-md h-full w-full" controls></video>
           }
           
         </div>

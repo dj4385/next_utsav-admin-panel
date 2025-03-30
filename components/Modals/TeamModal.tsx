@@ -14,7 +14,7 @@ import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
-import { IAboutGalleryData, IAwardList, ITeamList } from "@/app/types/components/About"
+import { ITeamList } from "@/app/types/components/About"
 import { setTeamListItem, setTeamModal, setTeamModalList } from "@/lib/features/about/TeamSlice"
 
 const TeamModal = () => {
@@ -32,11 +32,13 @@ const TeamModal = () => {
         if (teamListItem) {
             teamData = {
                 ...data,
-                _id: teamListItem._id
+                _id: teamListItem._id,
+                image: imageUrl  ? imageUrl : teamListItem.image
             }
         } else {
             teamData = {
-                ...data
+                ...data,
+                image: imageUrl
             }
         }
         dispatch(setTeamModalList([teamData]))
@@ -83,7 +85,7 @@ const TeamModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Image Alt</label>
-                                <Input type="text" {...register("title")} placeholder="Enter Title" className="mt-1 w-full" />
+                                <Input type="text" {...register("alt")} placeholder="Enter Title" className="mt-1 w-full" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Name</label>

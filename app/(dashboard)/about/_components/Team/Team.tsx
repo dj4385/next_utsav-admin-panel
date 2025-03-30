@@ -3,7 +3,7 @@
 import { ITeam, ITeamData, ITeamList } from "@/app/types/components/About";
 import { Input } from "@/components/ui/input";
 import { CirclePlus, Edit2, Trash2, Users } from "lucide-react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import {
     Table,
     TableBody,
@@ -15,10 +15,15 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { setTeamListItem, setTeamModal } from "@/lib/features/about/TeamSlice";
 
 const Team = ({
     setTeamData, teamData, setTeamList, teamList
 }: ITeam) => {
+
+    const dispatch = useAppDispatch();
+    const { teamModalList } = useAppSelector((state) => state.TeamSlice)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -29,15 +34,39 @@ const Team = ({
         }));
     }
 
-    const openModal = () => {}
+    const openModal = () => {
+        dispatch(setTeamModal(true));
+    }
     
     const edit = (data: ITeamList) => {
-
+        dispatch(setTeamListItem(data));
+        dispatch(setTeamModal(true));
     }
 
     const deleteData = (id: string) => {
-
+        const data = teamList.filter((d) => d._id !== id);
+        setTeamList(data);
     }
+
+    useEffect(() => {
+        if(teamModalList?.length) {
+            if(teamModalList[0]._id) {
+                const data = teamList.map((d) =>
+                    d._id == teamModalList[0]._id ? {
+                        ...d,
+                        alt: teamModalList[0].alt,
+                        name: teamModalList[0].name,
+                        designation: teamModalList[0].designation,
+                        quotes: teamModalList[0].quotes,
+                        image: teamModalList[0].image
+                    } : d
+                );
+                setTeamList([...data]);
+            } else {
+                setTeamList([...teamList, ...teamModalList])
+            }
+        }
+    }, [teamModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

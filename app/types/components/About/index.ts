@@ -67,3 +67,71 @@ export interface IEventSectionData {
     events_count_icon: string,
     alt_events_count_icon: string,
 }
+
+export interface IVenue {
+    venueData: IVenueData;
+    setVenueData: any;
+}
+
+export interface IVenueData {
+    venues_count: string;
+    venue_label: string;
+    venues_count_icon: string;
+    alt_venues_count_icon: string;
+}
+
+export interface ICelebration {
+    celebrationData: ICelebrationData;
+    setCelebrationData: any
+}
+
+export interface ICelebrationData {
+    celebration_heading: string,
+    celebration_text: string,
+    celebration_image: string,
+    alt_celebration_image: string,
+    celebration_pitch: string,
+}
+
+export interface IAward {
+    awardData: IAwardData,
+    setAwardData: any
+}
+
+export interface IAwardData {
+    awards_section: string;
+}
+
+export interface ITeam {
+    teamData: ITeamData,
+    setTeamData: any
+}
+
+export interface ITeamData {
+    team_section: string;
+}
+
+export interface IPrefooter {
+    preFooterData: IPreFooterData;
+    setPreFooterData: any
+}
+
+export interface IPreFooterData {
+    pre_footer_image: string,
+    pre_alt_footer_image: string,
+    pre_footer_text: string,
+}
+
+export interface IAboutGallery {
+    aboutGalleryData: IAboutGalleryData[],
+    setAboutGalleryData: any
+}
+
+export interface IAboutGalleryData {
+    id: number;
+    isWide: boolean
+    image: string;
+    alt: string;
+    about: number;
+    _id: string;
+}

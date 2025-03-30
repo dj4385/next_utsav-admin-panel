@@ -9,7 +9,7 @@ import { IAddAboutPageRequest } from "@/app/types/api/request/about.request";
 import ContentHeader from "@/components/ContentHeader/ContentHeader";
 import { User2 } from "lucide-react";
 import Meta from "./Meta/Meta";
-import { IBannerData, ILegacyData, IRealWeddingData } from "@/app/types/components/About";
+import { IAboutGalleryData, IBannerData, ILegacyData, IRealWeddingData } from "@/app/types/components/About";
 import Banner from "./Banner/Banner";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import ButtonComponent from "@/components/core/Button/Button";
@@ -18,6 +18,12 @@ import Legacy from "./Legacy/Legacy";
 import Experience from "./Experience/Experience";
 import Countries from "./Countries/Countries";
 import Event from "../Event/Event";
+import AboutGallery from "./AboutGallery/AboutGallery";
+import Venue from "./Venue/Venue";
+import Celebration from "./Celebration/Celebration";
+import Award from "./Award/Award";
+import Team from "./Team/Team";
+import PreFooter from "./PreFooter/PreFooter";
 
 const AboutForm = () => {
 
@@ -62,6 +68,32 @@ const AboutForm = () => {
         events_count_icon: "",
         alt_events_count_icon: "",
     })
+    const [venueData, setVenueData] = useState({
+        venues_count: "",
+        venue_label: "",
+        venues_count_icon: "",
+        alt_venues_count_icon: "",
+    })
+    const [celebrationData, setCelebrationData] = useState({
+        celebration_heading: "",
+        celebration_text: "",
+        celebration_image: "",
+        alt_celebration_image: "",
+        celebration_pitch: "",
+    })
+
+    const [awardData, setAwardData] = useState({
+        awards_section: ""
+    })
+    const [teamData, setTeamData] = useState({
+        team_section: ""
+    })
+    const [preFooterData, setPreFooterData] = useState({
+        pre_footer_image: "",
+        pre_alt_footer_image: "",
+        pre_footer_text: "",
+    })
+    const [aboutGalleryData, setAboutGalleryData] = useState<IAboutGalleryData[]>([]);
 
     const { toast } = useToast();
 
@@ -108,11 +140,27 @@ const AboutForm = () => {
                 setEventData({
                     events_count, events_count_label, events_count_icon, alt_events_count_icon,
                 })
+                setVenueData({
+                    venues_count, venue_label, venues_count_icon, alt_venues_count_icon,
+                })
+                setCelebrationData({
+                    celebration_heading, celebration_text, celebration_image, alt_celebration_image, celebration_pitch,
+                })
+                setAwardData({
+                    awards_section
+                })
+                setTeamData({
+                    team_section
+                })
+                setPreFooterData({
+                    pre_footer_image, pre_alt_footer_image, pre_footer_text,
+                })
                 setMetaData({
                     meta_description,
                     meta_image,
                     meta_title
                 })
+                setAboutGalleryData(about_gallery)
 
             }
         } catch (error) {
@@ -173,13 +221,28 @@ const AboutForm = () => {
                 <Event eventData={eventData} setEventData={setEventData} />
             </div>
             <div className="flex flex-row mt-5">
+                <Venue setVenueData={setVenueData} venueData={venueData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Celebration celebrationData={celebrationData} setCelebrationData={setCelebrationData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Award awardData={awardData} setAwardData={setAwardData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <Team setTeamData={setTeamData} teamData={teamData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <PreFooter preFooterData={preFooterData} setPreFooterData={setPreFooterData} />
+            </div>
+            <div className="flex flex-row mt-5">
                 <Meta metaData={metaData} setMetaData={setMetaData} />
             </div>
             <Separator className="mt-5" />
-            {/* <div className="flex flex-row mt-5">
-                <LandingVideoPage landingVideoPageData={landingVideoPageData} setLandingVideoPageData={setLandingVideoPageData} />
-            </div>
             <div className="flex flex-row mt-5">
+                <AboutGallery aboutGalleryData={aboutGalleryData} setAboutGalleryData={setAboutGalleryData} />
+            </div>
+            {/* <div className="flex flex-row mt-5">
                 <Event eventData={eventData} setEventData={setEventData} />
             </div>
             <div className="flex flex-row mt-5">

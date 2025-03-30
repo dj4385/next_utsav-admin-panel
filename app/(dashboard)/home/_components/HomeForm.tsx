@@ -18,6 +18,8 @@ import { Separator } from "@/components/ui/separator";
 import Event from "./Event/Event";
 import ButtonComponent from "@/components/core/Button/Button";
 import Contact from "./Contact/Contact";
+import { IAddLandingPageRequest } from "@/app/types/api/request/home.request";
+import { useToast } from "@/hooks/use-toast";
 
 const HomeForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -77,6 +79,8 @@ const HomeForm = () => {
         phone: "",
         sub_heading: ""
     })
+
+    const { toast } = useToast();
 
     const getHomepage = async () => {
         try {
@@ -148,7 +152,41 @@ const HomeForm = () => {
         }
     }
 
-    const onSaveChanges = () => {}
+    const onSaveChanges = async () => {
+        setLoading(true);
+        let id = '';
+
+        if(homePageData) {
+            id = homePageData._id
+        }
+
+        const req: IAddLandingPageRequest = {
+            "_id": id,
+            ...brandData,
+            ...heroData,
+            ...visionData,
+            ...missionData,
+            ...testimonialData,
+            ...galleryData,
+            ...metaData,
+            card_events: eventData,
+            landing_video: [landingVideoPageData],
+            contact_us: contactData,
+            the_gallery: galleryList,
+            the_testimonial: testimonialList
+        }
+
+        const res: any = await HomeService.updateLandingPage(id, req);
+        console.log(res);
+        if(res && res.status == 200) {
+            toast({
+                title: "Success",
+                description: res?.data?.message || "Home page data updated successfully",
+            })
+        }
+
+        setLoading(false);
+    }
 
     useEffect(() => {
         getHomepage()

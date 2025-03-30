@@ -23,6 +23,8 @@ export interface IAddLandingPageRequest {
     landing_video: ILandingVideo[],
     card_events: ICardEvent[],
     the_testimonial: ITestimonial[]
+    the_gallery: any[]
+    contact_us: any
 }
 
 export interface ILandingVideo {

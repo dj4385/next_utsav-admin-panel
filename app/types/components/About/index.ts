@@ -95,20 +95,44 @@ export interface ICelebrationData {
 
 export interface IAward {
     awardData: IAwardData,
-    setAwardData: any
+    setAwardData: any,
+    awardList: IAwardList[],
+    setAwardList: any
 }
 
 export interface IAwardData {
     awards_section: string;
 }
 
+export interface IAwardList {
+    id: number;
+    title: string;
+    heading: string;
+    name: string;
+    about: number;
+    _id: string;
+}
+
 export interface ITeam {
     teamData: ITeamData,
-    setTeamData: any
+    setTeamData: any,
+    teamList: ITeamList[],
+    setTeamList: any
 }
 
 export interface ITeamData {
     team_section: string;
+}
+
+export interface ITeamList {
+    id: number;
+    image: string;
+    alt: string;
+    name: string;
+    designation: string;
+    quotes: string;
+    about: number;
+    _id: string;
 }
 
 export interface IPrefooter {

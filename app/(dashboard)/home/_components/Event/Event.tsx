@@ -9,11 +9,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { IEvent } from "@/app/types/components/Home";
+import { IEvent, IEventData } from "@/app/types/components/Home";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useAppDispatch } from "@/lib/store";
-import { setEventModal } from "@/lib/features/EventSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { setEventListItem, setEventModal } from "@/lib/features/EventSlice";
+import { useEffect } from "react";
 
 const Event = ({
     eventData,
@@ -21,10 +22,43 @@ const Event = ({
 }: IEvent) => {
 
     const dispatch = useAppDispatch();
+    const { eventModalList } = useAppSelector((state) => state.EventSlice)
 
     const openModal = () => {
         dispatch(setEventModal(true));
     }
+
+    const editEvent = (data: IEventData) => {
+        dispatch(setEventListItem(data))
+        openModal();
+    }
+
+    const deleteData = (id: string) => {
+        const data = eventData.filter((d) => d._id !== id);
+        setEventData(data);
+    }
+
+    useEffect(() => {
+        if(eventModalList?.length) {
+            if(eventModalList[0]._id) {
+                const data = eventData.map((d) =>
+                    d._id == eventModalList[0]._id ? {
+                        ...d,
+                        event_ui_type: eventModalList[0].event_ui_type,
+                        heading: eventModalList[0].heading,
+                        text: eventModalList[0].text,
+                        alt_icon: eventModalList[0].alt_icon,
+                        icon: eventModalList[0].icon,
+                        alt: eventModalList[0].alt,
+                        image: eventModalList[0].image,
+                    } : d
+                );
+                setEventData([...data]);
+            } else {
+                setEventData([...eventData, ...eventModalList])
+            }
+        }
+    }, [eventModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -66,10 +100,10 @@ const Event = ({
                                 <TableCell>{event.text}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-center gap-2">
-                                        <Button variant="secondary" size="icon">
+                                        <Button variant="secondary" size="icon" onClick={() => editEvent(event)}>
                                             <Edit2 />
                                         </Button>
-                                        <Button variant="destructive" size="icon">
+                                        <Button variant="destructive" size="icon" onClick={() => deleteData(event._id)}>
                                             <Trash2 />
                                         </Button>
                                     </div>

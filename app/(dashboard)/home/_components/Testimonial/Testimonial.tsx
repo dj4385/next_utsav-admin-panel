@@ -52,10 +52,6 @@ const Testimonial = ({
     }
 
     useEffect(() => {
-        console.log(testimonialList, 'tl');
-        console.log(testimonialModalList, 'tml');
-        
-        
         if(testimonialModalList?.length) {
             if(testimonialModalList[0]._id) {
                 const data = testimonialList.map((d) =>

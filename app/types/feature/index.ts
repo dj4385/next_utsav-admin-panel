@@ -1,4 +1,4 @@
-import { ITestimonialList } from "../components/Home";
+import { IGalleryList, ITestimonialList } from "../components/Home";
 
 export interface EventInitialData {
     isOpen: boolean
@@ -12,4 +12,6 @@ export interface TestimonialInitialData {
 
 export interface GalleryInitialData {
     isOpen: boolean;
+    galleryModalList: IGalleryList[]
+    galleryListItem: IGalleryList | null
 }

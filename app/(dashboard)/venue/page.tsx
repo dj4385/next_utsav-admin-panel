@@ -1,9 +1,11 @@
 "use server"
 
+import VenueListing from "./_components/VenueListing";
+
 const VenuePage = async () => {
     return (
         <>
-            Venue Page
+            <VenueListing />
         </>
     )
 }

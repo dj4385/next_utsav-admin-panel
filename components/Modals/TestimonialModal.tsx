@@ -16,22 +16,36 @@ import { Textarea } from "../ui/textarea"
 import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
-import { useState } from "react"
-import { setTestimonialModal, setTestimonialModalData } from "@/lib/features/TestimonialSlice"
+import { useEffect, useState } from "react"
+import { setTestimonialListItem, setTestimonialModal, setTestimonialModalData } from "@/lib/features/TestimonialSlice"
+import { ITestimonialList } from "@/app/types/components/Home"
 
 const TestimonialModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
-    const { isOpen } = useAppSelector((state) => state.TestimonialSlice);
+    const { isOpen, testimonialListItem } = useAppSelector((state) => state.TestimonialSlice);
     const dispatch = useDispatch();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<any>();
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<any>();
     const [imageUrl, setImageUrl] = useState<string>('');
 
     const onSubmit = (data: any) => {
         setLoading(true);
-        dispatch(setTestimonialModalData([{
-            ...data,
-            image: imageUrl || ""       
-        }]))
+
+        let testimonalData: ITestimonialList;
+
+        if(testimonialListItem) {
+            testimonalData = {
+                ...data,
+                _id: testimonialListItem._id,
+                testimonial: testimonialListItem.testimonial,
+                image: imageUrl ? imageUrl : testimonialListItem.image
+            }
+        } else {
+            testimonalData = {
+                ...data,
+                image: imageUrl || ""       
+            }
+        }
+        dispatch(setTestimonialModalData([testimonalData]))
         setTimeout(() => {
             setLoading(false)
             reset();
@@ -39,11 +53,26 @@ const TestimonialModal = () => {
         }, 1000);
     }
 
-    const handleClose = () => dispatch(setTestimonialModal(false));
+    const handleClose = () => {
+        dispatch(setTestimonialModal(false))
+        dispatch(setTestimonialListItem(null))
+        reset();
+    }
 
     const onFileUpload = (url: string) => {
         setImageUrl(url);
     }
+
+    useEffect(() => {
+      if(testimonialListItem) {
+        setValue("client", testimonialListItem.client)
+        setValue("alt", testimonialListItem.alt)
+        setValue("text", testimonialListItem.text)
+      } else {
+        reset()
+      }
+    }, [testimonialListItem])
+    
 
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -69,7 +98,7 @@ const TestimonialModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                                <FileUploader url={''} urlType="image" onFileUpload={(url: string) => onFileUpload(url)} />
+                                <FileUploader url={testimonialListItem?.image || ''} urlType="image" onFileUpload={(url: string) => onFileUpload(url)} />
                             </div>
                             <ButtonComponent label="Save Changes" onClick={() => {}} loading={loading} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>

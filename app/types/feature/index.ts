@@ -7,6 +7,7 @@ export interface EventInitialData {
 export interface TestimonialInitialData {
     isOpen: boolean,
     testimonialModalList: ITestimonialList[]
+    testimonialListItem: ITestimonialList | null
 }
 
 export interface GalleryInitialData {

@@ -16,7 +16,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { setTestimonialModal } from "@/lib/features/TestimonialSlice";
+import { setTestimonialListItem, setTestimonialModal } from "@/lib/features/TestimonialSlice";
 
 const Testimonial = ({
     setTestimonialData,
@@ -25,7 +25,6 @@ const Testimonial = ({
     testimonialList
 }: ITestimonial) => {
 
-    const [testimonialDataList, setTestimonialDataList] = useState<ITestimonialList[]>(testimonialList)
     const dispatch = useAppDispatch();
     const { testimonialModalList } = useAppSelector((state) => state.TestimonialSlice)
 
@@ -42,18 +41,39 @@ const Testimonial = ({
         }));
     }
 
-    useEffect(() => {
-        if(testimonialModalList?.length) {
-            setTestimonialDataList([...testimonialList, ...testimonialModalList])
-            setTestimonialList([...testimonialList, ...testimonialModalList])
-        }
-    }, [testimonialModalList])
+    const editTestimonial = (data: ITestimonialList) => {
+        dispatch(setTestimonialListItem(data))
+        openModal();
+    }
+
+    const deleteData = (id: string) => {
+        const data = testimonialList.filter((d) => d._id !== id);
+        setTestimonialList(data);
+    }
 
     useEffect(() => {
-        if(testimonialList?.length) {
-            setTestimonialDataList([...testimonialList])
+        console.log(testimonialList, 'tl');
+        console.log(testimonialModalList, 'tml');
+        
+        
+        if(testimonialModalList?.length) {
+            if(testimonialModalList[0]._id) {
+                const data = testimonialList.map((d) =>
+                    d._id == testimonialModalList[0]._id ? {
+                        ...d,
+                        alt: testimonialModalList[0].alt,
+                        client: testimonialModalList[0].client,
+                        image: testimonialModalList[0].image,
+                        text: testimonialModalList[0].text
+                    } : d
+                );
+                console.log(data, 'd')
+                setTestimonialList([...data]);
+            } else {
+                setTestimonialList([...testimonialList, ...testimonialModalList])
+            }
         }
-    }, [testimonialList])
+    }, [testimonialModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -82,7 +102,7 @@ const Testimonial = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {testimonialDataList.map((data, index) => (
+                        {testimonialList.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
@@ -92,10 +112,10 @@ const Testimonial = ({
                                 <TableCell>{data.text}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-center gap-2">
-                                        <Button variant="secondary" size="icon">
+                                        <Button variant="secondary" size="icon" onClick={() => editTestimonial(data)}>
                                             <Edit2 />
                                         </Button>
-                                        <Button variant="destructive" size="icon">
+                                        <Button variant="destructive" size="icon" onClick={() => deleteData(data._id)}>
                                             <Trash2 />
                                         </Button>
                                     </div>

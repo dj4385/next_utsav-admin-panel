@@ -98,7 +98,10 @@ export default function FileUploader({
           
         </div>
       )}
-      <ButtonComponent label="Upload File" type="button" loading={loading} onClick={handleUpload}></ButtonComponent>
+      {
+        file ? <ButtonComponent label="Upload File" type="button" loading={loading} onClick={handleUpload}></ButtonComponent> : null
+      }
+      
     </div>
   );
 }

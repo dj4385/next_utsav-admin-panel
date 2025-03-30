@@ -4,7 +4,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TestimonialInitialData = {
     isOpen: false,
-    testimonialModalList: []
+    testimonialModalList: [],
+    testimonialListItem: null
 };
 
 const TestimonialSlice = createSlice({
@@ -16,10 +17,13 @@ const TestimonialSlice = createSlice({
         },
         setTestimonialModalData: (state: TestimonialInitialData = initialState, action: PayloadAction<ITestimonialList[]>) => {
             state.testimonialModalList = action.payload
-        }
+        },
+        setTestimonialListItem: (state: TestimonialInitialData = initialState, action: PayloadAction<ITestimonialList | null>) => {
+            state.testimonialListItem = action.payload
+        },
 
     }
 });
 
-export const { setTestimonialModal, setTestimonialModalData } = TestimonialSlice.actions;
+export const { setTestimonialModal, setTestimonialModalData, setTestimonialListItem } = TestimonialSlice.actions;
 export default TestimonialSlice.reducer;

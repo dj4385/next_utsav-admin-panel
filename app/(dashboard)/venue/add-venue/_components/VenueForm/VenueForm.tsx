@@ -5,14 +5,19 @@ import FileUploader from "@/components/FileUploader/FileUploader";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { ExperienceService } from "@/services/experience.service";
+import { LocationService } from "@/services/location.service";
 import { Tag } from "lucide-react";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const VenueForm = ({
     venueData, setVenueData
 }: any) => {
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const [experienceList, setExperienceList] = useState<any[]>([])
+    const [locationList, setLocationList] = useState<any[]>([])
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
 
         setVenueData((prev: any) => ({
@@ -20,6 +25,33 @@ const VenueForm = ({
             [name]: value,
         }));
     }
+
+    const getExperienceList = async () => {
+        try {
+            const res: any = await ExperienceService.getExperienceList();
+            if (res && res.status == 200 && res.data.data.length) {
+                setExperienceList(res.data.data)
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const getLocationList = async () => {
+        try {
+            const res: any = await LocationService.getLocationList();
+            if (res && res.status == 200 && res.data.data.length) {
+                setLocationList(res.data.data)
+            }
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        getExperienceList();
+        getLocationList();
+    }, [])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white mt-4">
@@ -30,24 +62,46 @@ const VenueForm = ({
                     <Input type="text" placeholder="Enter Brand Name" name="name" onChange={handleChange} value={venueData?.name || ''} className="mt-1 w-full" />
                 </div>
                 <div>
+                    <label className="block text-sm font-medium text-gray-700">Location</label>
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="location" onChange={handleChange} value={venueData?.location || ''}  >
+                        {
+                            locationList.length ? locationList.map((loc, index) => <option key={index} value={loc._id}> {loc.name} </option>) : null
+
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Experience</label>
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="experience" onChange={handleChange} value={venueData?.experience || ''} >
+                        {
+                            experienceList.length ? experienceList.map((exp, index) => <option key={index} value={exp._id}> {exp.name} </option>) : null
+
+                        }
+                    </select>
+                </div>
+                <div>
                     <label className="block text-sm font-medium text-gray-700">Property Type</label>
-                    <Input type="text" placeholder="Enter Brand Name" name="property_type" onChange={handleChange} value={venueData?.property_type || ''} className="mt-1 w-full" />
+                    <Input type="text" placeholder="Enter Property type" name="property_type" onChange={handleChange} value={venueData?.property_type || ''} className="mt-1 w-full" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Capacity</label>
-                    <Input type="text" placeholder="Enter story here" onChange={handleChange} name="capacity" value={venueData?.capacity || ''} />
+                    <Input type="text" placeholder="Enter Capacity" onChange={handleChange} name="capacity" value={venueData?.capacity || ''} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">OutSide Catering Policy</label>
-                    <Input type="text" placeholder="Enter story here" onChange={handleChange} name="outdoor_catering_policy" value={venueData?.outdoor_catering_policy || ''} />
+                    <Input type="text" placeholder="Enter outside catering policy" onChange={handleChange} name="outdoor_catering_policy" value={venueData?.outdoor_catering_policy || ''} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">AQI</label>
-                    <Input type="number" placeholder="Enter story here" onChange={handleChange} name="air_quality_index" value={venueData?.air_quality_index || 0} />
+                    <Input type="number" placeholder="Enter air quality index" onChange={handleChange} name="air_quality_index" value={venueData?.air_quality_index || 0} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Google Rating</label>
-                    <Input type="number" placeholder="Enter story here" onChange={handleChange} name="google_rating" value={venueData?.google_rating || 0} />
+                    <Input type="number" placeholder="Enter google review" onChange={handleChange} name="google_rating" value={venueData?.google_rating || 0} />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Google Rating Review</label>
+                    <Input type="number" placeholder="Enter google rating review" onChange={handleChange} name="google_rating_review" value={venueData?.google_rating_review || 0} />
                 </div>
             </div>
             {/* <Separator className="mt-4" />

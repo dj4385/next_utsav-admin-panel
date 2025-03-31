@@ -24,7 +24,7 @@ const SideNav = () => {
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`flex items-center gap-3 p-3 rounded-lg transition ${pathname === item.href ? "bg-purple-800" : "hover:bg-purple-800"
+                            className={`flex items-center gap-3 p-3 rounded-lg transition ${pathname.includes(item.href) ? "bg-purple-800" : "hover:bg-purple-800"
                                 }`}
                         >
                             <item.icon className="w-5 h-5" />

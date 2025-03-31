@@ -12,7 +12,7 @@ export class ExperienceService {
 
     static async addExperience (req: {name: string}) {
         try {
-            const res = await api.post(`/destination/experience`, req);
+            const res = await api.post(`/destination/experience-list`, req);
             return res;
         } catch (error) {
             return error;

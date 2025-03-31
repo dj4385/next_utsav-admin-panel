@@ -14,20 +14,34 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { useToast } from "@/hooks/use-toast";
 
 const VenueListing = () => {
 
     const [venues, setVenues] = useState([]);
+    const { toast } = useToast();
     const router = useRouter();
 
     const getVenueListing = async () => {
         try {
             const res: any = await VenueService.getVenues();
+            console.log(res);
+            
             if (res && res.status == 200 && res.data) {
-
+                setVenues(res.data);
+            } else {
+                toast({
+                    title: "Error",
+                    description: res?.response?.data?.message || 'No Venue Found',
+                    variant: "destructive",
+                })
             }
-        } catch (error) {
-
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error?.response?.data?.message || 'Something went wrong',
+                variant: "destructive",
+            })
         }
     }
 
@@ -57,15 +71,16 @@ const VenueListing = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* {teamList.map((data, index) => (
+                        {/* {venues.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>
-                                <TableCell>{data.alt}</TableCell>
                                 <TableCell>{data.name}</TableCell>
-                                <TableCell>{data.designation}</TableCell>
-                                <TableCell>{data.quotes}</TableCell>
+                                <TableCell>{data.type}</TableCell>
+                                <TableCell>{data.capacity}</TableCell>
+                                <TableCell>{data.aqi}</TableCell>
+                                <TableCell>{data.rating}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-center gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => edit(data)}>

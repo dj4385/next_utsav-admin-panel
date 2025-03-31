@@ -20,4 +20,13 @@ export class ContactService {
             return error;
         }
     }
+
+    static async updateContactPageDetail (id: string, req: any) {
+        try {
+            const res = await api.put(`/contact/contact-page/${id}`, req);
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
 }

@@ -56,7 +56,7 @@ const GlobalPresence = ({
         if(globalPresenceModalList?.length) {
             if(globalPresenceModalList[0]._id) {
                 const data = globalPresenceList.map((d) =>
-                    d._id == globalPresenceList[0]._id ? {
+                    d._id == globalPresenceModalList[0]._id ? {
                         ...d,
                         alt_country_image: globalPresenceModalList[0].alt_country_image,
                         country_address: globalPresenceModalList[0].country_address,

@@ -109,32 +109,29 @@ const ContactForm = () => {
             id = contactPageData._id
         }
 
-        // const req: IAddLandingPageRequest = {
-        //     "_id": id,
-        //     ...brandData,
-        //     ...heroData,
-        //     ...visionData,
-        //     ...missionData,
-        //     ...testimonialData,
-        //     ...galleryData,
-        //     ...metaData,
-        //     card_events: eventData,
-        //     landing_video: [landingVideoPageData],
-        //     contact_us: contactData,
-        //     the_gallery: galleryList,
-        //     the_testimonial: testimonialList
-        // }
+        const req: any = {
+            "_id": id,
+            ...contactHeadingData,
+            ...feedbackData,
+            ...globalPresenceData,
+            global_presence: globalPresenceList,
+            ...contactFooterData,
+            footer_contact: contactFooterList,
+            ...workData,
+            ...channelPartnerData,
+            ...contactVenueData,
+            ...metaData,
+        }
 
-        // const res: any = await HomeService.updateLandingPage(id, req);
-        // console.log(res);
-        // if(res && res.status == 200) {
-        //     toast({
-        //         title: "Success",
-        //         description: res?.data?.message || "Home page data updated successfully",
-        //     })
-        // }
+        const res: any = await ContactService.updateContactPageDetail(id, req);
+        if(res && res.status == 200) {
+            toast({
+                title: "Success",
+                description: res?.data?.message || "Contact page data updated successfully",
+            })
+        }
 
-        // setLoading(false);
+        setLoading(false);
     }
 
     useEffect(() => {

@@ -17,7 +17,7 @@ import RealWedding from "./RealWedding/ReadWedding";
 import Legacy from "./Legacy/Legacy";
 import Experience from "./Experience/Experience";
 import Countries from "./Countries/Countries";
-import Event from "../Event/Event";
+import Event from "./Event/Event";
 import AboutGallery from "./AboutGallery/AboutGallery";
 import Venue from "./Venue/Venue";
 import Celebration from "./Celebration/Celebration";

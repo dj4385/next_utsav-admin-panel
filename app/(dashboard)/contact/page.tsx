@@ -1,9 +1,11 @@
 "use server"
 
+import ContactForm from "./_components/ContactForm";
+
 const ContactPage = async () => {
     return (
         <>
-            Contact Page
+            <ContactForm />
         </>
     )
 }

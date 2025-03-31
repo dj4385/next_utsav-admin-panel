@@ -14,11 +14,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { LocationService } from "@/services/location.service";
-import { useAppSelector } from "@/lib/store";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { setAddLocationSuccess } from "@/lib/features/EventsSlice";
 
 const LocationTable = () => {
     const [locationList, setLocationList] = useState<any[]>([])
     const { toast } = useToast();
+    const dispatch = useAppDispatch();
     const { isAddLocationSuccess } = useAppSelector((state) => state.EventsSlice);
 
     const getLocationList = async () => {
@@ -26,6 +28,7 @@ const LocationTable = () => {
             const res: any = await LocationService.getLocationList();
             if (res && res.status == 200 && res.data.data.length) {
                 setLocationList(res.data.data)
+                dispatch(setAddLocationSuccess(false));
             }
         } catch (error) {
 

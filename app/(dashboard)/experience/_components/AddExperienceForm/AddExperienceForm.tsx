@@ -18,8 +18,10 @@ const AddExperienceForm = () => {
     const dispatch = useAppDispatch();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { value } = e.target;
-        setExperienceTitle(value);
+        const { name, value } = e.target;
+        if(name == 'experienceTitle') {
+            setExperienceTitle(value);
+        }
     }
 
     const onSave = async () => {
@@ -36,7 +38,6 @@ const AddExperienceForm = () => {
                     title: "Success",
                     description: "Experience Added Successfully"
                 })
-                setExperienceTitle('');
                 dispatch(setAddExperinceSuccess(true));
             } else {
                 toast({
@@ -45,6 +46,9 @@ const AddExperienceForm = () => {
                     variant: "destructive",
                 })
             }
+            setTimeout(() => {
+                setExperienceTitle('');
+            }, 1000);
             setLoading(false);
 
         } catch (error) {

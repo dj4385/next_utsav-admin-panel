@@ -14,13 +14,14 @@ import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
 import { IImages } from "@/app/types/api/request/venue.request"
 import { setVenueImageListItem, setVenueImageModal, setVenueImageModalList } from "@/lib/features/venue/VenueImageSlice"
+import MultipleFileUploader from "../MultipleFileUploader/MultipleFileUploader"
 
 const VenueImageModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { isOpen, venueImageListItem } = useAppSelector((state) => state.VenueImageSlice);
     const dispatch = useDispatch();
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<any>();
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string[]>([]);
 
     const onSubmit = (data: any) => {
         setLoading(true);
@@ -53,7 +54,7 @@ const VenueImageModal = () => {
         reset();
     };
 
-    const onImageUpload = (url: string) => {
+    const onImageUpload = (url: string[]) => {
         setImageUrl(url)
     }
 
@@ -83,7 +84,7 @@ const VenueImageModal = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                                <FileUploader url={venueImageListItem?.urls[0] || ''} urlType="image" onFileUpload={(url: string) => onImageUpload(url)} />
+                                <MultipleFileUploader url={venueImageListItem?.urls || []} urlType="image" onFileUpload={(url: string[]) => onImageUpload(url)} />
                             </div>
                             <ButtonComponent label="Save Changes" onClick={() => { }} loading={loading} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>

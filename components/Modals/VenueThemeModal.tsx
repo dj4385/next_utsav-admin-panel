@@ -10,19 +10,19 @@ import { Input } from "@/components/ui/input"
 import { useAppSelector } from "@/lib/store"
 import { useDispatch } from "react-redux"
 import { Textarea } from "../ui/textarea"
-import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
 import { IThemes } from "@/app/types/api/request/venue.request"
 import { setVenueThemeListItem, setVenueThemeModal, setVenueThemeModalList } from "@/lib/features/venue/VenueThemeSlice"
+import MultipleFileUploader from "../MultipleFileUploader/MultipleFileUploader"
 
 const VenueThemeModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { isOpen, themeListItem } = useAppSelector((state) => state.VenueThemeSlice);
     const dispatch = useDispatch();
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<any>();
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string[]>([]);
 
     const onSubmit = (data: any) => {
         setLoading(true);
@@ -55,7 +55,7 @@ const VenueThemeModal = () => {
         reset();
     };
 
-    const onImageUpload = (url: string) => {
+    const onImageUpload = (url: string[]) => {
         setImageUrl(url)
     }
 
@@ -78,8 +78,8 @@ const VenueThemeModal = () => {
                     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid lg:grid-cols-1 grid-cols-1 gap-4 p-2">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-                                <FileUploader url={themeListItem?.images[0] || ''} urlType="image" onFileUpload={(url: string) => onImageUpload(url)} />
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
+                                <MultipleFileUploader url={themeListItem?.images || []} urlType="image" onFileUpload={(url: string[]) => onImageUpload(url)} />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Name</label>

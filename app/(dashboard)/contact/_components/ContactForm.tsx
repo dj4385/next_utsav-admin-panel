@@ -10,10 +10,47 @@ import { IContactResponse } from "@/app/types/api/response/contact.response";
 import Meta from "./Meta/Meta";
 import { IMetaData } from "@/app/types/components/Home";
 import ButtonComponent from "@/components/core/Button/Button";
+import { IChannelPartnerData, IContactFooterData, IContactFooterList, IContactHeadingData, IContactVenueData, IFeedbackData, IGlobalPresenceData, IGlobalPresenceList, IWorkData } from "@/app/types/components/Contact";
 
 const ContactForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [contactPageData, setContactPageData] = useState<IContactResponse | null>(null);
+    const [contactHeadingData, setContactHeadingData] = useState<IContactHeadingData>({
+        alt_header_image: "",
+        header_image: "",
+        heading: "",
+        sub_heading: ""
+    });
+    const [feedbackData, setFeedbackData] = useState<IFeedbackData>({
+        feedback_email: "",
+        feedback_heading: "",
+        feedback_phone: "",
+        feedback_sub_heading: "",
+        head_office: "",
+    })
+    const [globalPresenceData, setGlobalPresenceData] = useState<IGlobalPresenceData>({
+        global_presence_heading: "",
+        global_presence_sub_heading: "",
+    })
+    const [globalPresenceList, setGlobalPresenceList] = useState<IGlobalPresenceList[]>([]);
+    const [contactFooterData, setContactFooterData] = useState<IContactFooterData>({
+        footer_image: "",
+        alt_footer_image: "",
+        footer_contact: "",
+    })
+    const [contactFooterList, setContactFooterList] = useState<IContactFooterList[]>([]);
+    const [workData, setWorkData] = useState<IWorkData>({
+        work_email: "",
+        work_email_heading: "",
+    })
+    const [channelPartnerData, setChannelPartnerData] = useState<IChannelPartnerData>({
+        channel_partner_email: "",
+        channel_partner_email_heading: ""
+    })
+    const [contactVenueData, setContactVenueData] = useState<IContactVenueData>({
+        venue_email: "",
+        venue_email_heading: ""
+    })
     const [metaData, setMetaData] = useState<IMetaData>({
         meta_description: "",
         meta_image: "",
@@ -29,6 +66,13 @@ const ContactForm = () => {
             if(res && res.status == 200 && res.data && res.data.data.length) {
 
                 const {
+                    heading, sub_heading, alt_header_image, header_image,
+                    feedback_email, feedback_heading, feedback_phone, feedback_sub_heading, head_office,
+                    global_presence_heading, global_presence_sub_heading, global_presence,
+                    footer_image, alt_footer_image, footer_contact,
+                    work_email, work_email_heading, 
+                    channel_partner_email, channel_partner_email_heading, 
+                    venue_email, venue_email_heading,
                     meta_title, meta_description, meta_image
                 } = res.data.data[0];
 

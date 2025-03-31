@@ -11,6 +11,9 @@ import Meta from "./Meta/Meta";
 import { IMetaData } from "@/app/types/components/Home";
 import ButtonComponent from "@/components/core/Button/Button";
 import { IChannelPartnerData, IContactFooterData, IContactFooterList, IContactHeadingData, IContactVenueData, IFeedbackData, IGlobalPresenceData, IGlobalPresenceList, IWorkData } from "@/app/types/components/Contact";
+import ContactHeading from "./ContactHeading/ContactHeading";
+import Feedback from "./Feedback/Feedback";
+import GlobalPresence from "./GlobalPresence/GlobalPresence";
 
 const ContactForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -140,12 +143,16 @@ const ContactForm = () => {
                 <ContentHeader title="Add/Update Home Page" icon={<LayoutDashboard />} />
             </div>
             <div className="flex flex-row mt-5">
+                <ContactHeading contactHeadingData={contactHeadingData} setContactHeadingData={setContactHeadingData} />
             </div>
             <div className="flex flex-row mt-5">
+                <Feedback feedbackData={feedbackData} setFeedbackData={setFeedbackData} />
             </div>
             <div className="flex flex-row mt-5">
+                <GlobalPresence globalPresenceData={globalPresenceData} globalPresenceList={globalPresenceList} setGlobalPresenceData={setGlobalPresenceData} setGlobalPresenceList={setGlobalPresenceList} />
             </div>
             <div className="flex flex-row mt-5">
+                
             </div>
             <div className="flex flex-row mt-5">
             </div>

@@ -35,8 +35,7 @@ const ContactForm = () => {
     const [globalPresenceList, setGlobalPresenceList] = useState<IGlobalPresenceList[]>([]);
     const [contactFooterData, setContactFooterData] = useState<IContactFooterData>({
         footer_image: "",
-        alt_footer_image: "",
-        footer_contact: "",
+        alt_footer_image: ""
     })
     const [contactFooterList, setContactFooterList] = useState<IContactFooterList[]>([]);
     const [workData, setWorkData] = useState<IWorkData>({
@@ -77,6 +76,15 @@ const ContactForm = () => {
                 } = res.data.data[0];
 
                 setContactPageData(res.data.data[0]);
+                setContactHeadingData({heading, sub_heading, alt_header_image, header_image})
+                setFeedbackData({feedback_email, feedback_heading, feedback_phone, feedback_sub_heading, head_office,})
+                setGlobalPresenceData({global_presence_heading, global_presence_sub_heading})
+                setGlobalPresenceList(global_presence);
+                setContactFooterData({footer_image, alt_footer_image})
+                setContactFooterList(footer_contact);
+                setWorkData({work_email, work_email_heading, })
+                setContactVenueData({venue_email, venue_email_heading,})
+                setChannelPartnerData({channel_partner_email, channel_partner_email_heading, })
                 setMetaData({
                     meta_title, meta_description, meta_image
                 })

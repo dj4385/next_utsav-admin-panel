@@ -53,7 +53,6 @@ export interface IContactFooter {
 export interface IContactFooterData {
     footer_image: string;
     alt_footer_image: string;
-    footer_contact: string;
 }
 
 export interface IContactFooterList {

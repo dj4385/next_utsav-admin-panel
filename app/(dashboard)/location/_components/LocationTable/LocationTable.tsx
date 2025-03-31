@@ -14,11 +14,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { LocationService } from "@/services/location.service";
+import { useAppSelector } from "@/lib/store";
 
 const LocationTable = () => {
     const [locationList, setLocationList] = useState<any[]>([])
-    const [loading, setLoading] = useState<boolean>(false);
     const { toast } = useToast();
+    const { isAddLocationSuccess } = useAppSelector((state) => state.EventsSlice);
 
     const getLocationList = async () => {
         try {
@@ -60,6 +61,12 @@ const LocationTable = () => {
         getLocationList();
     }, [])
 
+    useEffect(() => {
+        if(isAddLocationSuccess) {
+            getLocationList();
+        }
+    }, [isAddLocationSuccess])
+
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -68,17 +75,19 @@ const LocationTable = () => {
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">Name</TableHead>
-                            <TableHead className="text-white">CreatedAt</TableHead>
-                            <TableHead className="text-white">UpdatedAt</TableHead>
+                            <TableHead className="text-white">City</TableHead>
+                            <TableHead className="text-white">State</TableHead>
+                            <TableHead className="text-white">Address</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {locationList?.length ? locationList.map((item, index) => (
                             <TableRow key={index}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{item.createdAt}</TableCell>
-                                <TableCell>{item.updatedAt}</TableCell>
+                                <TableCell>{item?.name || ''}</TableCell>
+                                <TableCell>{item?.city || ''}</TableCell>
+                                <TableCell>{item?.state || ''}</TableCell>
+                                <TableCell>{item?.address || ''}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="destructive" size="icon" onClick={() => deleteData(item._id)}>

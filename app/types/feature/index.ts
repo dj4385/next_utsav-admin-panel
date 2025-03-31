@@ -68,3 +68,7 @@ export interface ContactFooterInitialData {
     contactFooterListItem: IContactFooterList | null;
 }
 
+export interface IEventInitialData {
+    isAddLocationSuccess: boolean;
+    isAddExperienceSuccess: boolean;
+}

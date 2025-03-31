@@ -10,12 +10,12 @@ import RealWedding from "./RealWedding/RealWedding";
 import ThemeForm from "./ThemeForm/ThemeForm";
 import VenuesImages from "./VenueImages/VenuesImages";
 import ButtonComponent from "@/components/core/Button/Button";
-import { IImages, IRealWeddings, IThemes } from "@/app/types/api/request/venue.request";
+import { IImages, IThemes } from "@/app/types/api/request/venue.request";
 
 const AddVenueForm = () => {
 
     const [venueData, setVenueData] = useState<any>()
-    const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
+    // const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
     const [themeFormList, setThemeFormList] = useState<IThemes[]>([]);
     const [venueImagesList, setVenueImages] = useState<IImages[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -36,9 +36,9 @@ const AddVenueForm = () => {
             <div className="flex flex-row mt-5">
                 <VenueForm venueData={venueData} setVenueData={setVenueData} />
             </div>
-            <div className="flex flex-row mt-5">
+            {/* <div className="flex flex-row mt-5">
                 <RealWedding realWeddings={realWeddings} setRealWeddings={setRealWeddings} />
-            </div>
+            </div> */}
             <div className="flex flex-row mt-5">
                 <ThemeForm setThemeFormList={setThemeFormList} themeFormList={themeFormList} />
             </div>

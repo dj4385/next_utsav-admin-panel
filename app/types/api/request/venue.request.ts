@@ -1,41 +1,52 @@
 export interface IAddVenueRequest {
+    venue_name: string;
+    location: string;
+    experience: string;
     venue: IVenue,
-    theme_options: string[],
-    themes: IThemes[],
-    real_weddings: IRealWeddings[]
+    gallery: IImages[],
+    theme_options: IThemes[],
+    // real_weddings: IRealWeddings[]
 }
 
-export interface IRealWeddings {
-    couple: string,
-    description: string,
-    image: string
-    _id?: string;
-}
+// export interface IRealWeddings {
+//     couple: string,
+//     description: string,
+//     image: string
+//     _id?: string;
+// }
 
 export interface IThemes {
     name: string,
+    tab_name: string,
     description: string,
-    images: string[],
+    theme_img_gallery: IThemeImgGallery[];
     _id?: string
 }
 
+export interface IThemeImgGallery {
+    alt: string,
+    images: string,
+    is_wide: boolean
+}
+
 export interface IVenue {
-    name: string,
     property_type: string,
     capacity: string,
+    nearest_airport: INearestAirport,
     outdoor_catering_policy: string,
     air_quality_index: number,
     google_rating: number,
-    location: ILocation,
-    nearest_airport: INearestAirport,
-    images: IImages []
+    google_rating_review: number,
+    description: string;
+    // location: ILocation,
+    map_link: string,
 }
 
-export interface ILocation {
-    city: string,
-    state: string,
-    address: string
-}
+// export interface ILocation {
+//     city: string,
+//     state: string,
+//     address: string
+// }
 
 export interface INearestAirport {
     name: string,
@@ -44,7 +55,8 @@ export interface INearestAirport {
 
 export interface IImages {
     type: string,
-    // url: string,
-    urls: string[],
-    _id?: string;
+    name: string,
+    images: string,
+    video: string,
+    _id?: string
 }

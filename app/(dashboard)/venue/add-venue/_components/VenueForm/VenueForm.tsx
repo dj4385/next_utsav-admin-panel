@@ -50,7 +50,7 @@ const VenueForm = ({
                     <Input type="number" placeholder="Enter story here" onChange={handleChange} name="google_rating" value={venueData?.google_rating || 0} />
                 </div>
             </div>
-            <Separator className="mt-4" />
+            {/* <Separator className="mt-4" />
             <div>
                 <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium"> Location</h2>
                 <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
@@ -67,7 +67,7 @@ const VenueForm = ({
                         <Input type="text" placeholder="Enter Brand Name" name="address" onChange={handleChange} value={venueData?.address || ''} className="mt-1 w-full" />
                     </div>
                 </div>
-            </div>
+            </div> */}
             <Separator className="mt-4" />
             <div>
                 <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium">Nearest Airport</h2>

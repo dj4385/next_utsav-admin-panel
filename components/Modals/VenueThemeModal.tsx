@@ -33,7 +33,7 @@ const VenueThemeModal = () => {
             venueThemeData = {
                 ...data,
                 _id: themeListItem._id,
-                images: imageUrl ? imageUrl : themeListItem.images
+                images: imageUrl ? imageUrl : themeListItem.theme_img_gallery
             }
         } else {
             venueThemeData = {
@@ -62,6 +62,7 @@ const VenueThemeModal = () => {
     useEffect(() => {
         if (themeListItem) {
             setValue("name", themeListItem.name);
+            setValue("tab_name", themeListItem.tab_name)
             setValue("description", themeListItem.description);
         } else {
             reset()
@@ -79,11 +80,15 @@ const VenueThemeModal = () => {
                         <div className="grid lg:grid-cols-1 grid-cols-1 gap-4 p-2">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
-                                <MultipleFileUploader url={themeListItem?.images || []} urlType="image" onFileUpload={(url: string[]) => onImageUpload(url)} />
+                                <MultipleFileUploader url={themeListItem?.theme_img_gallery?.map((gallery) => gallery.images) || []} urlType="image" onFileUpload={(url: string[]) => onImageUpload(url)} />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Name</label>
                                 <Input type="text" {...register("name")} placeholder="Enter Theme Name" className="mt-1 w-full" />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Tab Name</label>
+                                <Input type="text" {...register("tab_name")} placeholder="Enter Tab Name" className="mt-1 w-full" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Description</label>

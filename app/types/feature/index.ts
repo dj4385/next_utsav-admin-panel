@@ -1,4 +1,4 @@
-import { IImages, IRealWeddings, IThemes } from "../api/request/venue.request";
+import { IImages, IThemes } from "../api/request/venue.request";
 import { IAboutGalleryData, IAwardList, IRealWeddingData, ITeamList } from "../components/About";
 import { IContactFooterList, IGlobalPresenceList } from "../components/Contact";
 import { IEventData, IGalleryList, ITestimonialList } from "../components/Home";
@@ -38,11 +38,11 @@ export interface AboutGalleryInitialData {
 
 }
 
-export interface RealWeddingInitialData {
-    isOpen: boolean;
-    realWeddingModalList: IRealWeddings[];
-    realWeddingListItem: IRealWeddings | null;
-}
+// export interface RealWeddingInitialData {
+//     isOpen: boolean;
+//     realWeddingModalList: IRealWeddings[];
+//     realWeddingListItem: IRealWeddings | null;
+// }
 
 export interface VenueThemeInitialData {
     isOpen: boolean;

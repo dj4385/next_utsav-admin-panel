@@ -5,8 +5,16 @@ import { VenueService } from "@/services/venue.service";
 import { ArrowLeft, MapPinHouse } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import VenueForm from "./VenueForm/VenueForm";
+import RealWedding from "./RealWedding/RealWedding";
+import ThemeForm from "./ThemeForm/ThemeForm";
+import VenuesImages from "./VenueImages/VenuesImages";
+import ButtonComponent from "@/components/core/Button/Button";
 
 const AddVenueForm = () => {
+
+    const [venueData, setVenueData] = useState<any>()
+    const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
 
@@ -14,13 +22,27 @@ const AddVenueForm = () => {
         router.push('/venue')
     }
 
+    const onSaveChanges = () => {}
+
     return (
         <div className="flex flex-col rounded-lg bg-gray-50 p-2">
             <div className="w-full">
                 <ContentHeader title="Add Venue" icon={<MapPinHouse />} buttonLabel="Back" buttonIcon={<ArrowLeft />} onBtnClick={() => back()} />
             </div>
-            <div>
-
+            <div className="flex flex-row mt-5">
+                <VenueForm venueData={venueData} setVenueData={setVenueData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <RealWedding aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <ThemeForm aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <VenuesImages aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+            </div>
+            <div className="flex justify-center items-center mt-5">
+                <ButtonComponent label="Save Changes" onClick={() => onSaveChanges()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />
             </div>
         </div>
     )

@@ -13,48 +13,51 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IAboutGallery, IAboutGalleryData } from "@/app/types/components/About";
-import { setAboutGalleryListItem, setAboutGalleryModal } from "@/lib/features/about/AboutGallerySlice";
+import { IVenueImages } from "@/app/types/components/Venue";
+import { setVenueImageListItem, setVenueImageModal } from "@/lib/features/venue/VenueImageSlice";
+import { IImages } from "@/app/types/api/request/venue.request";
 
 const VenuesImages = ({
-    aboutGalleryData,
-    setAboutGalleryData
-}: IAboutGallery) => {
+    setVenueImages,
+    venueImagesList
+}: IVenueImages) => {
 
     const dispatch = useAppDispatch();
-    const { aboutGalleryModalList } = useAppSelector((state) => state.AboutGallerySlice)
+    const { venueImageModalList } = useAppSelector((state) => state.VenueImageSlice)
 
     const openModal = () => {
-        dispatch(setAboutGalleryModal(true));
+        dispatch(setVenueImageModal(true));
     }
 
-    const editModal = (data: IAboutGalleryData) => {
-        dispatch(setAboutGalleryListItem(data))
+    const editModal = (data: IImages) => {
+        dispatch(setVenueImageListItem(data))
         openModal();
     }
 
-    const deleteData = (id: string) => {
-        const data = aboutGalleryData.filter((d) => d._id !== id);
-        setAboutGalleryData(data);
+    const deleteData = (id: string | undefined) => {
+        if(!id) {
+            return;
+        }
+        const data = venueImagesList.filter((d) => d._id !== id);
+        setVenueImages(data);
     }
 
     useEffect(() => {
-        if(aboutGalleryModalList?.length) {
-            if(aboutGalleryModalList[0]._id) {
-                const data = aboutGalleryData.map((d) =>
-                    d._id == aboutGalleryModalList[0]._id ? {
+        if(venueImageModalList?.length) {
+            if(venueImageModalList[0]._id) {
+                const data = venueImagesList.map((d) =>
+                    d._id == venueImageModalList[0]._id ? {
                         ...d,
-                        isWide: aboutGalleryModalList[0].isWide,
-                        alt: aboutGalleryModalList[0].alt,
-                        image: aboutGalleryModalList[0].image,
+                        type: venueImageModalList[0].type,
+                        urls: venueImageModalList[0].urls,
                     } : d
                 );
-                setAboutGalleryData([...data]);
+                setVenueImages([...data]);
             } else {
-                setAboutGalleryData([...aboutGalleryData, ...aboutGalleryModalList])
+                setVenueImages([...venueImagesList, ...venueImageModalList])
             }
         }
-    }, [aboutGalleryModalList])
+    }, [venueImageModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -70,20 +73,18 @@ const VenuesImages = ({
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Image Type</TableHead>
-                            <TableHead className="text-white">Other Images</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* {aboutGalleryData.map((item, index) => (
+                        {venueImagesList.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     {
-                                        item && item.image ? <div className="h-[50px] w-[50px]"> <Image src={item.image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
+                                        item && item.urls && item.urls.length ? <div className="h-[50px] w-[50px]"> <Image src={item.urls[0]} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
-                                <TableCell>{item.alt}</TableCell>
-                                <TableCell>{item.isWide ? 'Yes' : 'No'}</TableCell>
+                                <TableCell>{item.type}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>
@@ -96,7 +97,7 @@ const VenuesImages = ({
 
                                 </TableCell>
                             </TableRow>
-                        ))} */}
+                        ))}
                     </TableBody>
                 </Table>
             </div>

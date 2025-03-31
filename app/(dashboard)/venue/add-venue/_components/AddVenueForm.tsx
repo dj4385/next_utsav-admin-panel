@@ -10,12 +10,14 @@ import RealWedding from "./RealWedding/RealWedding";
 import ThemeForm from "./ThemeForm/ThemeForm";
 import VenuesImages from "./VenueImages/VenuesImages";
 import ButtonComponent from "@/components/core/Button/Button";
-import { IRealWeddings } from "@/app/types/api/request/venue.request";
+import { IImages, IRealWeddings, IThemes } from "@/app/types/api/request/venue.request";
 
 const AddVenueForm = () => {
 
     const [venueData, setVenueData] = useState<any>()
     const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
+    const [themeFormList, setThemeFormList] = useState<IThemes[]>([]);
+    const [venueImagesList, setVenueImages] = useState<IImages[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
@@ -38,10 +40,10 @@ const AddVenueForm = () => {
                 <RealWedding realWeddings={realWeddings} setRealWeddings={setRealWeddings} />
             </div>
             <div className="flex flex-row mt-5">
-                <ThemeForm aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+                <ThemeForm setThemeFormList={setThemeFormList} themeFormList={themeFormList} />
             </div>
             <div className="flex flex-row mt-5">
-                <VenuesImages aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+                <VenuesImages setVenueImages={setVenueImages} venueImagesList={venueImagesList} />
             </div>
             <div className="flex justify-center items-center mt-5">
                 <ButtonComponent label="Save Changes" onClick={() => onSaveChanges()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />

@@ -9,13 +9,14 @@ export interface IRealWeddings {
     couple: string,
     description: string,
     image: string
-    _id: string;
+    _id?: string;
 }
 
 export interface IThemes {
     name: string,
     description: string,
-    images: string[]
+    images: string[],
+    _id?: string
 }
 
 export interface IVenue {
@@ -43,6 +44,7 @@ export interface INearestAirport {
 
 export interface IImages {
     type: string,
-    url: string,
-    urls: string[]
+    // url: string,
+    urls: string[],
+    _id?: string;
 }

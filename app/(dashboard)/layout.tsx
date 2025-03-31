@@ -8,6 +8,8 @@ import GalleryModal from "@/components/Modals/GalleryModal";
 import RealWeddingModal from "@/components/Modals/RealWeddingModal";
 import TeamModal from "@/components/Modals/TeamModal";
 import TestimonialModal from "@/components/Modals/TestimonialModal";
+import VenueImageModal from "@/components/Modals/VenueImageModal";
+import VenueThemeModal from "@/components/Modals/VenueThemeModal";
 import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
 import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
@@ -43,6 +45,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <AwardModal />
               <TeamModal />
               <RealWeddingModal />
+              <VenueThemeModal />
+              <VenueImageModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

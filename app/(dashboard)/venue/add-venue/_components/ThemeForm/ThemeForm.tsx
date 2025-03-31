@@ -1,6 +1,6 @@
 "use client"
 
-import { CalendarClock, CirclePlus, Edit2, GalleryHorizontal, Palette, Trash2 } from "lucide-react";
+import { CirclePlus, Edit2, Palette, Trash2 } from "lucide-react";
 import {
     Table,
     TableBody,
@@ -13,48 +13,52 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IAboutGallery, IAboutGalleryData } from "@/app/types/components/About";
-import { setAboutGalleryListItem, setAboutGalleryModal } from "@/lib/features/about/AboutGallerySlice";
+import { IThemeForm } from "@/app/types/components/Venue";
+import { setVenueThemeListItem, setVenueThemeModal } from "@/lib/features/venue/VenueThemeSlice";
+import { IThemes } from "@/app/types/api/request/venue.request";
 
 const ThemeForm = ({
-    aboutGalleryData,
-    setAboutGalleryData
-}: IAboutGallery) => {
+    setThemeFormList,
+    themeFormList
+}: IThemeForm) => {
 
     const dispatch = useAppDispatch();
-    const { aboutGalleryModalList } = useAppSelector((state) => state.AboutGallerySlice)
+    const { themeModalList } = useAppSelector((state) => state.VenueThemeSlice)
 
     const openModal = () => {
-        dispatch(setAboutGalleryModal(true));
+        dispatch(setVenueThemeModal(true));
     }
 
-    const editModal = (data: IAboutGalleryData) => {
-        dispatch(setAboutGalleryListItem(data))
+    const editModal = (data: IThemes) => {
+        dispatch(setVenueThemeListItem(data))
         openModal();
     }
 
-    const deleteData = (id: string) => {
-        const data = aboutGalleryData.filter((d) => d._id !== id);
-        setAboutGalleryData(data);
+    const deleteData = (id: string | undefined) => {
+        if(!id) {
+            return;
+        }
+        const data = themeFormList.filter((d) => d._id !== id);
+        setThemeFormList(data);
     }
 
     useEffect(() => {
-        if(aboutGalleryModalList?.length) {
-            if(aboutGalleryModalList[0]._id) {
-                const data = aboutGalleryData.map((d) =>
-                    d._id == aboutGalleryModalList[0]._id ? {
+        if(themeModalList?.length) {
+            if(themeModalList[0]._id) {
+                const data = themeFormList.map((d) =>
+                    d._id == themeModalList[0]._id ? {
                         ...d,
-                        isWide: aboutGalleryModalList[0].isWide,
-                        alt: aboutGalleryModalList[0].alt,
-                        image: aboutGalleryModalList[0].image,
+                        isWide: themeModalList[0].name,
+                        alt: themeModalList[0].description,
+                        images: themeModalList[0].images,
                     } : d
                 );
-                setAboutGalleryData([...data]);
+                setThemeFormList([...data]);
             } else {
-                setAboutGalleryData([...aboutGalleryData, ...aboutGalleryModalList])
+                setThemeFormList([...themeFormList, ...themeModalList])
             }
         }
-    }, [aboutGalleryModalList])
+    }, [themeModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -75,15 +79,15 @@ const ThemeForm = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* {aboutGalleryData.map((item, index) => (
+                        {themeFormList.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     {
-                                        item && item.image ? <div className="h-[50px] w-[50px]"> <Image src={item.image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
+                                        item && item.images && item.images.length ? <div className="h-[50px] w-[50px]"> <Image src={item.images[0]} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
-                                <TableCell>{item.alt}</TableCell>
-                                <TableCell>{item.isWide ? 'Yes' : 'No'}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.description}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>
@@ -96,7 +100,7 @@ const ThemeForm = ({
 
                                 </TableCell>
                             </TableRow>
-                        ))} */}
+                        ))}
                     </TableBody>
                 </Table>
             </div>

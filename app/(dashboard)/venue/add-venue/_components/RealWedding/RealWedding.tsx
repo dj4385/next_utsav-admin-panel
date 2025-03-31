@@ -34,7 +34,10 @@ const RealWedding = ({
         openModal();
     }
 
-    const deleteData = (id: string) => {
+    const deleteData = (id: string | undefined) => {
+        if(!id) {
+            return;
+        }
         const data = realWeddings.filter((d) => d._id !== id);
         setRealWeddings(data);
     }

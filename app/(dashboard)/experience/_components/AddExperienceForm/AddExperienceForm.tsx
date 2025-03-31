@@ -3,6 +3,8 @@
 import ButtonComponent from "@/components/core/Button/Button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { setAddExperinceSuccess } from "@/lib/features/EventsSlice";
+import { useAppDispatch } from "@/lib/store";
 import { ExperienceService } from "@/services/experience.service";
 import { CirclePlus } from "lucide-react";
 import { ChangeEvent, useState } from "react";
@@ -13,6 +15,7 @@ const AddExperienceForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const { toast } = useToast();
+    const dispatch = useAppDispatch();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { value } = e.target;
@@ -26,13 +29,15 @@ const AddExperienceForm = () => {
             }
             setLoading(true);
 
-            const res: any = ExperienceService.addExperience({ name: experienceTitle });
-            if (res && res.status == 200) {
+            const res: any = await ExperienceService.addExperience({ name: experienceTitle });
+
+            if (res && (res.status == 200 || res.status == 201)) {
                 toast({
                     title: "Success",
                     description: "Experience Added Successfully"
                 })
                 setExperienceTitle('');
+                dispatch(setAddExperinceSuccess(true));
             } else {
                 toast({
                     title: "Error",
@@ -55,16 +60,13 @@ const AddExperienceForm = () => {
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
-                <div className="flex flex-row gap-5">
-                    <div className="w-[50%]"> 
-                        <label className="block text-sm font-medium text-gray-700">Experience</label>
-                        <Input type="text" placeholder="Enter Experience" className="mt-1 w-full" onChange={handleChange} />
-                    </div>
-                    <div className="flex justify-end items-center mt-5">
-                        <ButtonComponent label="Save Changes" onClick={() => onSave()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />
-                    </div>
-
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Experience</label>
+                    <Input type="text" placeholder="Enter Experience" className="mt-1 w-full" onChange={handleChange} name="experienceTitle" />
                 </div>
+            </div>
+            <div className="flex justify-center items-center my-5">
+                <ButtonComponent label="Save Changes" onClick={() => onSave()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />
             </div>
         </div>
     )

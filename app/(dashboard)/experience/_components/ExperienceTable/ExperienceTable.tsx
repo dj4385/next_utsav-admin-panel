@@ -14,11 +14,12 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { useAppSelector } from "@/lib/store";
 
 const ExperienceTable = () => {
     const [experienceList, setExperienceList] = useState<any[]>([])
-    const [loading, setLoading] = useState<boolean>(false);
     const { toast } = useToast();
+    const { isAddExperienceSuccess } = useAppSelector((state) => state.EventsSlice);
 
     const getExperienceList = async () => {
         try {
@@ -59,6 +60,13 @@ const ExperienceTable = () => {
     useEffect(() => {
         getExperienceList();
     }, [])
+
+    useEffect(() => {
+        debugger
+        if(isAddExperienceSuccess) {
+            getExperienceList();
+        }
+    }, [isAddExperienceSuccess])
 
 
     return (

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table"
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { setGlobalPresenceListItem, setGlobalPresenceModal } from "@/lib/features/contact/GlobalPresenceSlice";
 
 const GlobalPresence = ({
     globalPresenceData,
@@ -26,7 +27,7 @@ const GlobalPresence = ({
     setGlobalPresenceList
 }: IGlobalPresence) => {
     const dispatch = useAppDispatch();
-    // const {} = useAppSelector((state) => state)
+    const { globalPresenceModalList } = useAppSelector((state) => state.GlobalPresenceSlice)
     
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -38,11 +39,11 @@ const GlobalPresence = ({
     }
 
     const openModal = () => {
-        // dispatch(setAboutGalleryModal(true));
+        dispatch(setGlobalPresenceModal(true));
     }
 
     const editModal = (data: IGlobalPresenceList) => {
-        // dispatch(setAboutGalleryListItem(data))
+        dispatch(setGlobalPresenceListItem(data))
         openModal();
     }
 
@@ -51,6 +52,24 @@ const GlobalPresence = ({
         setGlobalPresenceList(data);
     }
 
+    useEffect(() => {
+        if(globalPresenceModalList?.length) {
+            if(globalPresenceModalList[0]._id) {
+                const data = globalPresenceList.map((d) =>
+                    d._id == globalPresenceList[0]._id ? {
+                        ...d,
+                        alt_country_image: globalPresenceModalList[0].alt_country_image,
+                        country_address: globalPresenceModalList[0].country_address,
+                        country_image: globalPresenceModalList[0].country_image,
+                        country_name: globalPresenceModalList[0].country_name,
+                    } : d
+                );
+                setGlobalPresenceList([...data]);
+            } else {
+                setGlobalPresenceList([...globalPresenceList, ...globalPresenceModalList])
+            }
+        }
+    }, [globalPresenceModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

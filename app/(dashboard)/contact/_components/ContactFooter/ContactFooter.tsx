@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { setContactFooterListItem, setContactFooterModal } from "@/lib/features/contact/ContactFooterSlice";
 
 const ContactFooter = ({
     contactFooterData,
@@ -27,7 +28,7 @@ const ContactFooter = ({
 }: IContactFooter) => {
 
     const dispatch = useAppDispatch();
-    // const {} = useAppSelector((state) => state)
+    const { contactFooterModalList } = useAppSelector((state) => state.ContactFooterSlice)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -46,11 +47,11 @@ const ContactFooter = ({
     }
 
     const openModal = () => {
-        // dispatch(setAboutGalleryModal(true));
+        dispatch(setContactFooterModal(true));
     }
 
     const editModal = (data: IContactFooterList) => {
-        // dispatch(setAboutGalleryListItem(data))
+        dispatch(setContactFooterListItem(data))
         openModal();
     }
 
@@ -58,6 +59,27 @@ const ContactFooter = ({
         const data = contactFooterList.filter((d) => d._id !== id);
         setContactFooterList(data);
     }
+
+    useEffect(() => {
+        if(contactFooterModalList?.length) {
+            if(contactFooterModalList[0]._id) {
+                const data = contactFooterList.map((d) =>
+                    d._id == contactFooterModalList[0]._id ? {
+                        ...d,
+                        alt_country_image: contactFooterModalList[0].alt_country_image,
+                        country_address: contactFooterModalList[0].country_address,
+                        country_image: contactFooterModalList[0].country_image,
+                        country_name: contactFooterModalList[0].country_name,
+                        email: contactFooterModalList[0].email,
+                        phone: contactFooterModalList[0].phone,
+                    } : d
+                );
+                setContactFooterList([...data]);
+            } else {
+                setContactFooterList([...contactFooterList, ...contactFooterModalList])
+            }
+        }
+    }, [contactFooterModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

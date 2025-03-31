@@ -1,5 +1,6 @@
 import { IImages, IRealWeddings, IThemes } from "../api/request/venue.request";
 import { IAboutGalleryData, IAwardList, IRealWeddingData, ITeamList } from "../components/About";
+import { IContactFooterList, IGlobalPresenceList } from "../components/Contact";
 import { IEventData, IGalleryList, ITestimonialList } from "../components/Home";
 
 export interface EventInitialData {
@@ -54,3 +55,16 @@ export interface VenueImageInitialData {
     venueImageModalList: IImages[];
     venueImageListItem: IImages | null;
 }
+
+export interface GlobalPresenceInitialData {
+    isOpen: boolean;
+    globalPresenceModalList: IGlobalPresenceList[];
+    globalPresenceListItem: IGlobalPresenceList | null;
+}
+
+export interface ContactFooterInitialData {
+    isOpen: boolean;
+    contactFooterModalList: IContactFooterList[];
+    contactFooterListItem: IContactFooterList | null;
+}
+

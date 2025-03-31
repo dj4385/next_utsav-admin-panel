@@ -3,8 +3,10 @@
 import { ReduxProvider } from "@/components/context/ReduxContext";
 import AboutGalleryModal from "@/components/Modals/AboutGalleryModal";
 import AwardModal from "@/components/Modals/AwardModal";
+import ContactFooterModal from "@/components/Modals/ContactFooterModal";
 import EventModal from "@/components/Modals/EventModal";
 import GalleryModal from "@/components/Modals/GalleryModal";
+import GlobalPresenceModal from "@/components/Modals/GlobalPresenceModal";
 import RealWeddingModal from "@/components/Modals/RealWeddingModal";
 import TeamModal from "@/components/Modals/TeamModal";
 import TestimonialModal from "@/components/Modals/TestimonialModal";
@@ -47,6 +49,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <RealWeddingModal />
               <VenueThemeModal />
               <VenueImageModal />
+              <GlobalPresenceModal />
+              <ContactFooterModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

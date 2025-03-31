@@ -5,6 +5,7 @@ import AboutGalleryModal from "@/components/Modals/AboutGalleryModal";
 import AwardModal from "@/components/Modals/AwardModal";
 import EventModal from "@/components/Modals/EventModal";
 import GalleryModal from "@/components/Modals/GalleryModal";
+import RealWeddingModal from "@/components/Modals/RealWeddingModal";
 import TeamModal from "@/components/Modals/TeamModal";
 import TestimonialModal from "@/components/Modals/TestimonialModal";
 import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
@@ -41,6 +42,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <AboutGalleryModal />
               <AwardModal />
               <TeamModal />
+              <RealWeddingModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

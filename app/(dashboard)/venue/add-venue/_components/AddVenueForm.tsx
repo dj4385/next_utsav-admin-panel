@@ -10,10 +10,12 @@ import RealWedding from "./RealWedding/RealWedding";
 import ThemeForm from "./ThemeForm/ThemeForm";
 import VenuesImages from "./VenueImages/VenuesImages";
 import ButtonComponent from "@/components/core/Button/Button";
+import { IRealWeddings } from "@/app/types/api/request/venue.request";
 
 const AddVenueForm = () => {
 
     const [venueData, setVenueData] = useState<any>()
+    const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
@@ -33,7 +35,7 @@ const AddVenueForm = () => {
                 <VenueForm venueData={venueData} setVenueData={setVenueData} />
             </div>
             <div className="flex flex-row mt-5">
-                <RealWedding aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />
+                <RealWedding realWeddings={realWeddings} setRealWeddings={setRealWeddings} />
             </div>
             <div className="flex flex-row mt-5">
                 <ThemeForm aboutGalleryData={venueData} setAboutGalleryData={setVenueData} />

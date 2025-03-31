@@ -13,48 +13,49 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IAboutGallery, IAboutGalleryData } from "@/app/types/components/About";
-import { setAboutGalleryListItem, setAboutGalleryModal } from "@/lib/features/about/AboutGallerySlice";
+import { setRealWeddingListItem, setRealWeddingModal } from "@/lib/features/venue/RealWeddingSlice";
+import { IRealWeddings } from "@/app/types/api/request/venue.request";
+import { IRealWeddingsProps } from "@/app/types/components/Venue";
 
 const RealWedding = ({
-    aboutGalleryData,
-    setAboutGalleryData
-}: IAboutGallery) => {
+    realWeddings,
+    setRealWeddings
+}: IRealWeddingsProps) => {
 
     const dispatch = useAppDispatch();
-    const { aboutGalleryModalList } = useAppSelector((state) => state.AboutGallerySlice)
+    const { realWeddingModalList } = useAppSelector((state) => state.RealWeddingSlice)
 
     const openModal = () => {
-        dispatch(setAboutGalleryModal(true));
+        dispatch(setRealWeddingModal(true));
     }
 
-    const editModal = (data: IAboutGalleryData) => {
-        dispatch(setAboutGalleryListItem(data))
+    const editModal = (data: IRealWeddings) => {
+        dispatch(setRealWeddingListItem(data))
         openModal();
     }
 
     const deleteData = (id: string) => {
-        const data = aboutGalleryData.filter((d) => d._id !== id);
-        setAboutGalleryData(data);
+        const data = realWeddings.filter((d) => d._id !== id);
+        setRealWeddings(data);
     }
 
     useEffect(() => {
-        if(aboutGalleryModalList?.length) {
-            if(aboutGalleryModalList[0]._id) {
-                const data = aboutGalleryData.map((d) =>
-                    d._id == aboutGalleryModalList[0]._id ? {
+        if(realWeddingModalList?.length) {
+            if(realWeddingModalList[0]._id) {
+                const data = realWeddings.map((d) =>
+                    d._id == realWeddingModalList[0]._id ? {
                         ...d,
-                        isWide: aboutGalleryModalList[0].isWide,
-                        alt: aboutGalleryModalList[0].alt,
-                        image: aboutGalleryModalList[0].image,
+                        couple: realWeddingModalList[0].couple,
+                        description: realWeddingModalList[0].description,
+                        image: realWeddingModalList[0].image,
                     } : d
                 );
-                setAboutGalleryData([...data]);
+                setRealWeddings([...data]);
             } else {
-                setAboutGalleryData([...aboutGalleryData, ...aboutGalleryModalList])
+                setRealWeddings([...realWeddings, ...realWeddingModalList])
             }
         }
-    }, [aboutGalleryModalList])
+    }, [realWeddingModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
@@ -75,15 +76,15 @@ const RealWedding = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* {aboutGalleryData.map((item, index) => (
+                        {realWeddings.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     {
                                         item && item.image ? <div className="h-[50px] w-[50px]"> <Image src={item.image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
-                                <TableCell>{item.alt}</TableCell>
-                                <TableCell>{item.isWide ? 'Yes' : 'No'}</TableCell>
+                                <TableCell>{item.couple}</TableCell>
+                                <TableCell>{item.description}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>
@@ -93,10 +94,9 @@ const RealWedding = ({
                                             <Trash2 />
                                         </Button>
                                     </div>
-
                                 </TableCell>
                             </TableRow>
-                        ))} */}
+                        ))}
                     </TableBody>
                 </Table>
             </div>

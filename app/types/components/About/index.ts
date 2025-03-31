@@ -20,6 +20,7 @@ export interface IRealWeddingData {
     alt_real_weddings_image: string;
     real_weddings_text: string;
     real_wedding_button: string;
+    _id: string;
 }
 
 export interface ILegacy {

@@ -9,6 +9,9 @@ import GallerySlice from "./features/home/GallerySlice";
 import AboutGallerySlice from "./features/about/AboutGallerySlice";
 import AwardSlice from "./features/about/AwardSlice";
 import TeamSlice from "./features/about/TeamSlice";
+import RealWeddingSlice from "./features/venue/RealWeddingSlice";
+import VenueImageSlice from "./features/venue/VenueImageSlice";
+import VenueThemeSlice from "./features/venue/VenueThemeSlice";
 
 const rootReducer = combineReducers({
     "EventSlice": EventSlice,
@@ -17,6 +20,9 @@ const rootReducer = combineReducers({
     "AboutGallerySlice": AboutGallerySlice,
     "AwardSlice": AwardSlice,
     "TeamSlice": TeamSlice,
+    "RealWeddingSlice": RealWeddingSlice,
+    "VenueImageSlice": VenueImageSlice,
+    "VenueThemeSlice": VenueThemeSlice,
 })
 
 export const store = configureStore({

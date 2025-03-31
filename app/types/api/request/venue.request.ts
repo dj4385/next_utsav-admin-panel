@@ -9,6 +9,7 @@ export interface IRealWeddings {
     couple: string,
     description: string,
     image: string
+    _id: string;
 }
 
 export interface IThemes {
@@ -26,7 +27,7 @@ export interface IVenue {
     google_rating: number,
     location: ILocation,
     nearest_airport: INearestAirport,
-    images: IImanges []
+    images: IImages []
 }
 
 export interface ILocation {
@@ -40,7 +41,7 @@ export interface INearestAirport {
     distance_km: number
 }
 
-export interface IImanges {
+export interface IImages {
     type: string,
     url: string,
     urls: string[]

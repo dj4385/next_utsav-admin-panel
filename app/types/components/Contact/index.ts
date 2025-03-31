@@ -45,7 +45,7 @@ export interface IGlobalPresenceList {
 
 export interface IContactFooter {
     contactFooterData: IContactFooterData;
-    setContactFotterData: any;
+    setContactFooterData: any;
     contactFooterList: IContactFooterList[];
     setContactFooterList: any;
 }

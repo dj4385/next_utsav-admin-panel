@@ -14,6 +14,10 @@ import { IChannelPartnerData, IContactFooterData, IContactFooterList, IContactHe
 import ContactHeading from "./ContactHeading/ContactHeading";
 import Feedback from "./Feedback/Feedback";
 import GlobalPresence from "./GlobalPresence/GlobalPresence";
+import ContactFooter from "./ContactFooter/ContactFooter";
+import Work from "./Work/Work";
+import ChannelPartner from "./ChannelPartner/ChannelPartner";
+import ContactVenue from "./ContactVenue/ContactVenue";
 
 const ContactForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -152,11 +156,16 @@ const ContactForm = () => {
                 <GlobalPresence globalPresenceData={globalPresenceData} globalPresenceList={globalPresenceList} setGlobalPresenceData={setGlobalPresenceData} setGlobalPresenceList={setGlobalPresenceList} />
             </div>
             <div className="flex flex-row mt-5">
-                
+                <ContactFooter contactFooterData={contactFooterData} contactFooterList={contactFooterList} setContactFooterData={setContactFooterData} setContactFooterList={setContactFooterList} />
             </div>
             <div className="flex flex-row mt-5">
+                <Work setWorkData={setWorkData} workData={workData} />
             </div>
             <div className="flex flex-row mt-5">
+                <ChannelPartner channelPartnerData={channelPartnerData} setChannelPartnerData={setChannelPartnerData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <ContactVenue contactVenueData={contactVenueData} setContactVenueData={setContactVenueData} />
             </div>
             <div className="flex flex-row mt-5">
                 <Meta metaData={metaData} setMetaData={setMetaData} />

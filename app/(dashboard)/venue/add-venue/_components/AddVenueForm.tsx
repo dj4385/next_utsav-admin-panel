@@ -41,7 +41,10 @@ const AddVenueForm = () => {
                 gallery: venueImagesList,
                 location: venueData?.location,
                 experience: venueData?.experience,
-                venue: venueData?.venue
+                venue: {
+                    ...venueData?.venue,
+                    nearest_airport: nearestAirport
+                }
             }
 
             console.log(req, 'req');

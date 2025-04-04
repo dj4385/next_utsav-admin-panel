@@ -2,6 +2,7 @@
 
 import CapacityWrapper from "./_components/CapacityWrapper";
 
+
 const Capacity = () => {
     return (
         <>

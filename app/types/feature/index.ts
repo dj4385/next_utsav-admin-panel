@@ -71,4 +71,8 @@ export interface ContactFooterInitialData {
 export interface IEventInitialData {
     isAddLocationSuccess: boolean;
     isAddExperienceSuccess: boolean;
+    isAddCapacitySuccess: boolean;
+    isAddCateringSuccess: boolean;
+    isAddGoogleRatingSuccess: boolean;
+    isAddAQIRequestSuccess: boolean;
 }

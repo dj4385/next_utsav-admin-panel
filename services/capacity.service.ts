@@ -4,7 +4,7 @@ import api from "@/lib/axios.interceptor";
 export class CapacityService {
     static async getCapacity() {
         try {
-            const res = await api.get('/api/search/capacity');
+            const res = await api.get('/search/capacity');
             return res;
         } catch (error) {
             return error;
@@ -13,7 +13,7 @@ export class CapacityService {
 
     static async getCapacityById(id: string) {
         try {
-            const res = await api.get(`/api/search/capacity/${id}`);
+            const res = await api.get(`/search/capacity/${id}`);
             return res;
         } catch (error) {
             return error;
@@ -22,7 +22,7 @@ export class CapacityService {
 
     static async addCapacity(req: IAddAQIRequest) {
         try {
-            const res = await api.post('/api/search/capacity', req);
+            const res = await api.post('/search/capacity', req);
             return res;
         } catch (error) {
             return error;
@@ -31,7 +31,7 @@ export class CapacityService {
 
     static async updateCapacity(id: string, req: IAddAQIRequest) {
         try {
-            const res = await api.put(`/api/search/capacity/${id}`, req);
+            const res = await api.put(`/search/capacity/${id}`, req);
             return res;
         } catch (error) {
             return error;
@@ -40,7 +40,7 @@ export class CapacityService {
 
     static async deleteCapacity(id: string) {
         try {
-            const res = await api.delete(`/api/search/capacity/${id}`);
+            const res = await api.delete(`/search/capacity/${id}`);
             return res;
         } catch (error) {
             return error;

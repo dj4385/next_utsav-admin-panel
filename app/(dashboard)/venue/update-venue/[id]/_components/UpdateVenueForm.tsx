@@ -3,15 +3,17 @@
 import { IThemes } from "@/app/types/api/request/venue.request";
 import ContentHeader from "@/components/ContentHeader/ContentHeader";
 import { ArrowLeft, MapPinHouse } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IImages } from "@/app/types/api/request/venue.request";
-import VenueForm from "./VenueForm/VenueForm";
-import ThemeForm from "./ThemeForm/ThemeForm";
-import VenuesImages from "./VenueImages/VenuesImages";
 import ButtonComponent from "@/components/core/Button/Button";
+import VenueForm from "../../../add-venue/_components/VenueForm/VenueForm";
+import ThemeForm from "../../../add-venue/_components/ThemeForm/ThemeForm";
+import VenuesImages from "../../../add-venue/_components/VenueImages/VenuesImages";
+import { VenueService } from "@/services/venue.service";
 
-const UpdateVenueForm = () => {
+const UpdateVenueForm = ({ id }: { id: string }) => {
+    const [venueApiResponse, setVenueApiResponse] = useState<any>();
     const [venueData, setVenueData] = useState<any>()
     // const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
     const [themeFormList, setThemeFormList] = useState<IThemes[]>([]);
@@ -24,7 +26,36 @@ const UpdateVenueForm = () => {
         router.push('/venue')
     }
 
+    const getVenueDetail = async () => {
+        try {
+            const res: any = await VenueService.getVenueDetail(id);
+            if (res && res.status == 200) {
+                console.log(res.data, 'res');
+                
+                setVenueApiResponse(res.data);
+                setVenueData({
+                    ...res.data.venue,
+                    venue_name: res.data.venue_name,
+                    experience: res.data.experience,
+                    location: res.data.location,
+                    theme_options_heading: res.data.theme_options_heading,
+                    theme_options_description: res.data.theme_options_description,
+                });
+                setThemeFormList(res.data.theme_options);
+                setVenueImages(res.data.gallery);
+            }
+        } catch (error) {
+            
+        }
+    }
+
     const onSaveChanges = () => {}
+
+    useEffect(() => {
+        if (id) {
+            getVenueDetail();
+        }
+    }, [id])
 
     return (
         <div className="flex flex-col rounded-lg bg-gray-50 p-2">

@@ -53,7 +53,7 @@ const VenueListing = () => {
     }
 
     const edit = (data: any) => {
-        router.push(`/venue/edit-venue/${data._id}`)
+        router.push(`/venue/update-venue/${data._id}`)
     }
 
     const deleteData = async (id: string) => {

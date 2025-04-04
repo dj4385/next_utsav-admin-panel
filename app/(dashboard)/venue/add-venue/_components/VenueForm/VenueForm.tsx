@@ -52,6 +52,7 @@ const VenueForm = ({
         getExperienceList();
         getLocationList();
     }, [])
+        
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white mt-4">
@@ -59,11 +60,11 @@ const VenueForm = ({
             <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Name</label>
-                    <Input type="text" placeholder="Enter Brand Name" name="name" onChange={handleChange} value={venueData?.name || ''} className="mt-1 w-full" />
+                    <Input type="text" placeholder="Enter Venue Name" name="venue_name" onChange={handleChange} value={venueData?.venue_name || ''} className="mt-1 w-full" />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Location</label>
-                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="location" onChange={handleChange} value={venueData?.location || ''}  >
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="location" onChange={handleChange} value={venueData?.location?._id || ''}  >
                         {
                             locationList.length ? locationList.map((loc, index) => <option key={index} value={loc._id}> {loc.name} </option>) : null
 
@@ -72,7 +73,7 @@ const VenueForm = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Experience</label>
-                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="experience" onChange={handleChange} value={venueData?.experience || ''} >
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="experience" onChange={handleChange} value={venueData?.experience?._id || ''} >
                         {
                             experienceList.length ? experienceList.map((exp, index) => <option key={index} value={exp._id}> {exp.name} </option>) : null
 
@@ -128,11 +129,25 @@ const VenueForm = ({
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Name</label>
-                        <Input type="text" placeholder="Enter Brand Name" name="airportName" onChange={handleChange} value={venueData?.airportName || ''} className="mt-1 w-full" />
+                        <Input type="text" placeholder="Enter Brand Name" name="airportName" onChange={handleChange} value={venueData?.nearest_airport?.name || ''} className="mt-1 w-full" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Distance(KM)</label>
-                        <Input type="number" placeholder="Enter Brand Name" name="distance" onChange={handleChange} value={venueData?.distance_km || ''} className="mt-1 w-full" />
+                        <Input type="number" placeholder="Enter Brand Name" name="distance" onChange={handleChange} value={venueData?.nearest_airport?.distance_km || ''} className="mt-1 w-full" />
+                    </div>
+                </div>
+            </div>
+            <Separator className="mt-4" />
+            <div>
+                <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium">Theme Options</h2>
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Theme Options Heading</label>
+                        <Input type="text" placeholder="Enter Theme Options Heading" name="theme_options_heading" onChange={handleChange} value={venueData?.theme_options_heading || ''} className="mt-1 w-full" />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Theme Options Sub Heading</label>
+                        <Input type="text" placeholder="Enter Theme Options Sub Heading" name="theme_options_subheading" onChange={handleChange} value={venueData?.theme_options_subheading || ''} className="mt-1 w-full" />
                     </div>
                 </div>
             </div>

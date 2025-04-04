@@ -15,6 +15,7 @@ import { useEffect, useState } from "react"
 import { IImages } from "@/app/types/api/request/venue.request"
 import { setVenueImageListItem, setVenueImageModal, setVenueImageModalList } from "@/lib/features/venue/VenueImageSlice"
 import MultipleFileUploader from "../MultipleFileUploader/MultipleFileUploader"
+import { Input } from "../ui/input"
 
 const VenueImageModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -34,13 +35,13 @@ const VenueImageModal = () => {
                 ...data,
                 _id: venueImageListItem._id,
                 images: imageUrl ? imageUrl : venueImageListItem.images,
-                video: imageUrl ? imageUrl : venueImageListItem.video 
+                video: imageUrl ? imageUrl : venueImageListItem.video
             }
         } else {
             venueImageData = {
                 ...data,
                 images: imageUrl,
-                video: imageUrl 
+                video: imageUrl
             }
         }
         dispatch(setVenueImageModalList([venueImageData]))
@@ -64,6 +65,7 @@ const VenueImageModal = () => {
     useEffect(() => {
         if (venueImageListItem) {
             setValue("type", venueImageListItem.type);
+            setValue("name", venueImageListItem.name);
         } else {
             reset()
         }
@@ -84,6 +86,10 @@ const VenueImageModal = () => {
                                     <option value="image">Image</option>
                                     <option value="video">Video</option>
                                 </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Name</label>
+                                <Input type="text" placeholder="Enter Image/Video Name" {...register("name")} className="mt-1 w-full" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>

@@ -49,7 +49,7 @@ const VenuesImages = ({
                     d._id == venueImageModalList[0]._id ? {
                         ...d,
                         type: venueImageModalList[0].type,
-                        urls: venueImageModalList[0].urls,
+                        images: venueImageModalList[0].images,
                     } : d
                 );
                 setVenueImages([...data]);
@@ -65,14 +65,15 @@ const VenuesImages = ({
             <div className="p-2">
                 <div className="flex justify-end items-center mb-2">
                     <Button variant="secondary" className="bg-purple-600 text-white hover:bg-purple-800" onClick={() => openModal()}>
-                        <CirclePlus /> Add Real Wedding
+                        <CirclePlus /> Add Image
                     </Button>
                 </div>
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">Image</TableHead>
-                            <TableHead className="text-white">Image Type</TableHead>
+                            <TableHead className="text-white">Name</TableHead>
+                            <TableHead className="text-white">Type</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -81,9 +82,10 @@ const VenuesImages = ({
                             <TableRow key={index}>
                                 <TableCell>
                                     {
-                                        item && item.urls && item.urls.length ? <div className="h-[50px] w-[50px]"> <Image src={item.urls[0]} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
+                                        item?.type == 'image' && item?.images ? <div className="h-[50px] w-[50px]"> <Image src={item?.images} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
+                                <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.type}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">

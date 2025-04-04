@@ -33,12 +33,12 @@ const VenueThemeModal = () => {
             venueThemeData = {
                 ...data,
                 _id: themeListItem._id,
-                images: imageUrl ? imageUrl : themeListItem.theme_img_gallery
+                theme_img_gallery: imageUrl ? imageUrl : themeListItem.theme_img_gallery
             }
         } else {
             venueThemeData = {
                 ...data,
-                images: imageUrl
+                theme_img_gallery: imageUrl
             }
         }
         dispatch(setVenueThemeModalList([venueThemeData]))

@@ -50,7 +50,7 @@ const ThemeForm = ({
                         ...d,
                         isWide: themeModalList[0].name,
                         alt: themeModalList[0].description,
-                        images: themeModalList[0].images,
+                        theme_img_gallery: themeModalList[0].theme_img_gallery,
                     } : d
                 );
                 setThemeFormList([...data]);
@@ -74,6 +74,7 @@ const ThemeForm = ({
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Theme Name</TableHead>
+                            <TableHead className="text-white">Tab Name</TableHead>
                             <TableHead className="text-white">Description</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
@@ -83,7 +84,7 @@ const ThemeForm = ({
                             <TableRow key={index}>
                                 <TableCell>
                                     {
-                                        item && item.images && item.images.length ? <div className="h-[50px] w-[50px]"> <Image src={item.images[0]} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
+                                        item?.theme_img_gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={item?.theme_img_gallery[0]?.images} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
                                 </TableCell>
                                 <TableCell>{item.name}</TableCell>

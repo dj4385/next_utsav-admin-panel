@@ -78,19 +78,19 @@ const AddLocationForm = () => {
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Location</label>
-                    <Input type="text" placeholder="Enter Location Name" className="mt-1 w-full" onChange={handleChange} name="locationTitle" />
+                    <Input type="text" placeholder="Enter Location Name" className="mt-1 w-full" onChange={handleChange} name="locationTitle" value={locationTitle} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">City</label>
-                    <Input type="text" placeholder="Enter City" className="mt-1 w-full" onChange={handleChange} name="city" />
+                    <Input type="text" placeholder="Enter City" className="mt-1 w-full" onChange={handleChange} name="city" value={city} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">State</label>
-                    <Input type="text" placeholder="Enter State" className="mt-1 w-full" onChange={handleChange} name="state" />
+                    <Input type="text" placeholder="Enter State" className="mt-1 w-full" onChange={handleChange} name="state" value={state} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Address</label>
-                    <Input type="text" placeholder="Enter Address" className="mt-1 w-full" onChange={handleChange} name="address" />
+                    <Input type="text" placeholder="Enter Address" className="mt-1 w-full" onChange={handleChange} name="address" value={address} />
                 </div>
             </div>
             <div className="flex justify-center items-center my-5">

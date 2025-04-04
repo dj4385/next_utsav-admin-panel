@@ -1,8 +1,6 @@
 'use client';
 
-import { TableCell } from "@/components/ui/table";
-
-import { TableBody } from "@/components/ui/table";
+import { TableCell, TableBody } from "@/components/ui/table";
 
 import { useAppSelector } from "@/lib/store";
 

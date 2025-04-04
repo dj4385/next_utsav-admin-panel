@@ -11,10 +11,12 @@ import VenueForm from "../../../add-venue/_components/VenueForm/VenueForm";
 import ThemeForm from "../../../add-venue/_components/ThemeForm/ThemeForm";
 import VenuesImages from "../../../add-venue/_components/VenueImages/VenuesImages";
 import { VenueService } from "@/services/venue.service";
+import NearestAirport from "../../../add-venue/_components/NearestAirport/NearestAirport";
 
 const UpdateVenueForm = ({ id }: { id: string }) => {
     const [venueApiResponse, setVenueApiResponse] = useState<any>();
     const [venueData, setVenueData] = useState<any>()
+    const [nearestAirport, setNearestAirport] = useState<any>()
     // const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
     const [themeFormList, setThemeFormList] = useState<IThemes[]>([]);
     const [venueImagesList, setVenueImages] = useState<IImages[]>([]);
@@ -43,6 +45,7 @@ const UpdateVenueForm = ({ id }: { id: string }) => {
                 });
                 setThemeFormList(res.data.theme_options);
                 setVenueImages(res.data.gallery);
+                setNearestAirport(res.data.venue.nearest_airport);
             }
         } catch (error) {
             
@@ -64,6 +67,9 @@ const UpdateVenueForm = ({ id }: { id: string }) => {
             </div>
             <div className="flex flex-row mt-5">
                 <VenueForm venueData={venueData} setVenueData={setVenueData} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <NearestAirport nearestAirport={nearestAirport} setNearestAirport={setNearestAirport} />
             </div>
             {/* <div className="flex flex-row mt-5">
                 <RealWedding realWeddings={realWeddings} setRealWeddings={setRealWeddings} />

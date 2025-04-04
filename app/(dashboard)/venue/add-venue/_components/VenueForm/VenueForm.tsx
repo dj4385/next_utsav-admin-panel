@@ -16,14 +16,13 @@ const VenueForm = ({
 
     const [experienceList, setExperienceList] = useState<any[]>([])
     const [locationList, setLocationList] = useState<any[]>([])
-
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-
         setVenueData((prev: any) => ({
             ...prev,
             [name]: value,
         }));
+        
     }
 
     const getExperienceList = async () => {
@@ -52,7 +51,6 @@ const VenueForm = ({
         getExperienceList();
         getLocationList();
     }, [])
-        
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white mt-4">
@@ -103,38 +101,6 @@ const VenueForm = ({
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Google Rating Review</label>
                     <Input type="number" placeholder="Enter google rating review" onChange={handleChange} name="google_rating_review" value={venueData?.google_rating_review || 0} />
-                </div>
-            </div>
-            {/* <Separator className="mt-4" />
-            <div>
-                <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium"> Location</h2>
-                <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">City</label>
-                        <Input type="text" placeholder="Enter Brand Name" name="city" onChange={handleChange} value={venueData?.city || ''} className="mt-1 w-full" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">State</label>
-                        <Input type="text" placeholder="Enter Brand Name" name="state" onChange={handleChange} value={venueData?.state || ''} className="mt-1 w-full" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Address</label>
-                        <Input type="text" placeholder="Enter Brand Name" name="address" onChange={handleChange} value={venueData?.address || ''} className="mt-1 w-full" />
-                    </div>
-                </div>
-            </div> */}
-            <Separator className="mt-4" />
-            <div>
-                <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium">Nearest Airport</h2>
-                <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Name</label>
-                        <Input type="text" placeholder="Enter Brand Name" name="airportName" onChange={handleChange} value={venueData?.nearest_airport?.name || ''} className="mt-1 w-full" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Distance(KM)</label>
-                        <Input type="number" placeholder="Enter Brand Name" name="distance" onChange={handleChange} value={venueData?.nearest_airport?.distance_km || ''} className="mt-1 w-full" />
-                    </div>
                 </div>
             </div>
             <Separator className="mt-4" />

@@ -23,17 +23,19 @@ const CapacityForm = () => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        if(name == 'range') {
-            setRange(value);
-        }
-        if(name == 'min') {
-            setMin(value);
-        }
-        if(name == 'max') {
-            setMax(value);
-        }
-        if(name == 'description') {
-            setDescription(value);
+        switch(name) {
+            case 'range':
+                setRange(value);
+                break;
+            case 'min':
+                setMin(value);
+                break;
+            case 'max':
+                setMax(value);
+                break;
+            case 'description':
+                setDescription(value);
+                break;
         }
     }
 

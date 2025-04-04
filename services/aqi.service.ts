@@ -4,7 +4,7 @@ import api from "@/lib/axios.interceptor";
 export class AQIService {
     static async getAQI() {
         try {
-            const res = await api.get('/api/search/aqi');
+            const res = await api.get('/search/aqi');
             return res;
         } catch (error) {
             return error;
@@ -13,7 +13,7 @@ export class AQIService {
 
     static async getAQIById(id: string) {
         try {
-            const res = await api.get(`/api/search/aqi/${id}`);
+            const res = await api.get(`/search/aqi/${id}`);
             return res;
         } catch (error) {
             return error;
@@ -22,7 +22,7 @@ export class AQIService {
 
     static async addAQI(req: IAddAQIRequest) {
         try {
-            const res = await api.post('/api/search/aqi', req);
+            const res = await api.post('/search/aqi', req);
             return res;
         } catch (error) {
             return error;
@@ -31,7 +31,7 @@ export class AQIService {
 
     static async updateAQI(id: string, req: IAddAQIRequest) {
         try {
-            const res = await api.put(`/api/search/aqi/${id}`, req);
+            const res = await api.put(`/search/aqi/${id}`, req);
             return res;
         } catch (error) {
             return error;
@@ -40,7 +40,7 @@ export class AQIService {
 
     static async deleteAQI(id: string) {
         try {
-            const res = await api.delete(`/api/search/aqi/${id}`);
+            const res = await api.delete(`/search/aqi/${id}`);
             return res;
         } catch (error) {
             return error;

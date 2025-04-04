@@ -4,7 +4,7 @@ import api from "@/lib/axios.interceptor";
 export class CateringService {
     static async getCatering() {
         try {
-            const res = await api.get('/api/search/catering');
+            const res = await api.get('/search/catering');
             return res;
         } catch (error) {
             return error;
@@ -13,7 +13,7 @@ export class CateringService {
 
     static async getCateringById(id: string) {
         try {
-            const res = await api.get(`/api/search/catering/${id}`);
+            const res = await api.get(`/search/catering/${id}`);
             return res;
         } catch (error) {
             return error;
@@ -22,7 +22,7 @@ export class CateringService {
 
     static async addCatering(req: IAddCateringRequest) {
         try {
-            const res = await api.post('/api/search/catering', req);
+            const res = await api.post('/search/catering', req);
             return res;
         } catch (error) {
             return error;
@@ -31,7 +31,7 @@ export class CateringService {
 
     static async updateCatering(id: string, req: IAddCateringRequest) {
         try {
-            const res = await api.put(`/api/search/catering/${id}`, req);
+            const res = await api.put(`/search/catering/${id}`, req);
             return res;
         } catch (error) {
             return error;
@@ -40,7 +40,7 @@ export class CateringService {
 
     static async deleteCatering(id: string) {
         try {
-            const res = await api.delete(`/api/search/catering/${id}`);
+            const res = await api.delete(`/search/catering/${id}`);
             return res;
         } catch (error) {
             return error;

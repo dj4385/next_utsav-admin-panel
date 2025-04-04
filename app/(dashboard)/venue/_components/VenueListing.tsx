@@ -15,10 +15,13 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Edit2, Trash2 } from "lucide-react";
 
 const VenueListing = () => {
 
-    const [venues, setVenues] = useState([]);
+    const [venues, setVenues] = useState<any[]>([]);
     const { toast } = useToast();
     const router = useRouter();
 
@@ -27,8 +30,8 @@ const VenueListing = () => {
             const res: any = await VenueService.getVenues();
             console.log(res);
             
-            if (res && res.status == 200 && res.data) {
-                setVenues(res.data);
+            if (res && res.status == 200 && res.data.data) {
+                setVenues(res.data.data);
             } else {
                 toast({
                     title: "Error",
@@ -47,6 +50,35 @@ const VenueListing = () => {
 
     const addVenue = () => {
         router.push('/venue/add-venue')
+    }
+
+    const edit = (data: any) => {
+        router.push(`/venue/edit-venue/${data._id}`)
+    }
+
+    const deleteData = async (id: string) => {
+        try {
+            const res: any = await VenueService.deleteVenue(id);
+            if (res && res.status == 200) {
+                toast({
+                    title: "Venue deleted successfully",
+                    description: "Venue deleted successfully",
+                })
+                getVenueListing();
+            } else {
+                toast({
+                    title: "Error",
+                    description: res?.response?.data?.message || 'Unable to delete venue',
+                    variant: "destructive",
+                })
+            }
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error?.response?.data?.message || 'Something went wrong',
+                variant: "destructive",
+            })
+        }
     }
 
     useEffect(() => {
@@ -71,16 +103,16 @@ const VenueListing = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {/* {venues.map((data, index) => (
+                        {venues.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
-                                    {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
+                                    {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>
-                                <TableCell>{data.name}</TableCell>
-                                <TableCell>{data.type}</TableCell>
-                                <TableCell>{data.capacity}</TableCell>
-                                <TableCell>{data.aqi}</TableCell>
-                                <TableCell>{data.rating}</TableCell>
+                                <TableCell>{data.venue_name}</TableCell>
+                                <TableCell>{data.venue.property_type}</TableCell>
+                                <TableCell>{data.venue.capacity}</TableCell>
+                                <TableCell>{data.venue.air_quality_index}</TableCell>
+                                <TableCell>{data.venue.google_rating}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-center gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => edit(data)}>
@@ -93,7 +125,7 @@ const VenueListing = () => {
 
                                 </TableCell>
                             </TableRow>
-                        ))} */}
+                        ))}
                     </TableBody>
                 </Table>
             </div>

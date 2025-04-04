@@ -94,6 +94,7 @@ const VenueListing = () => {
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Type</TableHead>
                             <TableHead className="text-white">Capacity</TableHead>

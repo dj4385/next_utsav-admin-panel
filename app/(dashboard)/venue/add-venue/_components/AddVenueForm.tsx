@@ -10,10 +10,10 @@ import RealWedding from "./RealWedding/RealWedding";
 import ThemeForm from "./ThemeForm/ThemeForm";
 import VenuesImages from "./VenueImages/VenuesImages";
 import ButtonComponent from "@/components/core/Button/Button";
-import { IImages, IThemes } from "@/app/types/api/request/venue.request";
+import { IImages, IThemes, IHeaderImages, IAddVenueRequest } from "@/app/types/api/request/venue.request";
 import { toast } from "@/hooks/use-toast";
 import NearestAirport from "./NearestAirport/NearestAirport";
-
+import HeaderImage from "./HeaderImage/HeaderImage";
 const AddVenueForm = () => {
 
     const [venueData, setVenueData] = useState<any>()
@@ -21,6 +21,8 @@ const AddVenueForm = () => {
     // const [realWeddings, setRealWeddings] = useState<IRealWeddings[]>([]);
     const [themeFormList, setThemeFormList] = useState<IThemes[]>([]);
     const [venueImagesList, setVenueImages] = useState<IImages[]>([]);
+    const [headerImageList, setHeaderImageList] = useState<IHeaderImages[]>([]);
+    const [headerImageGalleryList, setHeaderImageGalleryList] = useState<IHeaderImages[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
@@ -33,7 +35,7 @@ const AddVenueForm = () => {
         try {
             setLoading(true);
             debugger
-            const req = {
+            const req: IAddVenueRequest = {
                 venue_name: venueData?.venue_name,
                 venue: {
                     "property_type": venueData?.property_type,
@@ -55,6 +57,7 @@ const AddVenueForm = () => {
                 gallery: venueImagesList,
                 location: venueData?.location?._id,
                 experience: venueData?.experience?._id,
+                header_image_gallery: headerImageList,
             }
 
             console.log(req, 'req');
@@ -99,6 +102,9 @@ const AddVenueForm = () => {
             </div>
             <div className="flex flex-row mt-5">
                 <VenuesImages setVenueImages={setVenueImages} venueImagesList={venueImagesList} />
+            </div>
+            <div className="flex flex-row mt-5">
+                <HeaderImage setHeaderImageList={setHeaderImageList} headerImageList={headerImageList} />
             </div>
             <div className="flex justify-center items-center mt-5">
                 <ButtonComponent label="Save Changes" onClick={() => onSaveChanges()} loading={loading} type="button" customClass="bg-purple-700 hover:bg-purple-800" />

@@ -5,6 +5,10 @@ export interface IAddVenueRequest {
     venue: IVenue,
     gallery: IImages[],
     theme_options: IThemes[],
+    header_image_gallery: IHeaderImages[],
+    theme_options_heading: string,
+    theme_options_subheading: string,
+
     // real_weddings: IRealWeddings[]
 }
 
@@ -21,6 +25,7 @@ export interface IThemes {
     description: string,
     theme_img_gallery: IThemeImgGallery[];
     _id?: string
+    id?: string
 }
 
 export interface IThemeImgGallery {
@@ -59,6 +64,14 @@ export interface IImages {
     alt: string,
     images: string,
     video: string,
+    _id?: string,
+    id?: string
+}
+
+export interface IHeaderImages {
+    url: string,
+    alt: string,
+    is_wide: boolean,
     _id?: string,
     id?: string
 }

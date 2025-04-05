@@ -15,12 +15,11 @@ import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
 import { IThemes } from "@/app/types/api/request/venue.request"
 import { setVenueThemeListItem, setVenueThemeModal, setVenueThemeModalList } from "@/lib/features/venue/VenueThemeSlice"
-import MultipleFileUploader from "../MultipleFileUploader/MultipleFileUploader"
 import { Plus, Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
 import FileUploader from "../FileUploader/FileUploader"
-
+import { v4 as uuidv4 } from 'uuid';
 type FormValues = {
     name: string;
     tab_name: string;
@@ -45,7 +44,6 @@ const VenueThemeModal = () => {
             theme_img_gallery: [{ alt: '', images: '', is_wide: false }],
         }
     });
-    const [imageUrl, setImageUrl] = useState<string[]>([]);
 
     const { fields, append, remove } = useFieldArray({
         control,
@@ -61,12 +59,13 @@ const VenueThemeModal = () => {
             venueThemeData = {
                 ...data,
                 _id: themeListItem._id,
-                theme_img_gallery: imageUrl ? imageUrl : themeListItem.theme_img_gallery
+                theme_img_gallery: data.theme_img_gallery
             }
         } else {
             venueThemeData = {
                 ...data,
-                theme_img_gallery: imageUrl
+                theme_img_gallery: data.theme_img_gallery,
+                id: uuidv4()
             }
         }
         dispatch(setVenueThemeModalList([venueThemeData]))
@@ -82,10 +81,6 @@ const VenueThemeModal = () => {
         dispatch(setVenueThemeListItem(null))
         reset();
     };
-
-    const onImageUpload = (url: string[]) => {
-        setImageUrl(url)
-    }
 
     useEffect(() => {
         if (themeListItem) {

@@ -12,6 +12,7 @@ import TeamModal from "@/components/Modals/TeamModal";
 import TestimonialModal from "@/components/Modals/TestimonialModal";
 import VenueImageModal from "@/components/Modals/VenueImageModal";
 import VenueThemeModal from "@/components/Modals/VenueThemeModal";
+import VenueHeaderImageModal from "@/components/Modals/VenueHeaderImageModal";
 import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
 import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
@@ -51,6 +52,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <VenueImageModal />
               <GlobalPresenceModal />
               <ContactFooterModal />
+              <VenueHeaderImageModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

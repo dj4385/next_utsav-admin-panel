@@ -1,4 +1,4 @@
-import { IImages, IThemes } from "../../api/request/venue.request";
+import { IHeaderImages, IImages, IThemes } from "../../api/request/venue.request";
 
 export interface IRealWeddingsProps {
     // realWeddings: IRealWeddings[];
@@ -13,4 +13,9 @@ export interface IThemeForm {
 export interface IVenueImages {
     venueImagesList: IImages[],
     setVenueImages: any
+}
+
+export interface IHeaderImage {
+    setHeaderImageList: any;
+    headerImageList: IHeaderImages[];
 }

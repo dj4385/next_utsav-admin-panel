@@ -36,7 +36,7 @@ export interface IThemeImgGallery {
 
 export interface IVenue {
     property_type: string,
-    capacity: string,
+    capacity: number,
     nearest_airport: INearestAirport,
     outdoor_catering_policy: string,
     air_quality_index: number,

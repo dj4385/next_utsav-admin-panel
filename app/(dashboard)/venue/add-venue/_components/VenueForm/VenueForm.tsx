@@ -98,7 +98,7 @@ const VenueForm = ({
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Capacity</label>
-                    <Input type="text" placeholder="Enter Capacity" onChange={handleChange} name="capacity" value={venueData?.capacity || ''} />
+                    <Input type="number" placeholder="Enter Capacity" onChange={handleChange} name="capacity" value={venueData?.capacity || ''} />
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">OutSide Catering Policy</label>

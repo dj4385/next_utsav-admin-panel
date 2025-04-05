@@ -39,15 +39,15 @@ const AddVenueForm = () => {
                 venue_name: venueData?.venue_name,
                 venue: {
                     "property_type": venueData?.property_type,
-                    "capacity": venueData?.capacity,
+                    "capacity": +venueData?.capacity,
                     "nearest_airport": {
                         "name": nearestAirport?.name,
-                        "distance_km": nearestAirport?.distance_km
+                        "distance_km": +nearestAirport?.distance_km
                     },
                     "outdoor_catering_policy": venueData?.outdoor_catering_policy,
-                    "air_quality_index": venueData?.air_quality_index,
-                    "google_rating": venueData?.google_rating,
-                    "google_rating_review": venueData?.google_rating_review,
+                    "air_quality_index": +venueData?.air_quality_index,
+                    "google_rating": +venueData?.google_rating,
+                    "google_rating_review": +venueData?.google_rating_review,
                     "description": venueData?.description,
                     "map_link": venueData?.map_link
                 },
@@ -62,21 +62,27 @@ const AddVenueForm = () => {
 
             console.log(req, 'req');
 
-            return;
 
             const res: any = await VenueService.addVenue(req);
 
-            if (res?.status == 200) {
+            if (res?.status == 200 || res?.status == 201) {
                 toast({
                     title: "Venue Added Successfully",
                     description: res.message
                 })
                 back();
+            } else {
+                toast({
+                    title: "Venue Added Failed",
+                    description: res?.response?.data?.error,
+                    variant: "destructive"
+                })
             }
         } catch (error: any) {
             toast({
-                title: "Venue Added Failed",
-                description: error.message
+                title: "Error",
+                description: error.message,
+                variant: "destructive"
             })
         } finally {
             setLoading(false);

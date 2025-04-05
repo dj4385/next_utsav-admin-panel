@@ -52,6 +52,7 @@ const VenueHeaderImageModal = () => {
                 id: uuidv4()
             }
         }
+        debugger
         dispatch(setVenueHeaderImageModalList([venueHeaderImageData]))
         setTimeout(() => {
             setLoading(false)

@@ -1,11 +1,11 @@
 "use server"
 
-import DestinationWrapper from "./_components/DestinationWrapper";
+import DestinationForm from "./_components/DestinationForm";
 
 const DestinationPage = async () => {
     return (
         <>
-            <DestinationWrapper />
+            <DestinationForm />
         </>
     )
 }

@@ -77,6 +77,7 @@ const ExperienceTable = () => {
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">CreatedAt</TableHead>
                             <TableHead className="text-white">UpdatedAt</TableHead>
@@ -86,6 +87,7 @@ const ExperienceTable = () => {
                     <TableBody>
                         {experienceList?.length ? experienceList.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.createdAt}</TableCell>
                                 <TableCell>{item.updatedAt}</TableCell>

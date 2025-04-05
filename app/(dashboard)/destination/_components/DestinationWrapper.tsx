@@ -1,9 +1,6 @@
-'use client '
-
-import { useState } from "react";
+'use client'
 
 const DestinationWrapper = () => {
-    const [destination, setDestination] = useState<any>()
 
     return (
         <div>

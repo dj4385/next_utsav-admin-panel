@@ -67,6 +67,7 @@ const CateringTable = () => {
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Description</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
@@ -75,6 +76,7 @@ const CateringTable = () => {
                     <TableBody>
                         {cateringList?.length ? cateringList.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.description}</TableCell>
                                 <TableCell>

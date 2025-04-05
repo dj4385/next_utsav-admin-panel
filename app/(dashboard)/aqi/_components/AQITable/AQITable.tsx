@@ -64,6 +64,7 @@ const AQITable = () => {
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Range</TableHead>
                             <TableHead className="text-white">Min</TableHead>
                             <TableHead className="text-white">Max</TableHead>
@@ -74,6 +75,7 @@ const AQITable = () => {
                     <TableBody>
                         {aqiList?.length ? aqiList.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>{item.range}</TableCell>
                                 <TableCell>{item.min}</TableCell>
                                 <TableCell>{item.max}</TableCell>

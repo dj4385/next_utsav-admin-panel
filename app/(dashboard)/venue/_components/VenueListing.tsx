@@ -175,6 +175,7 @@ const VenueListing = () => {
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Type</TableHead>
@@ -187,6 +188,7 @@ const VenueListing = () => {
                     <TableBody>
                         {venues.map((data, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>

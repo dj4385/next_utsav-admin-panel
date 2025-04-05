@@ -3,9 +3,9 @@ import api from "@/lib/axios.interceptor"
 
 export class VenueService {
 
-    static async getVenues () {
+    static async getVenues (page: number = 1, limit: number = 10) {
         try {
-            const res = await api.get(`/venues`);
+            const res = await api.get(`/venues?page=${page}&limit=${limit}`);
             return res;
         } catch (error) {
             return error;

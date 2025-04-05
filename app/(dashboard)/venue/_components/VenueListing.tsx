@@ -18,20 +18,33 @@ import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Edit2, Trash2 } from "lucide-react";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
+
+const ITEMS_PER_PAGE = 10;
 
 const VenueListing = () => {
-
     const [venues, setVenues] = useState<any[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const { toast } = useToast();
     const router = useRouter();
 
-    const getVenueListing = async () => {
+    const getVenueListing = async (page: number = 1) => {
         try {
-            const res: any = await VenueService.getVenues();
+            const res: any = await VenueService.getVenues(page, ITEMS_PER_PAGE);
             console.log(res);
             
             if (res && res.status == 200 && res.data.data) {
                 setVenues(res.data.data);
+                setTotalPages(Math.ceil(res.data.pagination.totalRecords / ITEMS_PER_PAGE));
             } else {
                 toast({
                     title: "Error",
@@ -46,6 +59,11 @@ const VenueListing = () => {
                 variant: "destructive",
             })
         }
+    }
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        getVenueListing(page);
     }
 
     const addVenue = () => {
@@ -64,7 +82,7 @@ const VenueListing = () => {
                     title: "Venue deleted successfully",
                     description: "Venue deleted successfully",
                 })
-                getVenueListing();
+                getVenueListing(currentPage);
             } else {
                 toast({
                     title: "Error",
@@ -84,6 +102,69 @@ const VenueListing = () => {
     useEffect(() => {
         getVenueListing()
     }, [])
+
+    const renderPaginationItems = () => {
+        const items = [];
+        const maxVisiblePages = 5;
+        const halfVisible = Math.floor(maxVisiblePages / 2);
+        
+        let startPage = Math.max(currentPage - halfVisible, 1);
+        let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+        }
+
+        // Add first page
+        if (startPage > 1) {
+            items.push(
+                <PaginationItem key={1}>
+                    <PaginationLink onClick={() => handlePageChange(1)}>1</PaginationLink>
+                </PaginationItem>
+            );
+            if (startPage > 2) {
+                items.push(
+                    <PaginationItem key="ellipsis1">
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                );
+            }
+        }
+
+        // Add pages
+        for (let i = startPage; i <= endPage; i++) {
+            items.push(
+                <PaginationItem key={i}>
+                    <PaginationLink 
+                        isActive={currentPage === i}
+                        onClick={() => handlePageChange(i)}
+                    >
+                        {i}
+                    </PaginationLink>
+                </PaginationItem>
+            );
+        }
+
+        // Add last page
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                items.push(
+                    <PaginationItem key="ellipsis2">
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                );
+            }
+            items.push(
+                <PaginationItem key={totalPages}>
+                    <PaginationLink onClick={() => handlePageChange(totalPages)}>
+                        {totalPages}
+                    </PaginationLink>
+                </PaginationItem>
+            );
+        }
+
+        return items;
+    };
 
     return (
         <div className="flex flex-col rounded-lg bg-gray-50 p-2">
@@ -123,12 +204,34 @@ const VenueListing = () => {
                                             <Trash2 />
                                         </Button>
                                     </div>
-
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+                {totalPages > 1 && (
+                    <div className="mt-4 flex justify-end">
+                        <Pagination>
+                            <PaginationContent>
+                                <PaginationItem>
+                                    <PaginationPrevious 
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        aria-disabled={currentPage === 1}
+                                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                                    />
+                                </PaginationItem>
+                                {renderPaginationItems()}
+                                <PaginationItem>
+                                    <PaginationNext 
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        aria-disabled={currentPage === totalPages}
+                                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                                    />
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
+                    </div>
+                )}
             </div>
         </div>
     )

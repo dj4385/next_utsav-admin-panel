@@ -38,7 +38,7 @@ const VenuesImages = ({
         if(!id) {
             return;
         }
-        const data = venueImagesList.filter((d) => d._id !== id);
+        const data = venueImagesList.filter((d) => d._id !== id && d.id !== id);
         setVenueImages(data);
     }
 
@@ -55,6 +55,7 @@ const VenuesImages = ({
                 setVenueImages([...data]);
             } else {
                 setVenueImages([...venueImagesList, ...venueImageModalList])
+                
             }
         }
     }, [venueImageModalList])
@@ -74,6 +75,7 @@ const VenuesImages = ({
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Type</TableHead>
+                            <TableHead className="text-white">Alt</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -84,15 +86,19 @@ const VenuesImages = ({
                                     {
                                         item?.type == 'image' && item?.images ? <div className="h-[50px] w-[50px]"> <Image src={item?.images} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null
                                     }
+                                    {
+                                        item?.type == 'video' && item?.video ? <div className="h-[50px] w-[50px]"> <video src={item?.video} width={50} height={50} controls className="h-full w-full rounded-md" /> </div> : null
+                                    }
                                 </TableCell>
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.type}</TableCell>
+                                <TableCell>{item.alt}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>
                                             <Edit2 />
                                         </Button>
-                                        <Button variant="destructive" size="icon" onClick={() => deleteData(item._id)}>
+                                        <Button variant="destructive" size="icon" onClick={() => deleteData(item?._id || item?.id)}>
                                             <Trash2 />
                                         </Button>
                                     </div>

@@ -56,7 +56,9 @@ export interface INearestAirport {
 export interface IImages {
     type: string,
     name: string,
+    alt: string,
     images: string,
     video: string,
-    _id?: string
+    _id?: string,
+    id?: string
 }

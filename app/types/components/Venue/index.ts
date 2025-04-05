@@ -1,7 +1,7 @@
-import { IImages, IRealWeddings, IThemes } from "../../api/request/venue.request";
+import { IImages, IThemes } from "../../api/request/venue.request";
 
 export interface IRealWeddingsProps {
-    realWeddings: IRealWeddings[];
+    // realWeddings: IRealWeddings[];
     setRealWeddings: any;
 }
 

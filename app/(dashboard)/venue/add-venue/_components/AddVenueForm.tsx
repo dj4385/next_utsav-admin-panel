@@ -32,19 +32,29 @@ const AddVenueForm = () => {
     const onSaveChanges = async () => {
         try {
             setLoading(true);
-
+            debugger
             const req = {
-                ...venueData,
+                venue_name: venueData?.venue_name,
+                venue: {
+                    "property_type": venueData?.property_type,
+                    "capacity": venueData?.capacity,
+                    "nearest_airport": {
+                        "name": nearestAirport?.name,
+                        "distance_km": nearestAirport?.distance_km
+                    },
+                    "outdoor_catering_policy": venueData?.outdoor_catering_policy,
+                    "air_quality_index": venueData?.air_quality_index,
+                    "google_rating": venueData?.google_rating,
+                    "google_rating_review": venueData?.google_rating_review,
+                    "description": venueData?.description,
+                    "map_link": venueData?.map_link
+                },
                 theme_options_heading: venueData?.theme_options_heading,
                 theme_options_subheading: venueData?.theme_options_subheading,
                 theme_options: themeFormList,
                 gallery: venueImagesList,
-                location: venueData?.location,
-                experience: venueData?.experience,
-                venue: {
-                    ...venueData?.venue,
-                    nearest_airport: nearestAirport
-                }
+                location: venueData?.location?._id,
+                experience: venueData?.experience?._id,
             }
 
             console.log(req, 'req');

@@ -18,11 +18,24 @@ const VenueForm = ({
     const [locationList, setLocationList] = useState<any[]>([])
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setVenueData((prev: any) => ({
-            ...prev,
-            [name]: value,
-        }));
-        
+        if (name === 'location') {
+            const selectedLocation = locationList.find(loc => loc._id === value);
+            setVenueData((prev: any) => ({
+                ...prev,
+                location: selectedLocation || null,
+            }));
+        } else if (name === 'experience') {
+            const selectedExperience = experienceList.find(exp => exp._id === value);
+            setVenueData((prev: any) => ({
+                ...prev,
+                experience: selectedExperience || null,
+            }));
+        } else {
+            setVenueData((prev: any) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
     }
 
     const getExperienceList = async () => {
@@ -63,15 +76,16 @@ const VenueForm = ({
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Location</label>
                     <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="location" onChange={handleChange} value={venueData?.location?._id || ''}  >
+                        <option value="">Select Location</option>
                         {
                             locationList.length ? locationList.map((loc, index) => <option key={index} value={loc._id}> {loc.name} </option>) : null
-
                         }
                     </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Experience</label>
                     <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="experience" onChange={handleChange} value={venueData?.experience?._id || ''} >
+                        <option value="">Select Experience</option>
                         {
                             experienceList.length ? experienceList.map((exp, index) => <option key={index} value={exp._id}> {exp.name} </option>) : null
 
@@ -101,6 +115,14 @@ const VenueForm = ({
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Google Rating Review</label>
                     <Input type="number" placeholder="Enter google rating review" onChange={handleChange} name="google_rating_review" value={venueData?.google_rating_review || 0} />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Map Link</label>
+                    <Input type="text" placeholder="Enter map link" onChange={handleChange} name="map_link" value={venueData?.map_link || ''} />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Description</label>
+                    <Textarea placeholder="Enter description" onChange={handleChange} name="description" value={venueData?.description || ''} />
                 </div>
             </div>
             <Separator className="mt-4" />

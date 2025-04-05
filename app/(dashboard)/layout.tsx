@@ -17,6 +17,7 @@ import ProtectedRoute from "@/components/ProtectedRoutes/ProtectedRoutes";
 import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
 import { ReactNode } from "react";
+import Loader from "@/components/Loader/Loader";
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   // const { isAuthenticated, isLoading } = useConvexAuth();
@@ -41,6 +42,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
         <div className="p-6 mt-16">
           <ReduxProvider>
             <ProtectedRoute>
+              <Loader />
               <EventModal />
               <GalleryModal />
               <TestimonialModal />

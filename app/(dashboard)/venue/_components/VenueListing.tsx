@@ -27,6 +27,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import FullPageLoader from "@/components/Loader/FullPageLoader";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -34,11 +35,13 @@ const VenueListing = () => {
     const [venues, setVenues] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
     const router = useRouter();
 
     const getVenueListing = async (page: number = 1) => {
         try {
+            setIsLoading(true);
             const res: any = await VenueService.getVenues(page, ITEMS_PER_PAGE);
             console.log(res);
             
@@ -58,6 +61,8 @@ const VenueListing = () => {
                 description: error?.response?.data?.message || 'Something went wrong',
                 variant: "destructive",
             })
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -76,6 +81,7 @@ const VenueListing = () => {
 
     const deleteData = async (id: string) => {
         try {
+            setIsLoading(true);
             const res: any = await VenueService.deleteVenue(id);
             if (res && res.status == 200) {
                 toast({
@@ -96,6 +102,8 @@ const VenueListing = () => {
                 description: error?.response?.data?.message || 'Something went wrong',
                 variant: "destructive",
             })
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -167,75 +175,78 @@ const VenueListing = () => {
     };
 
     return (
-        <div className="flex flex-col rounded-lg bg-gray-50 p-2">
-            <div className="w-full">
-                <ContentHeader title="Venue Listing" icon={<MapPinHouse />} buttonLabel="Add Venue" buttonIcon={<MapPinHouse />} onBtnClick={() => addVenue()} />
-            </div>
-            <div className="py-4">
-                <Table className="rounded-md">
-                    <TableHeader>
-                        <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
-                            <TableHead className="text-white">S.No</TableHead>
-                            <TableHead className="text-white">Image</TableHead>
-                            <TableHead className="text-white">Name</TableHead>
-                            <TableHead className="text-white">Type</TableHead>
-                            <TableHead className="text-white">Capacity</TableHead>
-                            <TableHead className="text-white">AQI</TableHead>
-                            <TableHead className="text-white">Google Rating</TableHead>
-                            <TableHead className="text-white">Action</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {venues.map((data, index) => (
-                            <TableRow key={index}>
-                                <TableCell>{index + 1}</TableCell>
-                                <TableCell>
-                                    {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
-                                </TableCell>
-                                <TableCell>{data.venue_name}</TableCell>
-                                <TableCell>{data.venue.property_type}</TableCell>
-                                <TableCell>{data.venue.capacity}</TableCell>
-                                <TableCell>{data.venue.air_quality_index}</TableCell>
-                                <TableCell>{data.venue.google_rating}</TableCell>
-                                <TableCell>
-                                    <div className="flex items-center justify-center gap-2">
-                                        <Button variant="secondary" size="icon" onClick={() => edit(data)}>
-                                            <Edit2 />
-                                        </Button>
-                                        <Button variant="destructive" size="icon" onClick={() => deleteData(data._id)}>
-                                            <Trash2 />
-                                        </Button>
-                                    </div>
-                                </TableCell>
+        <>
+            {isLoading && <FullPageLoader />}
+            <div className="flex flex-col rounded-lg bg-gray-50 p-2">
+                <div className="w-full">
+                    <ContentHeader title="Venue Listing" icon={<MapPinHouse />} buttonLabel="Add Venue" buttonIcon={<MapPinHouse />} onBtnClick={() => addVenue()} />
+                </div>
+                <div className="py-4">
+                    <Table className="rounded-md">
+                        <TableHeader>
+                            <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                                <TableHead className="text-white">S.No</TableHead>
+                                <TableHead className="text-white">Image</TableHead>
+                                <TableHead className="text-white">Name</TableHead>
+                                <TableHead className="text-white">Type</TableHead>
+                                <TableHead className="text-white">Capacity</TableHead>
+                                <TableHead className="text-white">AQI</TableHead>
+                                <TableHead className="text-white">Google Rating</TableHead>
+                                <TableHead className="text-white">Action</TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                {totalPages > 1 && (
-                    <div className="mt-4 flex justify-end">
-                        <Pagination>
-                            <PaginationContent>
-                                <PaginationItem>
-                                    <PaginationPrevious 
-                                        onClick={() => handlePageChange(currentPage - 1)}
-                                        aria-disabled={currentPage === 1}
-                                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                                    />
-                                </PaginationItem>
-                                {renderPaginationItems()}
-                                <PaginationItem>
-                                    <PaginationNext 
-                                        onClick={() => handlePageChange(currentPage + 1)}
-                                        aria-disabled={currentPage === totalPages}
-                                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                                    />
-                                </PaginationItem>
-                            </PaginationContent>
-                        </Pagination>
-                    </div>
-                )}
+                        </TableHeader>
+                        <TableBody>
+                            {venues.map((data, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>
+                                        {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
+                                    </TableCell>
+                                    <TableCell>{data.venue_name}</TableCell>
+                                    <TableCell>{data.venue.property_type}</TableCell>
+                                    <TableCell>{data.venue.capacity}</TableCell>
+                                    <TableCell>{data.venue.air_quality_index}</TableCell>
+                                    <TableCell>{data.venue.google_rating}</TableCell>
+                                    <TableCell>
+                                        <div className="flex items-center justify-center gap-2">
+                                            <Button variant="secondary" size="icon" onClick={() => edit(data)}>
+                                                <Edit2 />
+                                            </Button>
+                                            <Button variant="destructive" size="icon" onClick={() => deleteData(data._id)}>
+                                                <Trash2 />
+                                            </Button>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    {totalPages > 1 && (
+                        <div className="mt-4 flex justify-end">
+                            <Pagination>
+                                <PaginationContent>
+                                    <PaginationItem>
+                                        <PaginationPrevious 
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            aria-disabled={currentPage === 1}
+                                            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+                                    {renderPaginationItems()}
+                                    <PaginationItem>
+                                        <PaginationNext 
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            aria-disabled={currentPage === totalPages}
+                                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+                                </PaginationContent>
+                            </Pagination>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

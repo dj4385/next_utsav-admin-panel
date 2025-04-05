@@ -82,3 +82,7 @@ export interface IEventInitialData {
     isAddGoogleRatingSuccess: boolean;
     isAddAQIRequestSuccess: boolean;
 }
+
+export interface ILoadingInitialData {
+    isLoading: boolean;
+}

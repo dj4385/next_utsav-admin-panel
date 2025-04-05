@@ -16,6 +16,8 @@ import GlobalPresenceSlice from "./features/contact/GlobalPresenceSlice";
 import ContactFooterSlice from "./features/contact/ContactFooterSlice";
 import EventsSlice from "./features/EventsSlice";
 import VenueHeaderImageSlice from "./features/venue/VenueHeaderImageSlice";
+import LoadingSlice from "./features/LoadingSlice";
+    
 const rootReducer = combineReducers({
     "EventSlice": EventSlice,
     "TestimonialSlice": TestimonialSlice,
@@ -29,7 +31,8 @@ const rootReducer = combineReducers({
     "GlobalPresenceSlice": GlobalPresenceSlice,
     "ContactFooterSlice": ContactFooterSlice,
     "EventsSlice": EventsSlice,
-    "VenueHeaderImageSlice": VenueHeaderImageSlice
+    "VenueHeaderImageSlice": VenueHeaderImageSlice,
+    "LoadingSlice": LoadingSlice
 })
 
 export const store = configureStore({

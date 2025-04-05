@@ -97,10 +97,10 @@ const VenueHeaderImageModal = () => {
                                 <label className="block text-sm font-medium text-gray-700">Alt</label>
                                 <Input type="text" {...register("alt")} placeholder="Enter Alt" className="mt-1 w-full" />
                             </div>
-                            <div>
+                            {/* <div>
                                 <label className="block text-sm font-medium text-gray-700">Is Wide</label>
                                 <Checkbox {...register("is_wide")} />
-                            </div>
+                            </div> */}
                             <ButtonComponent label="Save Changes" onClick={() => { }} loading={loading} type="submit" customClass="w-full bg-purple-700 hover:bg-purple-800" />
                         </div>
                     </form>

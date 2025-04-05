@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { IHeaderImage, IVenueImages } from "@/app/types/components/Venue";
 import { setVenueHeaderImageListItem, setVenueHeaderImageModal } from "@/lib/features/venue/VenueHeaderImageSlice";
 import { IHeaderImages } from "@/app/types/api/request/venue.request";
+import { Checkbox } from "@/components/ui/checkbox";
 
 
 
@@ -63,6 +64,10 @@ const HeaderImage = ({
         }
     }, [venueHeaderImageModalList])
 
+    useEffect(() => {
+        console.log(headerImageList, 'headerImageList')
+    }, [headerImageList])
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Header Images Gallery</h2>
@@ -90,7 +95,19 @@ const HeaderImage = ({
                                     }
                                 </TableCell>
                                 <TableCell>{item.alt}</TableCell>
-                                <TableCell>{item.is_wide ? "Yes" : "No"}</TableCell>
+                                <TableCell>
+                                    <Checkbox 
+                                        checked={item.is_wide}
+                                        onCheckedChange={(checked: boolean) => {
+                                            // Uncheck all other checkboxes
+                                            const updatedList = headerImageList.map((img: IHeaderImages) => ({
+                                                ...img,
+                                                is_wide: img._id === item._id && img.id === item.id ? checked : false
+                                            }));
+                                            setHeaderImageList(updatedList);
+                                        }}
+                                    />
+                                </TableCell>
                                 <TableCell>
                                     <div className="flex items-center justify-end gap-2">
                                         <Button variant="secondary" size="icon" onClick={() => editModal(item)}>

@@ -92,7 +92,7 @@ const LocationTable = () => {
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>
-                                    { item?.image ? <Image src={item?.image} alt="location" width={100} height={100} /> : null }
+                                    { item?.image ? <div className="h-[50px] w-[50px]"> <Image src={item?.image} className="h-full w-full rounded-md" alt="location" width={50} height={50} /> </div> : null }
                                 </TableCell>
                                 <TableCell>{item?.name || ''}</TableCell>
                                 <TableCell>{item?.city || ''}</TableCell>

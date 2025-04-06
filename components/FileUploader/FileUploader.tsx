@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { IFileUploader } from "@/app/types/components/fileUploader/fileUploader";
@@ -78,7 +78,9 @@ export default function FileUploader({
     if(urlType == 'video') {
       const videoExtension: any = process.env.NEXT_PUBLIC_VIDEO_EXTENSION;
       if(videoExtension) {
-        setAllowedFileExt(videoExtension)
+        setAllowedFileExt(videoExtension);
+        const fileInputRef = useRef<HTMLInputElement>(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
       }
     }
   }, [urlType])

@@ -7,7 +7,8 @@ const initialState: IEventInitialData = {
     isAddCapacitySuccess: false,
     isAddCateringSuccess: false,
     isAddGoogleRatingSuccess: false,
-    isAddAQIRequestSuccess: false
+    isAddAQIRequestSuccess: false,
+    isAddVenueSuccess: false
 };
 
 const EventsSlice = createSlice({
@@ -31,12 +32,16 @@ const EventsSlice = createSlice({
         },
         setAddAQIRequestSuccess: (state: IEventInitialData = initialState, action: PayloadAction<boolean>) => {
             state.isAddAQIRequestSuccess = action.payload;
+        },
+        setAddVenueSuccess: (state: IEventInitialData = initialState, action: PayloadAction<boolean>) => {
+            state.isAddVenueSuccess = action.payload;
         }
     }
 });
 
 export const {
     setAddExperinceSuccess, setAddLocationSuccess, setAddCapacitySuccess,
-    setAddCateringSuccess, setAddGoogleRatingSuccess, setAddAQIRequestSuccess } = EventsSlice.actions;
+    setAddCateringSuccess, setAddGoogleRatingSuccess, setAddAQIRequestSuccess, setAddVenueSuccess
+} = EventsSlice.actions;
 
 export default EventsSlice.reducer;

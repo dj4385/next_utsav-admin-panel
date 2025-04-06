@@ -81,6 +81,7 @@ export interface IEventInitialData {
     isAddCateringSuccess: boolean;
     isAddGoogleRatingSuccess: boolean;
     isAddAQIRequestSuccess: boolean;
+    isAddVenueSuccess: boolean;
 }
 
 export interface ILoadingInitialData {

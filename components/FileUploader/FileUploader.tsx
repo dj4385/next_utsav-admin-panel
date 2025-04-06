@@ -17,6 +17,8 @@ export default function FileUploader({
   const [loading, setLoading] = useState<boolean>(false)
   const {toast} = useToast();
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   const handleFileChange = (event: any) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -25,8 +27,7 @@ export default function FileUploader({
     }
   };
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
+  
   const handleUpload = async () => {
     if (!file) return;
     
@@ -71,6 +72,13 @@ export default function FileUploader({
   }, [url])
 
   useEffect(() => {
+    if (file) {
+      handleUpload()
+    }
+  }, [file])
+
+
+  useEffect(() => {
     if(urlType == 'image') {
       const imageExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
       if(imageExtension) {
@@ -104,9 +112,9 @@ export default function FileUploader({
           
         </div>
       )}
-      {
+      {/* {
         file ? <ButtonComponent label="Upload File" type="button" loading={loading} onClick={handleUpload}></ButtonComponent> : null
-      }
+      } */}
       
     </div>
   );

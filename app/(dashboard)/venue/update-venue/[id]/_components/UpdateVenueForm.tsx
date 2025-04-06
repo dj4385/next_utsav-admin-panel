@@ -59,7 +59,6 @@ const UpdateVenueForm = ({ id }: { id: string }) => {
     const onSaveChanges = async () => {
         try {
             setLoading(true);
-            debugger
             const req: IAddVenueRequest = {
                 venue_name: venueData?.venue_name,
                 venue: {

@@ -19,7 +19,6 @@ const DestinationFields = ({
     }
 
     const onFileUpload = (url: string, type: string) => {
-        debugger
         setDestinationData((prev: any) => ({
             ...prev,
             [type]: url,

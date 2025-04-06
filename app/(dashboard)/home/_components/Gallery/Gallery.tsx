@@ -91,6 +91,7 @@ const Gallery = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Icon Alt</TableHead>
                             <TableHead className="text-white text-right">Action</TableHead>
@@ -99,6 +100,7 @@ const Gallery = ({
                     <TableBody>
                         {galleryList.map((data, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {data && data.image ? <div className="h-[50px] w-[50px]"> <Image src={data.image} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>

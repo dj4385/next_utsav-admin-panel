@@ -72,6 +72,7 @@ const VenuesImages = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Type</TableHead>
@@ -82,6 +83,7 @@ const VenuesImages = ({
                     <TableBody>
                         {venueImagesList.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {
                                         item?.type == 'image' && item?.images ? <div className="h-[50px] w-[50px]"> <Image src={item?.images} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null

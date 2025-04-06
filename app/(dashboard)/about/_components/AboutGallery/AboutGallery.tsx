@@ -68,6 +68,7 @@ const AboutGallery = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Alt</TableHead>
                             <TableHead className="text-white">Wide</TableHead>
@@ -77,6 +78,7 @@ const AboutGallery = ({
                     <TableBody>
                         {aboutGalleryData.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {
                                         item && item.image ? <div className="h-[50px] w-[50px]"> <Image src={item.image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null

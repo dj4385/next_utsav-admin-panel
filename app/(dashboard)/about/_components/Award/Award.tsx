@@ -84,6 +84,7 @@ const Award = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">Title</TableHead>
                             <TableHead className="text-white">Heading</TableHead>
@@ -93,6 +94,7 @@ const Award = ({
                     <TableBody>
                         {awardList.map((data, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>{data.name}</TableCell>
                                 <TableCell>{data.title}</TableCell>
                                 <TableCell>{data.heading}</TableCell>

@@ -72,6 +72,7 @@ const Event = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Icon</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white w-[100px]">Event Type</TableHead>

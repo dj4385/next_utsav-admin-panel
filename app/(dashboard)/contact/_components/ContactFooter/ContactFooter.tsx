@@ -104,6 +104,7 @@ const ContactFooter = ({
                 <Table className="rounded-md">
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
+                            <TableHead className="text-white">S.No</TableHead>
                             <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Image Alt</TableHead>
                             <TableHead className="text-white">Name</TableHead>
@@ -116,6 +117,7 @@ const ContactFooter = ({
                     <TableBody>
                         {contactFooterList.map((item, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {
                                         item && item.country_image ? <div className="h-[50px] w-[50px]"> <Image src={item.country_image} alt="image" width={50} height={50} className="h-full w-full rounded-md" /> </div> : null

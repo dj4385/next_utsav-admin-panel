@@ -200,7 +200,7 @@ const VenueListing = () => {
                                 <TableRow key={index}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>
-                                        {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
+                                        {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery?.filter((gallery: any) => gallery.type == 'image')[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                     </TableCell>
                                     <TableCell>{data.venue_name}</TableCell>
                                     <TableCell>{data.venue.property_type}</TableCell>

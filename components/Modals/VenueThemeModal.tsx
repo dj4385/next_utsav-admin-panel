@@ -100,6 +100,7 @@ const VenueThemeModal = () => {
             setValue("name", themeListItem.name);
             setValue("tab_name", themeListItem.tab_name)
             setValue("description", themeListItem.description);
+            setValue("theme_img_gallery", themeListItem.theme_img_gallery);
         } else {
             reset()
         }

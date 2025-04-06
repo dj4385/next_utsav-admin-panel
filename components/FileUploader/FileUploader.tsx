@@ -25,6 +25,8 @@ export default function FileUploader({
     }
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleUpload = async () => {
     if (!file) return;
     
@@ -73,13 +75,13 @@ export default function FileUploader({
       const imageExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
       if(imageExtension) {
         setAllowedFileExt(imageExtension)
+        if (fileInputRef.current) fileInputRef.current.value = '';
       }
     } 
     if(urlType == 'video') {
       const videoExtension: any = process.env.NEXT_PUBLIC_VIDEO_EXTENSION;
       if(videoExtension) {
         setAllowedFileExt(videoExtension);
-        const fileInputRef = useRef<HTMLInputElement>(null);
         if (fileInputRef.current) fileInputRef.current.value = '';
       }
     }

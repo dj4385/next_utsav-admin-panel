@@ -18,6 +18,7 @@ import { setVenueHeaderImageListItem, setVenueHeaderImageModal, setVenueHeaderIm
 import { Checkbox } from "../ui/checkbox"
 import FileUploader from "../FileUploader/FileUploader"
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from "@/hooks/use-toast"
 
 type FormValues = {
     alt: string;
@@ -30,6 +31,7 @@ const VenueHeaderImageModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { isOpen, venueHeaderImageListItem } = useAppSelector((state) => state.VenueHeaderImageSlice);
     const dispatch = useDispatch();
+    const { toast } = useToast();
     const { register, handleSubmit, reset, setValue, formState: { errors }, control, watch } = useForm<FormValues>({
         defaultValues: {
             alt: '', url: '', is_wide: false
@@ -37,6 +39,16 @@ const VenueHeaderImageModal = () => {
     });
 
     const onSubmit = (data: any) => {
+
+        if (data.url === '') {
+            toast({
+                title: 'Error',
+                description: 'Please upload an image',
+                variant: 'destructive'
+            })
+            return;
+        }
+
         setLoading(true);
 
         let venueHeaderImageData: IHeaderImages;
@@ -52,7 +64,6 @@ const VenueHeaderImageModal = () => {
                 id: uuidv4()
             }
         }
-        debugger
         dispatch(setVenueHeaderImageModalList([venueHeaderImageData]))
         setTimeout(() => {
             setLoading(false)

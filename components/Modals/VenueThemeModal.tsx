@@ -20,6 +20,8 @@ import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
 import FileUploader from "../FileUploader/FileUploader"
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from "@/hooks/use-toast"
+
 type FormValues = {
     name: string;
     tab_name: string;
@@ -36,6 +38,7 @@ const VenueThemeModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const { isOpen, themeListItem } = useAppSelector((state) => state.VenueThemeSlice);
     const dispatch = useDispatch();
+    const { toast } = useToast();
     const { register, handleSubmit, reset, setValue, formState: { errors }, control, watch } = useForm<FormValues>({
         defaultValues: {
             name: '',
@@ -51,6 +54,16 @@ const VenueThemeModal = () => {
     });
 
     const onSubmit = (data: any) => {
+
+        if (data.theme_img_gallery.length === 0 || data.theme_img_gallery.some((item: any) => item.images === '')) {
+            toast({
+                title: 'Error',
+                description: 'Please upload at least one image',
+                variant: 'destructive'
+            })
+            return;
+        }
+
         setLoading(true);
 
         let venueThemeData: IThemes;

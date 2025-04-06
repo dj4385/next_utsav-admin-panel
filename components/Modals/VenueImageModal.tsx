@@ -17,6 +17,7 @@ import { setVenueImageListItem, setVenueImageModal, setVenueImageModalList } fro
 import MultipleFileUploader from "../MultipleFileUploader/MultipleFileUploader"
 import { Input } from "../ui/input"
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from "@/hooks/use-toast"
 
 const VenueImageModal = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -25,8 +26,27 @@ const VenueImageModal = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<any>();
     const [imageUrl, setImageUrl] = useState<string>('');
-
+    const { toast } = useToast();
     const onSubmit = (data: any) => {
+
+        if (data.type == 'image' && !imageUrl) {
+            toast({
+                title: 'Error',
+                description: 'Please upload an image',
+                variant: 'destructive'
+            })
+            return;
+        }
+
+        if (data.type == 'video' && !imageUrl) {
+            toast({
+                title: 'Error',
+                description: 'Please upload a video',
+                variant: 'destructive'
+            })
+            return;
+        }
+
         setLoading(true);
 
         let venueImageData: IImages;

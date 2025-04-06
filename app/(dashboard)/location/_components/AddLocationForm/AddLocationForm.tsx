@@ -1,6 +1,7 @@
 "use client"
 
 import ButtonComponent from "@/components/core/Button/Button";
+import FileUploader from "@/components/FileUploader/FileUploader";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { setAddLocationSuccess } from "@/lib/features/EventsSlice";
@@ -15,6 +16,7 @@ const AddLocationForm = () => {
     const [address, setAddress] = useState<string>('');
     const [state, setState] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [locationImage, setLocationImage] = useState<string>('');
 
     const { toast } = useToast();
     const dispatch = useAppDispatch();
@@ -42,8 +44,16 @@ const AddLocationForm = () => {
             if (!locationTitle && !address && !city && !state) {
                 return
             }
+            if (!locationImage) {
+                toast({
+                    title: "Error",
+                    description: "Please upload location image",
+                    variant: "destructive",
+                }) 
+                return;
+            }
             setLoading(true);
-            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state });
+            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state, image: locationImage });
             if (res && (res.status == 200 || res.status == 201)) {
                 toast({
                     title: "Success",
@@ -53,6 +63,7 @@ const AddLocationForm = () => {
                 setCity('');
                 setState('');
                 setAddress('');
+                setLocationImage('');
                 dispatch(setAddLocationSuccess(true));
             } else {
                 toast({
@@ -91,6 +102,14 @@ const AddLocationForm = () => {
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Address</label>
                     <Input type="text" placeholder="Enter Address" className="mt-1 w-full" onChange={handleChange} name="address" value={address} />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Location Image</label>
+                    <FileUploader
+                        onFileUpload={(file: string) => setLocationImage(file)}
+                        url={locationImage}
+                        urlType="image"
+                    />
                 </div>
             </div>
             <div className="flex justify-center items-center my-5">

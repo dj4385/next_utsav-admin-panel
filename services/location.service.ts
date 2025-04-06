@@ -10,7 +10,7 @@ export class LocationService {
         }
     }
 
-    static async addLocation (req: {name: string, city: string, state: string, address: string}) {
+    static async addLocation (req: {name: string, city: string, state: string, address: string, image: string}) {
         try {
             const res = await api.post(`/destination/location-list`, req);
             return res;

@@ -63,6 +63,8 @@ export default function FileUploader({
   useEffect(() => {    
     if(url) {
       setPreview(url)
+    } else {
+      setPreview(null)
     }
   }, [url])
 

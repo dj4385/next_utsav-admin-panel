@@ -16,6 +16,7 @@ import { Trash2 } from "lucide-react";
 import { LocationService } from "@/services/location.service";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { setAddLocationSuccess } from "@/lib/features/EventsSlice";
+import Image from "next/image";
 
 const LocationTable = () => {
     const [locationList, setLocationList] = useState<any[]>([])
@@ -78,6 +79,7 @@ const LocationTable = () => {
                     <TableHeader>
                         <TableRow className="bg-purple-600 hover:bg-purple-600 text-white">
                             <TableHead className="text-white">S.No</TableHead>
+                            <TableHead className="text-white">Image</TableHead>
                             <TableHead className="text-white">Name</TableHead>
                             <TableHead className="text-white">City</TableHead>
                             <TableHead className="text-white">State</TableHead>
@@ -89,6 +91,9 @@ const LocationTable = () => {
                         {locationList?.length ? locationList.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
+                                <TableCell>
+                                    { item?.image ? <Image src={item?.image} alt="location" width={100} height={100} /> : null }
+                                </TableCell>
                                 <TableCell>{item?.name || ''}</TableCell>
                                 <TableCell>{item?.city || ''}</TableCell>
                                 <TableCell>{item?.state || ''}</TableCell>

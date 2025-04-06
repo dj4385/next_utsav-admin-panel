@@ -86,6 +86,7 @@ const Event = ({
                     <TableBody>
                         {eventData.map((event, index) => (
                             <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>
                                     {event && event.icon ? <div className="h-[50px] w-[50px]"> <Image src={event.icon} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                 </TableCell>

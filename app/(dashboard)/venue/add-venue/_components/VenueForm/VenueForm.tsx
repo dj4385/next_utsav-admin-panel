@@ -101,8 +101,12 @@ const VenueForm = ({
                     <Input type="number" placeholder="Enter Capacity" onChange={handleChange} name="capacity" value={venueData?.capacity || ''} />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">OutSide Catering Policy</label>
-                    <Input type="text" placeholder="Enter outside catering policy" onChange={handleChange} name="outdoor_catering_policy" value={venueData?.outdoor_catering_policy || ''} />
+                    <label className="block text-sm font-medium text-gray-700">Outside Catering Policy</label>
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="outdoor_catering_policy" onChange={handleChange} value={venueData?.outdoor_catering_policy || ''} >
+                        <option value="">Select Outside Catering Policy</option>
+                        <option value="ALLOWED">Allowed</option>
+                        <option value="NOT ALLOWED">Not Allowed</option>
+                    </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">AQI</label>

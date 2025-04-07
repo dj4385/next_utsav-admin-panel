@@ -107,7 +107,7 @@ export default function FileUploader({
     <div className="p-4 border rounded-xl shadow-md w-full">
       <input type="file" accept={allowedFileExt} onChange={handleFileChange} className="mb-4" />      
       {preview && (
-        <div className="mb-4 h-[150px] w-full">
+        <div className="relative mb-4 h-[150px] w-full">
           {
             urlType == 'image' ? <Image
             src={preview}
@@ -117,7 +117,18 @@ export default function FileUploader({
             className="h-[100%] w-[100%] rounded-md"
           /> : <video src={preview} className="rounded-md h-full w-full" controls></video>
           }
-          
+          <button 
+            onClick={() => {
+              setPreview(null)
+              const fileInput: any = document.querySelector('input[type="file"]');
+              if (fileInput) fileInput.value = '';
+            }}
+            className="absolute -top-2 -right-2 p-1 bg-red-500 rounded-full text-white hover:bg-red-600"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </button>
         </div>
       )}
       {/* {

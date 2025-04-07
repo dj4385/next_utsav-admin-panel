@@ -59,7 +59,7 @@ const MobileSideNavbar = () => {
                     </SheetTrigger>
                     <SheetContent side="left" className="w-64 bg-gray-900 text-white">
                         <h2 className="text-xl font-bold mb-6">Dashboard</h2>
-                        <nav className="space-y-2">
+                        <nav className="space-y-2 overflow-y-auto pr-4 max-h-[calc(100vh-120px)] mobile-custom-scrollbar">
                             {menuItems.map((item) => (
                                 <Link
                                     key={item.name}

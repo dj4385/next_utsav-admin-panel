@@ -121,3 +121,15 @@
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: rgb(243 244 246);
 } 
+
+.mobile-custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mobile-custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(126 34 206);
+}  
+
+.mobile-custom-scrollbar::-webkit-scrollbar-track {
+  background-color: rgb(243 244 246);
+} 

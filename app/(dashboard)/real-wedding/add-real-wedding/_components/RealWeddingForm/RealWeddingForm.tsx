@@ -1,0 +1,258 @@
+"use client";
+
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { ExperienceService } from "@/services/experience.service";
+import { LocationService } from "@/services/location.service";
+import { Gem, Tag } from "lucide-react";
+import { ChangeEvent, useEffect, useState } from "react";
+
+const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
+  const [experienceList, setExperienceList] = useState<any[]>([]);
+  const [stateList, setStateList] = useState<any[]>([]);
+  const [locationList, setLocationList] = useState<any[]>([]);
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "state") {
+      const selectedState = stateList.find((loc) => loc._id === value);
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        state: selectedState || null,
+      }));
+      getLocationList(selectedState?._id);
+    } else if (name === "experience") {
+      const selectedExperience = experienceList.find(
+        (exp) => exp._id === value
+      );
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        experience: selectedExperience || null,
+      }));
+    } else if (name === "location") {
+      const selectedLocation = locationList.find((loc) => loc._id === value);
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        location: selectedLocation || null,
+      }));
+    } else {
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const getExperienceList = async () => {
+    try {
+      const res: any = await ExperienceService.getExperienceList();
+      if (res && res.status == 200 && res.data.data.length) {
+        setExperienceList(res.data.data);
+      }
+    } catch (error) {}
+  };
+
+  const getStateList = async () => {
+    try {
+      const res: any = await LocationService.getStateList();
+      if (res && res.status == 200 && res.data.data.length) {
+        setStateList(res.data.data);
+      }
+    } catch (error) {}
+  };
+
+  const getLocationList = async (id: string) => {
+    try {
+      const res: any = await LocationService.getLocationList(id);
+    
+      if (res && res.status == 200 && res?.data?.data?.length) {
+        setLocationList(res.data.data);
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (!!realWeddingData) getLocationList(realWeddingData?.state?._id);
+  }, [realWeddingData]);
+
+  useEffect(() => {
+    getExperienceList();
+    getStateList();
+  }, []);
+
+  return (
+    <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white mt-4">
+      <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3">
+        <Gem /> Real Wedding Section
+      </h2>
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <Input
+            type="text"
+            placeholder="Enter Venue Name"
+            name="venue_name"
+            onChange={handleChange}
+            value={realWeddingData?.venue_name || ""}
+            className="mt-1 w-full"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            State
+          </label>
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="state"
+            onChange={handleChange}
+            value={realWeddingData?.state?._id || ""}
+          >
+            <option value="">Select State</option>
+            {stateList.length
+              ? stateList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Location
+          </label>
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="location"
+            onChange={handleChange}
+            value={realWeddingData?.location?._id || ""}
+          >
+            <option value="">Select Location</option>
+            {locationList.length
+              ? locationList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Experience
+          </label>
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="experience"
+            onChange={handleChange}
+            value={realWeddingData?.experience?._id || ""}
+          >
+            <option value="">Select Experience</option>
+            {experienceList.length
+              ? experienceList.map((exp, index) => (
+                  <option key={index} value={exp._id}>
+                    {" "}
+                    {exp.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Property Type
+          </label>
+          <Input
+            type="text"
+            placeholder="Enter Property type"
+            name="property_type"
+            onChange={handleChange}
+            value={realWeddingData?.property_type || ""}
+            className="mt-1 w-full"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Design Style
+          </label>
+          <Input
+            type="text"
+            placeholder="Enter Design Style"
+            name="design_style"
+            onChange={handleChange}
+            value={realWeddingData?.design_style || ""}
+            className="mt-1 w-full"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Photographer
+          </label>
+          <Input
+            type="text"
+            placeholder="Enter Photographer"
+            name="photographer"
+            onChange={handleChange}
+            value={realWeddingData?.photographer || ""}
+            className="mt-1 w-full"
+          />
+        </div>
+      </div>
+      <Separator className="mt-4" />
+      <div>
+        <h2 className="flex flex-row gap-2 p-2 items-center text-lg font-medium">
+          Wedding Theme Section
+        </h2>
+        <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
+        <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Wedding Theme
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter Wedding Theme"
+              name="wedding_theme"
+              onChange={handleChange}
+              value={realWeddingData?.wedding_theme || ""}
+              className="mt-1 w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Wedding Theme Name
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter Wedding Theme Name"
+              name="wedding_theme_name"
+              onChange={handleChange}
+              value={realWeddingData?.wedding_theme_name || ""}
+              className="mt-1 w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Wedding Description
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter Wedding Description"
+              name="wedding_description"
+              onChange={handleChange}
+              value={realWeddingData?.wedding_description || ""}
+              className="mt-1 w-full"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RealWeddingForm;

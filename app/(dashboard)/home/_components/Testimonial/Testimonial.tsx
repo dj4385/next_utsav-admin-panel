@@ -63,7 +63,7 @@ const Testimonial = ({
                         text: testimonialModalList[0].text
                     } : d
                 );
-                console.log(data, 'd')
+             
                 setTestimonialList([...data]);
             } else {
                 setTestimonialList([...testimonialList, ...testimonialModalList])

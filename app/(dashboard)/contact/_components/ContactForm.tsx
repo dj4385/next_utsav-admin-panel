@@ -68,7 +68,7 @@ const ContactForm = () => {
     const getContactPage = async () => {
         try {
             const res: any = await ContactService.getContactPageDetail();
-            console.log(res.data);
+           
             if(res && res.status == 200 && res.data && res.data.data.length) {
 
                 const {

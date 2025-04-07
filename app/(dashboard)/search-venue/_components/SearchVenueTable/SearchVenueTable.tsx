@@ -39,7 +39,7 @@ const SearchVenueTable = () => {
 
     const deleteData = async (id: string) => {
         try {
-            const res: any = await LocationService.deleteLocation(id);
+            const res: any = await SearchVenueService.deleteVenue(id);
             if (res && res.status) {
                 toast({
                     title: "Success",

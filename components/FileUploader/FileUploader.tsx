@@ -37,7 +37,7 @@ export default function FileUploader({
     try {
       setLoading(true);
         const res: any = await UploadService.uploadFile(formData);
-        console.log(res);
+       
         
         if(res && res.status == 200 && res?.data?.imageUrl) {
           onFileUpload(res.data.imageUrl)

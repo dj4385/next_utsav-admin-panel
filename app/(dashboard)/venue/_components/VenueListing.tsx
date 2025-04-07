@@ -43,7 +43,7 @@ const VenueListing = () => {
         try {
             setIsLoading(true);
             const res: any = await VenueService.getVenues(page, ITEMS_PER_PAGE);
-            console.log(res);
+          
             
             if (res && res.status == 200 && res.data.data) {
                 setVenues(res.data.data);

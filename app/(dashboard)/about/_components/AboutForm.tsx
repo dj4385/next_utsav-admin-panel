@@ -102,7 +102,7 @@ const AboutForm = () => {
     const getAboutpage = async () => {
         try {
             const res: any = await AboutService.getAboutPage();
-            console.log(res.data);
+         
             if (res && res.status == 200 && res.data.data.length) {
                 const {
                     banner, alt_banner, banner_heading, banner_text,
@@ -199,7 +199,7 @@ const AboutForm = () => {
         }
 
         const res: any = await AboutService.updateAboutPage(id, req);
-        console.log(res);
+      
         if (res && res.status == 200) {
             toast({
                 title: "Success",

@@ -26,9 +26,6 @@ const Brand = ({
         }));
     }
 
-    useEffect(() => {console.log(brandData, 'bd');
-    }, [brandData])
-
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <Tag /> Brand Section</h2>

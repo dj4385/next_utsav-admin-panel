@@ -7,7 +7,6 @@ import ButtonComponent from "@/components/core/Button/Button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { AuthService } from "@/services/auth.service";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 

@@ -39,7 +39,7 @@ const DestinationForm = () => {
     const getDestinationListing = async (page: number = 1) => {
         try {
             const res: any = await DestinationService.getDestinations();
-            console.log(res);
+          
             
             if (res && res.status == 200 && res.data.data) {
                 setDestinations(res.data.data.destination_result);
@@ -88,7 +88,7 @@ const DestinationForm = () => {
                 editordesk: destinations?.editordesk || []
             }
             const res: any = await DestinationService.createDestination(req);
-            console.log(res);
+          
             if (res && res.status == 200 || res.status == 201) {
                 toast({
                     title: "Success",

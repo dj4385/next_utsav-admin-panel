@@ -85,7 +85,7 @@ const HomeForm = () => {
     const getHomepage = async () => {
         try {
             const res: any = await HomeService.getLandingPage();
-            console.log(res.data);
+          
             if(res && res.status == 200 && res.data) {
                 const {
                     brand_name, brand_logo, alt_brand_logo, heading, heading_image,
@@ -177,7 +177,7 @@ const HomeForm = () => {
         }
 
         const res: any = await HomeService.updateLandingPage(id, req);
-        console.log(res);
+      
         if(res && res.status == 200) {
             toast({
                 title: "Success",

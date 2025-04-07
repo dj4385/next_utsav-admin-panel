@@ -116,6 +116,7 @@ const VenueImageModal = () => {
                                     {...register("type")}
                                     onChange={(e) => onSelectType(e.target.value)}
                                 >
+                                    <option value="">Select Type</option>
                                     <option value="image">Image</option>
                                     <option value="video">Video</option>
                                 </select>

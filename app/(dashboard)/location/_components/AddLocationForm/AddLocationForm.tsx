@@ -16,6 +16,7 @@ const AddLocationForm = () => {
     const [city, setCity] = useState<string>('');
     const [address, setAddress] = useState<string>('');
     const [state, setState] = useState<string>('');
+    const [stateId, setStateId] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [locationImage, setLocationImage] = useState<string>('');
     const [stateList, setStateList] = useState<any[]>([]);
@@ -38,7 +39,9 @@ const AddLocationForm = () => {
         }
 
         if (name == 'state') {
-            setState(value)
+            setStateId(value)
+            const stateName = stateList.find((state: any) => state._id == value);
+            setState(stateName.name);
         }
     }
 
@@ -71,7 +74,7 @@ const AddLocationForm = () => {
                 return;
             }
             setLoading(true);
-            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state_id: state, image: locationImage });
+            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state_id: stateId, state, image: locationImage });
             if (res && (res.status == 200 || res.status == 201)) {
                 toast({
                     title: "Success",
@@ -119,7 +122,7 @@ const AddLocationForm = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">State</label>
-                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="state" onChange={handleChange} value={state}  >
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="state" onChange={handleChange} value={stateId}  >
                         <option value="">Select State</option>
                         {
                             stateList.length ? stateList.map((loc, index) => <option key={index} value={loc._id}> {loc.name} </option>) : null

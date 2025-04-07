@@ -6,6 +6,7 @@ export const menuItems = [
     { name: "Contact", href: "/contact", icon: Contact },
     { name: "Destination", href: "/destination", icon: MapPin },
     { name: "Venue", href: "/venue", icon: MapPinHouse },
+    { name: "Real Wedding", href: "/real-wedding", icon: MapPinHouse },
     { name: "Venue Search Page", href: "/search-venue", icon: SearchCheckIcon },
     { name: "Experience", href: "/experience", icon: Lightbulb },
     { name: "Location", href: "/location", icon: MapPlusIcon },

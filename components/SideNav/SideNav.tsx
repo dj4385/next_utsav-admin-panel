@@ -19,7 +19,7 @@ const SideNav = () => {
                     </div>
                     <h2>Utsav - Dashboard</h2>
                 </div>
-                <nav className="space-y-2">
+                <nav className="space-y-2 overflow-y-auto pr-4 max-h-[calc(100vh-120px)] custom-scrollbar">
                     {menuItems.map((item) => (
                         <Link
                             key={item.name}

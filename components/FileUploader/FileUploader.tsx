@@ -95,6 +95,15 @@ export default function FileUploader({
     }
   }, [urlType])
 
+  useEffect(() => {
+    if(!url) {
+      debugger
+      const fileInput: any = document.querySelector('input[type="file"]');
+      if (fileInput) fileInput.value = '';
+      setPreview(null)
+    }
+  }, [url])
+
   return (
     <div className="p-4 border rounded-xl shadow-md w-full">
       <input type="file" accept={allowedFileExt} onChange={handleFileChange} className="mb-4" />      

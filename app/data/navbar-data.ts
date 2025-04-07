@@ -1,4 +1,4 @@
-import { Contact, Fullscreen, LayoutDashboard, Lightbulb, MapPin, MapPinHouse, MapPlusIcon, SearchCheckIcon, StarHalf, User2, UtensilsCrossed, Wind } from "lucide-react";
+import { Contact, Fullscreen, Globe2, LayoutDashboard, Lightbulb, MapPin, MapPinHouse, MapPlusIcon, SearchCheckIcon, StarHalf, User2, UtensilsCrossed, Wind } from "lucide-react";
 
 export const menuItems = [
     { name: "Home", href: "/home", icon: LayoutDashboard },
@@ -13,4 +13,5 @@ export const menuItems = [
     { name: "Catering", href: "/catering", icon: UtensilsCrossed },
     { name: "AQI", href: "/aqi", icon: Wind },
     { name: "Google Rating", href: "/google-rating", icon: StarHalf },
+    { name: "States", href: "/states", icon: Globe2 },
 ];

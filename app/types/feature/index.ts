@@ -82,6 +82,7 @@ export interface IEventInitialData {
     isAddGoogleRatingSuccess: boolean;
     isAddAQIRequestSuccess: boolean;
     isAddVenueSuccess: boolean;
+    isAddStateSuccess: boolean;
 }
 
 export interface ILoadingInitialData {

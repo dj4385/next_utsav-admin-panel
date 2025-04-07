@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { ExperienceService } from "@/services/experience.service";
 import { LocationService } from "@/services/location.service";
+import { VenueService } from "@/services/venue.service";
 import { Gem, Tag } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -12,6 +13,8 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
   const [experienceList, setExperienceList] = useState<any[]>([]);
   const [stateList, setStateList] = useState<any[]>([]);
   const [locationList, setLocationList] = useState<any[]>([]);
+  const [venueList, setVenueList] = useState<any[]>([]);
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -23,6 +26,13 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
         state: selectedState || null,
       }));
       getLocationList(selectedState?._id);
+    } else if (name === "venue_name" || name === "venue") {
+      const selectedVenue = venueList.find((loc) => loc._id === value);
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        venue_name: selectedVenue?.venue_name || null,
+        venue: value,
+      }));
     } else if (name === "experience") {
       const selectedExperience = experienceList.find(
         (exp) => exp._id === value
@@ -44,6 +54,15 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
       }));
     }
   };
+
+  const getVenueList = async () => {
+    try {
+      const res: any = await VenueService.getVenues();
+      if (res && res.status == 200 && res.data.data.length) {
+        setVenueList(res.data.data);
+      }
+    } catch (error) {}
+  }
 
   const getExperienceList = async () => {
     try {
@@ -69,17 +88,20 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
     
       if (res && res.status == 200 && res?.data?.data?.length) {
         setLocationList(res.data.data);
+      } else {
+        setLocationList([]);
       }
     } catch (error) {}
   };
 
-  useEffect(() => {
-    if (!!realWeddingData) getLocationList(realWeddingData?.state?._id);
-  }, [realWeddingData]);
+  // useEffect(() => {
+  //   if (!!realWeddingData) getLocationList(realWeddingData?.state?._id);
+  // }, [realWeddingData]);
 
   useEffect(() => {
     getExperienceList();
     getStateList();
+    getVenueList();
   }, []);
 
   return (
@@ -90,16 +112,32 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 p-2">
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Name
+            Venue
           </label>
-          <Input
+          {/* <Input
             type="text"
             placeholder="Enter Venue Name"
             name="venue_name"
             onChange={handleChange}
             value={realWeddingData?.venue_name || ""}
             className="mt-1 w-full"
-          />
+          /> */}
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="venue"
+            onChange={handleChange}
+            value={realWeddingData?.venue || ""}
+          >
+            <option value="">Select Venue</option>
+            {venueList.length
+              ? venueList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.venue_name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -163,19 +201,6 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
                 ))
               : null}
           </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Property Type
-          </label>
-          <Input
-            type="text"
-            placeholder="Enter Property type"
-            name="property_type"
-            onChange={handleChange}
-            value={realWeddingData?.property_type || ""}
-            className="mt-1 w-full"
-          />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">

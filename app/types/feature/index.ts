@@ -88,3 +88,15 @@ export interface IEventInitialData {
 export interface ILoadingInitialData {
     isLoading: boolean;
 }
+
+export interface RealWeddingImageInitialData {
+    isOpen: boolean;
+    realWeddingImageModalList: IImages[];
+    realWeddingImageListItem: IImages | null;
+}
+
+export interface RealWeddingHeaderImageInitialData {
+    isOpen: boolean;
+    realWeddingHeaderImageModalList: IHeaderImages[];
+    realWeddingHeaderImageListItem: IHeaderImages | null;
+}

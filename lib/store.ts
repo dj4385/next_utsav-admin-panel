@@ -17,7 +17,10 @@ import ContactFooterSlice from "./features/contact/ContactFooterSlice";
 import EventsSlice from "./features/EventsSlice";
 import VenueHeaderImageSlice from "./features/venue/VenueHeaderImageSlice";
 import LoadingSlice from "./features/LoadingSlice";
-    
+import RealWeddingImageSlice from "./features/real-wedding/RealWeddingImageSlice";
+import RealWeddingHeaderImageSlice from "./features/real-wedding/RealWeddingHeaderImageSlice";
+
+
 const rootReducer = combineReducers({
     "EventSlice": EventSlice,
     "TestimonialSlice": TestimonialSlice,
@@ -32,7 +35,9 @@ const rootReducer = combineReducers({
     "ContactFooterSlice": ContactFooterSlice,
     "EventsSlice": EventsSlice,
     "VenueHeaderImageSlice": VenueHeaderImageSlice,
-    "LoadingSlice": LoadingSlice
+    "LoadingSlice": LoadingSlice,
+    "RealWeddingImageSlice": RealWeddingImageSlice,
+    "RealWeddingHeaderImageSlice": RealWeddingHeaderImageSlice
 })
 
 export const store = configureStore({

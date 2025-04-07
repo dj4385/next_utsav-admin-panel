@@ -13,27 +13,26 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IHeaderImage, IVenueImages } from "@/app/types/components/Venue";
-import { setVenueHeaderImageListItem, setVenueHeaderImageModal } from "@/lib/features/venue/VenueHeaderImageSlice";
+import { setRealWeddingHeaderImageListItem, setRealWeddingHeaderImageModal } from "@/lib/features/real-wedding/RealWeddingHeaderImageSlice";
 import { IHeaderImages } from "@/app/types/api/request/venue.request";
 import { Checkbox } from "@/components/ui/checkbox";
+import { IRealWeddingHeaderImage } from "@/app/types/components/RealWedding";
 
 
-
-const HeaderImage = ({
+const RealWeddingHeaderImage = ({
     setHeaderImageList,
     headerImageList
-}: IHeaderImage) => {
+}: IRealWeddingHeaderImage) => {
 
     const dispatch = useAppDispatch();
-    const { venueHeaderImageModalList } = useAppSelector((state) => state.VenueHeaderImageSlice)
+    const { realWeddingHeaderImageModalList } = useAppSelector((state) => state.RealWeddingHeaderImageSlice)
 
     const openModal = () => {
-        dispatch(setVenueHeaderImageModal(true));
+        dispatch(setRealWeddingHeaderImageModal(true));
     }
 
     const editModal = (data: IHeaderImages) => {
-        dispatch(setVenueHeaderImageListItem(data))
+        dispatch(setRealWeddingHeaderImageListItem(data))
         openModal();
     }
 
@@ -46,27 +45,27 @@ const HeaderImage = ({
     }
 
     useEffect(() => {
-        if(venueHeaderImageModalList?.length) {
-            if(venueHeaderImageModalList[0]._id) {
+        if(realWeddingHeaderImageModalList?.length) {
+            if(realWeddingHeaderImageModalList[0]._id) {
                 const data = headerImageList.map((d) =>
-                    d._id == venueHeaderImageModalList[0]._id ? {
+                    d._id == realWeddingHeaderImageModalList[0]._id ? {
                         ...d,
-                        url: venueHeaderImageModalList[0].url,
-                        alt: venueHeaderImageModalList[0].alt,
-                        is_wide: venueHeaderImageModalList[0].is_wide,
+                        url: realWeddingHeaderImageModalList[0].url,
+                        alt: realWeddingHeaderImageModalList[0].alt,
+                        is_wide: realWeddingHeaderImageModalList[0].is_wide,
                     } : d
                 );
                 setHeaderImageList([...data]);
             } else {
-                setHeaderImageList([...headerImageList, ...venueHeaderImageModalList])
+                setHeaderImageList([...headerImageList, ...realWeddingHeaderImageModalList])
                 
             }
         }
-    }, [venueHeaderImageModalList])
+    }, [realWeddingHeaderImageModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
-            <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Header Images Gallery</h2>
+            <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Real Wedding Header Images</h2>
             <div className="p-2">
                 <div className="flex justify-end items-center mb-2">
                     <Button variant="secondary" className="bg-purple-600 text-white hover:bg-purple-800" onClick={() => openModal()}>
@@ -126,4 +125,4 @@ const HeaderImage = ({
     )
 }
 
-export default HeaderImage;
+export default RealWeddingHeaderImage;

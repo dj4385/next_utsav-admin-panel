@@ -10,21 +10,18 @@ import ButtonComponent from "@/components/core/Button/Button";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, GemIcon, MapPinHouse } from "lucide-react";
 import { useRouter } from "next/navigation";
-import HeaderImage from "./HeaderImage/HeaderImage";
-import NearestAirport from "./NearestAirport/NearestAirport";
-import ThemeForm from "./ThemeForm/ThemeForm";
-import VenueForm from "./RealWeddingForm/RealWeddingForm";
-import VenuesImages from "./VenueImages/VenuesImages";
+import RealWeddingHeaderImage from "./RealWeddingHeaderImage/RealWeddingHeaderImage";
 import Meta from "./Meta/Meta";
 import { IMetaData } from "@/app/types/components/Home";
 import { RealWeddingService } from "@/services/real-wedding.service";
 import { useState } from "react";
 import RealWeddingForm from "./RealWeddingForm/RealWeddingForm";
+import RealWeddingImages from "./RealWeddingImages/RealWeddingImages";
 
 const AddRealWeddingForm = () => {
-  const [realWeddingData, setRealWeddingData] = useState<any>();
-  const [venueImagesList, setVenueImages] = useState<IImages[]>([]);
-  const [headerImageList, setHeaderImageList] = useState<IHeaderImages[]>([]);
+  const [realWeddingData, setRealWeddingData] = useState<any>(); 
+  const [realWeddingImagesList, setRealWeddingImages] = useState<IImages[]>([]);
+  const [realWeddingHeaderImageList, setRealWeddingHeaderImageList] = useState<IHeaderImages[]>([]);
   
   const [loading, setLoading] = useState<boolean>(false);
   const [metaData, setMetaData] = useState<IMetaData>({
@@ -42,7 +39,19 @@ const AddRealWeddingForm = () => {
     try {
       setLoading(true);
       const req: any = {
-        
+        ...metaData,
+        venue: realWeddingData?.venue,
+        venue_name: realWeddingData?.venue_name,
+        state: realWeddingData?.state?._id,
+        wedding_description: realWeddingData?.wedding_description,
+        wedding_theme: realWeddingData?.wedding_theme,
+        wedding_theme_name: realWeddingData?.wedding_theme_name,
+        design_style: realWeddingData?.design_style,
+        photographer: realWeddingData?.photographer,
+        experience: realWeddingData?.experience?._id,
+        location: realWeddingData?.location?._id,
+        gallery: realWeddingImagesList,
+        header_image_gallery: realWeddingHeaderImageList
       };
       const res: any = await RealWeddingService.addRealWedding(req);
       if (res?.status == 200 || res?.status == 201) {
@@ -88,15 +97,15 @@ const AddRealWeddingForm = () => {
       </div>
 
       <div className="flex flex-row mt-5">
-        <VenuesImages
-          setVenueImages={setVenueImages}
-          venueImagesList={venueImagesList}
+        <RealWeddingImages
+          setRealWeddingImages={setRealWeddingImages}
+          realWeddingImagesList={realWeddingImagesList}
         />
       </div>
       <div className="flex flex-row mt-5">
-        <HeaderImage
-          setHeaderImageList={setHeaderImageList}
-          headerImageList={headerImageList}
+        <RealWeddingHeaderImage
+          setHeaderImageList={setRealWeddingHeaderImageList}
+          headerImageList={realWeddingHeaderImageList}
         />
       </div>
       <div className="flex justify-center items-center mt-5">

@@ -1,6 +1,6 @@
 "use client"
 
-import { CalendarClock, CirclePlus, Edit2, GalleryHorizontal, GalleryHorizontalEndIcon, ScanHeart, Trash2 } from "lucide-react";
+import { CirclePlus, Edit2, GalleryHorizontalEndIcon, Trash2 } from "lucide-react";
 import {
     Table,
     TableBody,
@@ -13,24 +13,24 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IVenueImages } from "@/app/types/components/Venue";
-import { setVenueImageListItem, setVenueImageModal } from "@/lib/features/venue/VenueImageSlice";
+import { IRealWeddingImages } from "@/app/types/components/RealWedding";
+import { setRealWeddingImageListItem, setRealWeddingImageModal } from "@/lib/features/real-wedding/RealWeddingImageSlice";
 import { IImages } from "@/app/types/api/request/venue.request";
 
-const VenuesImages = ({
-    setVenueImages,
-    venueImagesList
-}: IVenueImages) => {
+const RealWeddingImages = ({
+    setRealWeddingImages,
+    realWeddingImagesList
+}: IRealWeddingImages) => {
 
     const dispatch = useAppDispatch();
-    const { venueImageModalList } = useAppSelector((state) => state.VenueImageSlice)
+    const { realWeddingImageModalList } = useAppSelector((state) => state.RealWeddingImageSlice)
 
     const openModal = () => {
-        dispatch(setVenueImageModal(true));
+        dispatch(setRealWeddingImageModal(true));
     }
 
     const editModal = (data: IImages) => {
-        dispatch(setVenueImageListItem(data))
+        dispatch(setRealWeddingImageListItem(data))
         openModal();
     }
 
@@ -38,31 +38,31 @@ const VenuesImages = ({
         if(!id) {
             return;
         }
-        const data = venueImagesList.filter((d) => d._id !== id && d.id !== id);
-        setVenueImages(data);
+        const data = realWeddingImagesList.filter((d) => d._id !== id && d.id !== id);
+        setRealWeddingImages(data);
     }
 
     useEffect(() => {
-        if(venueImageModalList?.length) {
-            if(venueImageModalList[0]._id) {
-                const data = venueImagesList.map((d) =>
-                    d._id == venueImageModalList[0]._id ? {
+        if(realWeddingImageModalList?.length) {
+            if(realWeddingImageModalList[0]._id) {
+                const data = realWeddingImagesList.map((d) =>
+                    d._id == realWeddingImageModalList[0]._id ? {
                         ...d,
-                        type: venueImageModalList[0].type,
-                        images: venueImageModalList[0].images,
+                        type: realWeddingImageModalList[0].type,
+                        images: realWeddingImageModalList[0].images,
                     } : d
                 );
-                setVenueImages([...data]);
+                setRealWeddingImages([...data]);
             } else {
-                setVenueImages([...venueImagesList, ...venueImageModalList])
+                setRealWeddingImages([...realWeddingImagesList, ...realWeddingImageModalList])
                 
             }
         }
-    }, [venueImageModalList])
+    }, [realWeddingImageModalList])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
-            <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Images</h2>
+            <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Real Wedding Images</h2>
             <div className="p-2">
                 <div className="flex justify-end items-center mb-2">
                     <Button variant="secondary" className="bg-purple-600 text-white hover:bg-purple-800" onClick={() => openModal()}>
@@ -81,7 +81,7 @@ const VenuesImages = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {venueImagesList.map((item, index) => (
+                        {realWeddingImagesList.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>
@@ -115,4 +115,4 @@ const VenuesImages = ({
     )
 }
 
-export default VenuesImages;
+export default RealWeddingImages;

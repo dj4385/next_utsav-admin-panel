@@ -18,7 +18,8 @@ import SideNav from "@/components/SideNav/SideNav";
 import Toolbar from "@/components/Toolbar/Toolbar";
 import { ReactNode } from "react";
 import Loader from "@/components/Loader/Loader";
-
+import RealWeddingHeaderImageModal from "@/components/Modals/RealWeddingHeaderImageModal";
+import RealWeddingImageModal from "@/components/Modals/RealWeddingImageModal";
 const MainLayout = ({ children }: { children: ReactNode }) => {
   // const { isAuthenticated, isLoading } = useConvexAuth();
 
@@ -55,6 +56,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <GlobalPresenceModal />
               <ContactFooterModal />
               <VenueHeaderImageModal />
+              <RealWeddingHeaderImageModal />
+              <RealWeddingImageModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

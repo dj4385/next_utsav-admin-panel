@@ -97,7 +97,6 @@ export default function FileUploader({
 
   useEffect(() => {
     if(!url) {
-      debugger
       const fileInput: any = document.querySelector('input[type="file"]');
       if (fileInput) fileInput.value = '';
       setPreview(null)

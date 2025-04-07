@@ -7,7 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { setAddLocationSuccess } from "@/lib/features/EventsSlice";
 import { useAppDispatch } from "@/lib/store";
 import { LocationService } from "@/services/location.service";
-import { ChangeEvent, useState } from "react";
+import { StateService } from "@/services/state.service";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const AddLocationForm = () => {
 
@@ -17,11 +18,13 @@ const AddLocationForm = () => {
     const [state, setState] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [locationImage, setLocationImage] = useState<string>('');
+    const [stateList, setStateList] = useState<any[]>([]);
+
 
     const { toast } = useToast();
     const dispatch = useAppDispatch();
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         if (name == 'locationTitle') {
             setLocationTitle(value);
@@ -39,6 +42,21 @@ const AddLocationForm = () => {
         }
     }
 
+    const getStateList = async () => {
+        try {
+            const res: any = await StateService.getStateList();
+            if (res && (res.status == 200 || res.status == 201)) {
+                setStateList(res.data.data);
+            }
+        } catch (error) {
+            toast({
+                title: "Error",
+                description: "Something went wrong",
+                variant: "destructive",
+            })
+        }
+    }
+
     const onSave = async () => {
         try {
             if (!locationTitle && !address && !city && !state) {
@@ -53,7 +71,7 @@ const AddLocationForm = () => {
                 return;
             }
             setLoading(true);
-            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state, image: locationImage });
+            const res: any = await LocationService.addLocation({ name: locationTitle, address, city, state_id: state, image: locationImage });
             if (res && (res.status == 200 || res.status == 201)) {
                 toast({
                     title: "Success",
@@ -84,6 +102,10 @@ const AddLocationForm = () => {
         }
     }
 
+    useEffect(() => {
+        getStateList();
+    }, [])
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 p-2">
@@ -97,7 +119,12 @@ const AddLocationForm = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">State</label>
-                    <Input type="text" placeholder="Enter State" className="mt-1 w-full" onChange={handleChange} name="state" value={state} />
+                    <select className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" name="state" onChange={handleChange} value={state}  >
+                        <option value="">Select State</option>
+                        {
+                            stateList.length ? stateList.map((loc, index) => <option key={index} value={loc._id}> {loc.name} </option>) : null
+                        }
+                    </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Address</label>

@@ -84,7 +84,7 @@ const RealWeddingHeaderImage = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {headerImageList.map((item, index) => (
+                        {headerImageList?.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>

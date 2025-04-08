@@ -81,7 +81,7 @@ const RealWeddingImages = ({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {realWeddingImagesList.map((item, index) => (
+                        {realWeddingImagesList?.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>

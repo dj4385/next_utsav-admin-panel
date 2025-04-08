@@ -109,10 +109,9 @@ const RealWeddingListing = () => {
                                 <TableHead className="text-white">S.No</TableHead>
                                 <TableHead className="text-white">Image</TableHead>
                                 <TableHead className="text-white">Name</TableHead>
-                                <TableHead className="text-white">Type</TableHead>
-                                <TableHead className="text-white">Capacity</TableHead>
-                                <TableHead className="text-white">AQI</TableHead>
-                                <TableHead className="text-white">Google Rating</TableHead>
+                                <TableHead className="text-white">Design Style</TableHead>
+                                <TableHead className="text-white">Photographer</TableHead>
+                                <TableHead className="text-white">Theme Name</TableHead>
                                 <TableHead className="text-white">Action</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -124,12 +123,11 @@ const RealWeddingListing = () => {
                                         {data?.gallery?.length ? <div className="h-[50px] w-[50px]"> <Image src={data?.gallery?.filter((gallery: any) => gallery.type == 'image')[0]?.images} alt="icon" className="h-full w-full rounded-md" width={50} height={50} /> </div> : null}
                                     </TableCell>
                                     <TableCell>{data.venue_name}</TableCell>
-                                    <TableCell>{data.venue.property_type}</TableCell>
-                                    <TableCell>{data.venue.capacity}</TableCell>
-                                    <TableCell>{data.venue.air_quality_index}</TableCell>
-                                    <TableCell>{data.venue.google_rating}</TableCell>
+                                    <TableCell>{data.design_style}</TableCell>
+                                    <TableCell>{data.photographer}</TableCell>
+                                    <TableCell>{data.wedding_theme_name}</TableCell>
                                     <TableCell>
-                                        <div className="flex items-center justify-center gap-2">
+                                        <div className="flex items-center justify-center">
                                             <Button variant="secondary" size="icon" onClick={() => edit(data)}>
                                                 <Edit2 />
                                             </Button>

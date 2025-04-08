@@ -15,4 +15,5 @@ export const menuItems = [
     { name: "AQI", href: "/aqi", icon: Wind },
     { name: "Google Rating", href: "/google-rating", icon: StarHalf },
     { name: "States", href: "/states", icon: Globe2 },
+    { name: "Footer", href: "/footer", icon: LayoutDashboard },
 ];

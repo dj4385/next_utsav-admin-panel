@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
-import { IHeaderImage, IVenueImages } from "@/app/types/components/Venue";
+import { IHeaderImage } from "@/app/types/components/Venue";
 import { setVenueHeaderImageListItem, setVenueHeaderImageModal, setVenueHeaderImageModalList } from "@/lib/features/venue/VenueHeaderImageSlice";
 import { IHeaderImages } from "@/app/types/api/request/venue.request";
 import { Checkbox } from "@/components/ui/checkbox";

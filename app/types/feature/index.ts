@@ -2,7 +2,7 @@ import { IHeaderImages, IImages, IThemes } from "../api/request/venue.request";
 import { IAboutGalleryData, IAwardList, IRealWeddingData, ITeamList } from "../components/About";
 import { IContactFooterList, IGlobalPresenceList } from "../components/Contact";
 import { IEventData, IGalleryList, ITestimonialList } from "../components/Home";
-
+import { IContactUsData, IPopularLinksData } from "../components/Foooter";
 export interface EventInitialData {
     isOpen: boolean,
     eventModalList: IEventData[]
@@ -100,3 +100,17 @@ export interface RealWeddingHeaderImageInitialData {
     realWeddingHeaderImageModalList: IHeaderImages[];
     realWeddingHeaderImageListItem: IHeaderImages | null;
 }
+
+export interface ContactUsInitialData {
+    isOpen: boolean;
+    contactUsModalList: IContactUsData[];
+    contactUsListItem: IContactUsData | null;
+}
+
+export interface PopularLinksInitialData {
+    isOpen: boolean;
+    popularLinksModalList: IPopularLinksData[];
+    popularLinksListItem: IPopularLinksData | null;
+}
+
+

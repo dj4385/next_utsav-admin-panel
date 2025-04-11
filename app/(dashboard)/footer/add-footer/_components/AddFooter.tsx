@@ -8,9 +8,9 @@ import { ArrowLeft, GemIcon, MapPinHouse } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SocialLinks from "./SocialLinks/SocialLinks";
-import { ISocialLinksData } from "@/app/types/components/Foooter";
-import ContactUs from "./ContactUs/ContactUs";
+import { ISocialLinksData, IPopularLinksData, IContactUsData } from "@/app/types/components/Foooter";
 import PopularLinks from "./PopularLinks/PopularLinks";
+import ContactUsCard from "./ContactUsCard/ContactUs";
 const AddFooter = () => {
   
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,6 +22,9 @@ const AddFooter = () => {
     youtube: "",
     logo: "",
   });
+  const [contactUs, setContactUs] = useState<IContactUsData[]>([]);
+  const [popularLinks, setPopularLinks] = useState<IPopularLinksData[]>([]);
+
 
   const router = useRouter();
 
@@ -31,9 +34,70 @@ const AddFooter = () => {
 
   const onSaveChanges = async () => {
     try {
+
+      if (!socialLinks.logo) {
+        toast({
+          title: "Error",
+          description: "Please upload logo",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (!socialLinks.facebook || !socialLinks.instagram || !socialLinks.twitter || !socialLinks.linkedin || !socialLinks.youtube) {
+        toast({
+          title: "Error", 
+          description: "Please fill all social links",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (!socialLinks.facebook.startsWith('https://') || 
+          !socialLinks.instagram.startsWith('https://') || 
+          !socialLinks.twitter.startsWith('https://') || 
+          !socialLinks.linkedin.startsWith('https://') || 
+          !socialLinks.youtube.startsWith('https://')) {
+        toast({
+          title: "Error",
+          description: "All social links must start with https://",
+          variant: "destructive", 
+        });
+        return;
+      }
+
+      if (contactUs.length === 0) {
+        toast({
+          title: "Error",
+          description: "Please add at least one contact us card",
+          variant: "destructive",
+        }); 
+        return;
+      }
+
+      if (popularLinks.length === 0) {
+        toast({
+          title: "Error", 
+          description: "Please add at least one popular link",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      
+
       setLoading(true);
       const req: any = {
-        
+        logo: socialLinks.logo,
+        socialLinks: {
+          facebook: socialLinks.facebook,
+          instagram: socialLinks.instagram,
+          twitter: socialLinks.twitter,
+          linkedin: socialLinks.linkedin,
+          youtube: socialLinks.youtube,
+        },
+        contactUs: contactUs,
+        popularLinks: popularLinks,
       };
       const res: any = await FooterService.addFooter(req);
       if (res?.status == 200 || res?.status == 201) {
@@ -75,11 +139,11 @@ const AddFooter = () => {
         <SocialLinks socialLinks={socialLinks} setSocialLinks={setSocialLinks} />
       </div>
       <div className="flex flex-row mt-5">
-        <ContactUs />
+        <ContactUsCard contactUs={contactUs} setContactUs={setContactUs} />
       </div>
 
       <div className="flex flex-row mt-5">
-        <PopularLinks />
+        <PopularLinks popularLinks={popularLinks} setPopularLinks={setPopularLinks} />
       </div>
       <div className="flex justify-center items-center mt-5">
         <ButtonComponent

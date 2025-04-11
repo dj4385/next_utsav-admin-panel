@@ -21,6 +21,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "utsav-kestone-public.s3.amazonaws.com"
+            },
+            {
+                protocol: "https",
+                hostname: "cdn.example.com"
             }
         ]
     },

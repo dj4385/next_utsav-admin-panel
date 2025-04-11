@@ -20,6 +20,9 @@ import { ReactNode } from "react";
 import Loader from "@/components/Loader/Loader";
 import RealWeddingHeaderImageModal from "@/components/Modals/RealWeddingHeaderImageModal";
 import RealWeddingImageModal from "@/components/Modals/RealWeddingImageModal";
+import ContactUsCardModal from "@/components/Modals/ContactUsCardModal";
+import PopularLinkModal from "@/components/Modals/PopularLinkModal";
+
 const MainLayout = ({ children }: { children: ReactNode }) => {
   // const { isAuthenticated, isLoading } = useConvexAuth();
 
@@ -58,6 +61,8 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
               <VenueHeaderImageModal />
               <RealWeddingHeaderImageModal />
               <RealWeddingImageModal />
+              <ContactUsCardModal />
+              <PopularLinkModal />
               {children}
             </ProtectedRoute>
           </ReduxProvider>

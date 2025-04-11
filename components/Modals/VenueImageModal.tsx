@@ -52,7 +52,7 @@ const VenueImageModal = () => {
             alt: '',
             url: '',
             is_wide: false,
-            type: 'image',
+            type: '',
             name: '',
         }
     })
@@ -74,6 +74,8 @@ const VenueImageModal = () => {
     const handleClose = () => {
         dispatch(setVenueImageModal(false))
         dispatch(setVenueImageListItem(null))
+        onSelectType('');
+        setImageUrl('');
         reset()
     }
 

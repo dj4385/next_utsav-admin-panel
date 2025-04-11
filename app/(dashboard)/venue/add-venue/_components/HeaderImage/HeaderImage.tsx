@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
 import { IHeaderImage, IVenueImages } from "@/app/types/components/Venue";
-import { setVenueHeaderImageListItem, setVenueHeaderImageModal } from "@/lib/features/venue/VenueHeaderImageSlice";
+import { setVenueHeaderImageListItem, setVenueHeaderImageModal, setVenueHeaderImageModalList } from "@/lib/features/venue/VenueHeaderImageSlice";
 import { IHeaderImages } from "@/app/types/api/request/venue.request";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -63,6 +63,13 @@ const HeaderImage = ({
             }
         }
     }, [venueHeaderImageModalList])
+
+    useEffect(() => {
+        return () => {
+            dispatch(setVenueHeaderImageModalList([]));
+            dispatch(setVenueHeaderImageListItem(null));
+        }
+    }, [])
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

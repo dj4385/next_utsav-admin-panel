@@ -48,9 +48,14 @@ const ThemeForm = ({
                 const data = themeFormList.map((d) =>
                     d._id == themeModalList[0]._id ? {
                         ...d,
+                        name:themeModalList[0].name,
+                        tab_name:themeModalList[0].tab_name,
+                        description:themeModalList[0].description,
                         theme_img_gallery: themeModalList[0].theme_img_gallery,
                     } : d
                 );
+
+                
                 setThemeFormList([...data]);
             } else {
                 setThemeFormList([...themeFormList, ...themeModalList])

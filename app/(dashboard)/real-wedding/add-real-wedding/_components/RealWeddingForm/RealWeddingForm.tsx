@@ -15,28 +15,44 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
   const [locationList, setLocationList] = useState<any[]>([]);
   const [venueList, setVenueList] = useState<any[]>([]);
 
-  const handleChange = (
+  const handleChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    if (name === "state") {
+  
+    if (name === "venue") {
+      const selectedVenue = venueList.find((v) => v._id === value);
+      console.log(selectedVenue);
+      if (selectedVenue) {
+        // Fetch location list based on selected venue's state
+        await getLocationList(selectedVenue?.state?._id);
+  
+        setRealWeddingData((prev: any) => ({
+          ...prev,
+          venue: selectedVenue._id,
+          venue_name: selectedVenue.venue_name || null,
+          state: selectedVenue.state.name || null,
+          location: selectedVenue.location.name || null,
+          experience: selectedVenue.experience.name|| null,
+          state_id: selectedVenue.state._id || null,
+          location_id: selectedVenue.location._id || null,
+          experience_id: selectedVenue.experience._id|| null
+        }));
+      }
+    } else if (name === "state") {
       const selectedState = stateList.find((loc) => loc._id === value);
       setRealWeddingData((prev: any) => ({
         ...prev,
         state: selectedState || null,
       }));
       getLocationList(selectedState?._id);
-    } else if (name === "venue_name" || name === "venue") {
-      const selectedVenue = venueList.find((loc) => loc._id === value);
+    } else if (name === "venue_name") {
       setRealWeddingData((prev: any) => ({
         ...prev,
-        venue_name: selectedVenue?.venue_name || null,
-        venue: value,
+        venue_name: value,
       }));
     } else if (name === "experience") {
-      const selectedExperience = experienceList.find(
-        (exp) => exp._id === value
-      );
+      const selectedExperience = experienceList.find((exp) => exp._id === value);
       setRealWeddingData((prev: any) => ({
         ...prev,
         experience: selectedExperience || null,
@@ -54,7 +70,7 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
       }));
     }
   };
-
+  
   const getVenueList = async () => {
     try {
       const res: any = await VenueService.getVenues();
@@ -102,7 +118,14 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
     getExperienceList();
     getStateList();
     getVenueList();
+    
   }, []);
+
+  // useEffect(()=>{
+  //   if(realWeddingData?.location){
+  //     setLocationList(realWeddingData.location);
+  //   }
+  // })
 
   return (
     <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white mt-4">
@@ -143,11 +166,21 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
           <label className="block text-sm font-medium text-gray-700">
             State
           </label>
-          <select
+
+          <Input
+            type="text"
+            placeholder="Enter State"
+            name="state"
+            onChange={handleChange}
+            value={realWeddingData?.state || ""}
+            className="mt-1 w-full"
+            readOnly
+          />
+          {/* <select
             className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             name="state"
             onChange={handleChange}
-            value={realWeddingData?.state?._id || ""}
+            value={realWeddingData?.state || ""}
           >
             <option value="">Select State</option>
             {stateList.length
@@ -158,17 +191,26 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
                   </option>
                 ))
               : null}
-          </select>
+          </select> */}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Location
           </label>
-          <select
+          <Input
+            type="text"
+            placeholder="Enter location"
+            name="location"
+            onChange={handleChange}
+            value={realWeddingData?.location || ""}
+            className="mt-1 w-full"
+            readOnly
+          />
+          {/* <select
             className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             name="location"
             onChange={handleChange}
-            value={realWeddingData?.location?._id || ""}
+            value={realWeddingData?.location || ""}
           >
             <option value="">Select Location</option>
             {locationList.length
@@ -179,17 +221,27 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
                   </option>
                 ))
               : null}
-          </select>
+          </select> */}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Experience
           </label>
-          <select
+          <Input
+            type="text"
+            placeholder="Enter Experience"
+            name="experience"
+            onChange={handleChange}
+            value={realWeddingData?.experience || ""}
+            className="mt-1 w-full"
+            readOnly
+          />
+          
+          {/* <select
             className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             name="experience"
             onChange={handleChange}
-            value={realWeddingData?.experience?._id || ""}
+            value={realWeddingData?.experience || ""}
           >
             <option value="">Select Experience</option>
             {experienceList.length
@@ -200,7 +252,7 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
                   </option>
                 ))
               : null}
-          </select>
+          </select> */}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">

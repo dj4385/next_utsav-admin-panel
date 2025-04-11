@@ -102,8 +102,8 @@ const AboutForm = () => {
     const getAboutpage = async () => {
         try {
             const res: any = await AboutService.getAboutPage();
-         
-            if (res && res.status == 200 && res.data.data.length) {
+            
+            if (res && res?.status == 200 && !!res?.data?.data) {
                 const {
                     banner, alt_banner, banner_heading, banner_text,
                     real_weddings_image, alt_real_weddings_image, real_weddings_text, real_wedding_button,
@@ -118,9 +118,9 @@ const AboutForm = () => {
                     team_section, managing_team,
                     pre_footer_image, pre_alt_footer_image, pre_footer_text,
                     meta_title, meta_description, meta_image
-                } = res.data.data[0];
+                } = res.data.data;
 
-                setAboutPageData(res.data.data[0]);
+                setAboutPageData(res.data.data);
                 setBannerData({
                     alt_banner,
                     banner,
@@ -212,8 +212,8 @@ const AboutForm = () => {
 
     useEffect(() => {
         getAboutpage()
-    }, [])
-
+    }, []);
+    
     return (
         <div className="flex flex-col rounded-lg bg-gray-50 p-2">
             <div className="w-full">

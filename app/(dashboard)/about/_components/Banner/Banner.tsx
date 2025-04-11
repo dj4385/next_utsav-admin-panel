@@ -26,6 +26,7 @@ const Banner = ({
             banner: url,
         }));
     }
+   
 
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">

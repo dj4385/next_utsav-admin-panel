@@ -40,9 +40,8 @@ const UpdateRealWeddingForm = ({ id }: { id: string }) => {
   const getRealWeddingDetail = async () => {
     try {
       const res: any = await RealWeddingService.getRealWeddingDetail(id);
-      if (res && res.status == 200) {
-        console.log(res.data.data,"res");
-        
+      if (res && res.status == 200) { 
+        console.log(res.data?.data?.venue.state,"state");  
         setRealWeddingApiResponse(res.data.data);
 
         const metaData = {
@@ -54,16 +53,16 @@ const UpdateRealWeddingForm = ({ id }: { id: string }) => {
 
         // ✅ Properly set the realWeddingData
         setRealWeddingData({
-          venue: res.data?.data?.venue,
+          venue: res.data?.data?.venue._id,
           venue_name: res.data?.data?.venue_name,
-          state: res.data?.data?.state,
+          state: res.data?.data?.venue?.state?.name,
           wedding_theme:res.data?.data?.wedding_theme,
           wedding_theme_name: res.data?.data?.wedding_theme_name,
           design_style: res.data?.data?.design_style,
           photographer: res.data?.data?.photographer,
           wedding_description: res.data?.data?.wedding_description,
-          experience: res.data?.data?.experience,
-          location: res.data?.data?.location,
+          experience: res.data?.data?.venue?.experience?.name,
+          location: res.data?.data?.venue?.location?.name,
         });
 
         setRealWeddingImages(res.data?.data?.gallery);
@@ -125,6 +124,7 @@ const UpdateRealWeddingForm = ({ id }: { id: string }) => {
     }
   }, [id]);
 
+  console.log(setRealWeddingData,realWeddingData);
   return (
     <div className="flex flex-col rounded-lg bg-gray-50 p-2">
       <div className="w-full">

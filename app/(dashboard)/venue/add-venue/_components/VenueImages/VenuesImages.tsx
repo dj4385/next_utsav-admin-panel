@@ -50,6 +50,9 @@ const VenuesImages = ({
                         ...d,
                         type: venueImageModalList[0].type,
                         images: venueImageModalList[0].images,
+                        alt:venueImageModalList[0].alt,
+                        name:venueImageModalList[0].name,
+                        video:venueImageModalList[0].video,
                     } : d
                 );
                 setVenueImages([...data]);

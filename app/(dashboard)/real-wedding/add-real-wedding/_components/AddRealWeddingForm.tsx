@@ -38,21 +38,24 @@ const AddRealWeddingForm = () => {
   const onSaveChanges = async () => {
     try {
       setLoading(true);
+      console.log(realWeddingData,"realWeddingData");
       const req: any = {
         ...metaData,
         venue: realWeddingData?.venue,
         venue_name: realWeddingData?.venue_name,
-        state: realWeddingData?.state?._id,
+        state: realWeddingData?.state_id,
         wedding_description: realWeddingData?.wedding_description,
         wedding_theme: realWeddingData?.wedding_theme,
         wedding_theme_name: realWeddingData?.wedding_theme_name,
         design_style: realWeddingData?.design_style,
         photographer: realWeddingData?.photographer,
-        experience: realWeddingData?.experience?._id,
-        location: realWeddingData?.location?._id,
+        experience: realWeddingData?.experience_id,
+        location: realWeddingData?.location_id,
         gallery: realWeddingImagesList,
         header_image_gallery: realWeddingHeaderImageList
       };
+
+      console.log(req);
       const res: any = await RealWeddingService.addRealWedding(req);
       if (res?.status == 200 || res?.status == 201) {
         toast({

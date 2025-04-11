@@ -59,7 +59,7 @@ const UpdateVenueForm = ({ id }: { id: string }) => {
           venue_name: res.data.venue_name,
           experience: res.data.experience,
           state: {
-            _id: res?.data?.state,
+            _id: res?.data?.state._id,
           },
           location: res.data.location,
           meta_title: res?.data?.meta_title,

@@ -72,10 +72,12 @@ const VenueForm = ({ venueData, setVenueData }: any) => {
       }
     } catch (error) {}
   };
-
   useEffect(() => {
-    if (!!venueData) getLocationList(venueData?.state?._id);
-  }, [venueData]);
+    if (venueData?.state?._id) {
+      getLocationList(venueData.state._id);
+    }
+  }, [venueData?.state?._id]);
+  
 
   useEffect(() => {
     getExperienceList();

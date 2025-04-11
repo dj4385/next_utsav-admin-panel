@@ -26,7 +26,6 @@ const DestinationFields = ({
     }
 
     useEffect(() => {
-        console.log(destinationData);
     }, [destinationData]);
 
     return (

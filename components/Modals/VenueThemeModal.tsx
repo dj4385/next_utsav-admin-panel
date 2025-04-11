@@ -72,11 +72,17 @@ const VenueThemeModal = () => {
             venueThemeData = {
                 ...data,
                 _id: themeListItem._id,
-                theme_img_gallery: data.theme_img_gallery
+                name:data?.name,
+                tab_name:data?.tab_name,
+                description:data?.description,
+                theme_img_gallery: data?.theme_img_gallery
             }
         } else {
             venueThemeData = {
                 ...data,
+                name:data?.name,
+                tab_name:data?.tab_name,
+                description:data?.description,
                 theme_img_gallery: data.theme_img_gallery,
                 id: uuidv4()
             }

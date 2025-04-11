@@ -14,7 +14,7 @@ import FileUploader from "../FileUploader/FileUploader"
 import { useForm } from "react-hook-form"
 import ButtonComponent from "../core/Button/Button"
 import { useEffect, useState } from "react"
-import { IRealWeddings } from "@/app/types/api/request/venue.request"
+// import { IRealWeddings } from "@/app/types/api/request/venue.request"
 import { setRealWeddingListItem, setRealWeddingModal, setRealWeddingModalList } from "@/lib/features/venue/RealWeddingSlice"
 
 const RealWeddingModal = () => {
@@ -27,7 +27,7 @@ const RealWeddingModal = () => {
     const onSubmit = (data: any) => {
         setLoading(true);
 
-        let realWeddingData: IRealWeddings;
+        let realWeddingData: any;
 
         if (realWeddingListItem) {
             realWeddingData = {

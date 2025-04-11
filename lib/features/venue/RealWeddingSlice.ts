@@ -1,8 +1,8 @@
-import { IRealWeddings } from "@/app/types/api/request/venue.request";
-import { RealWeddingInitialData } from "@/app/types/feature";
+// import { IRealWeddings } from "@/app/types/api/request/venue.request";
+// import { RealWeddingInitialData } from "@/app/types/feature";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: RealWeddingInitialData = {
+const initialState: any = {
     isOpen: false,
     realWeddingListItem: null,
     realWeddingModalList: []
@@ -12,13 +12,13 @@ const RealWeddingSlice = createSlice({
     name: "RealWeddingSlice",
     initialState,
     reducers: {
-        setRealWeddingModal: (state: RealWeddingInitialData = initialState, action: PayloadAction<boolean>) => {
+        setRealWeddingModal: (state: any = initialState, action: PayloadAction<boolean>) => {
             state.isOpen = action.payload;
         },
-        setRealWeddingModalList: (state: RealWeddingInitialData = initialState, action: PayloadAction<IRealWeddings[]>) => {
+        setRealWeddingModalList: (state: any = initialState, action: PayloadAction<any[]>) => {
             state.realWeddingModalList = action.payload;
         },
-        setRealWeddingListItem: (state: RealWeddingInitialData = initialState, action: PayloadAction<IRealWeddings | null>) => {
+        setRealWeddingListItem: (state: any = initialState, action: PayloadAction<any | null>) => {
             state.realWeddingListItem = action.payload
         },
     }

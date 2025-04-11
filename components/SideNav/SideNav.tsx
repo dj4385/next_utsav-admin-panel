@@ -3,11 +3,19 @@
 import { menuItems } from "@/app/data/navbar-data";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import logo from "@/public/images/logo-circle.webp"
+import { useEffect } from "react";
 
 const SideNav = () => {
+    const router = useRouter();
     const pathname = usePathname();
+
+    useEffect(() => {
+        menuItems.forEach(item => {
+          router.prefetch(item.href);
+        });
+      }, []);
 
     return (
         <div className="flex">

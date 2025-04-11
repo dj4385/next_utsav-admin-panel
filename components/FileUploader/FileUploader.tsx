@@ -32,11 +32,10 @@ export default function FileUploader({
     if (!file) return;
 
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    const allowedImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     
     if(urlType == 'image') {
       const imageExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
-      if (!allowedImageExtensions.includes(fileExtension)) {
+      if (!imageExtension.includes(fileExtension)) {
         toast({
           title: "Error",
           description: `Only ${imageExtension} files are allowed`,
@@ -49,7 +48,7 @@ export default function FileUploader({
     } 
     if(urlType == 'video') {
       const videoExtension: any = process.env.NEXT_PUBLIC_VIDEO_EXTENSION;
-      if (!allowedImageExtensions.includes(fileExtension)) {
+      if (!videoExtension.includes(fileExtension)) {
         toast({
           title: "Error",
           description: `Only ${videoExtension} files are allowed`,

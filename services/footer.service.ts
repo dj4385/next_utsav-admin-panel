@@ -9,6 +9,16 @@ export class FooterService {
             return null;
         }
     }
+
+    static async getFooterDetail(id: string) {
+        try {
+            const res = await api.get(`/home/footer/${id}`);
+            return res;
+        } catch (error) {
+            return null;
+        }
+    } 
+
     static async addFooter(data: any) {
         try {
             const res = await api.post('/home/footer', data);
@@ -17,9 +27,9 @@ export class FooterService {
             return null;
         }   
     }
-    static async updateFooter(data: any) {
+    static async updateFooter(id: string, data: any) {
         try {
-            const res = await api.put('/home/footer', data);
+            const res = await api.put(`/home/footer/${id}`, data);
             return res;
         } catch (error) {
             return null;

@@ -12,7 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
-import { Gem, GemIcon, Trash2 } from "lucide-react";
+import { Gem, GemIcon, Pencil, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { FooterService } from "@/services/footer.service";
 import { useRouter } from "next/navigation";
@@ -112,6 +112,9 @@ const FooterList = () => {
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center justify-end gap-2">
+                                            <Button variant="outline" size="icon" onClick={() => edit(item)}>
+                                                <Pencil />
+                                            </Button>
                                             <Button variant="destructive" size="icon" onClick={() => deleteData(item._id)}>
                                                 <Trash2 />
                                             </Button>

@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { ExperienceService } from "@/services/experience.service";
 import { LocationService } from "@/services/location.service";
 import { VenueService } from "@/services/venue.service";
+import { DesignService } from "@/services/design.service";
+import { PhotographerService } from "@/services/photographer.service";
 import { Gem, Tag } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -14,6 +16,9 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
   const [stateList, setStateList] = useState<any[]>([]);
   const [locationList, setLocationList] = useState<any[]>([]);
   const [venueList, setVenueList] = useState<any[]>([]);
+  const [themeList, setThemeList] = useState<any[]>([]);
+  const [designList, setDesignList] = useState<any[]>([]);
+  const [photographerList, setPhotographerList] = useState<any[]>([]);
 
   const handleChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -24,6 +29,7 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
       const selectedVenue = venueList.find((v) => v._id === value);
       console.log(selectedVenue);
       if (selectedVenue) {
+        setThemeList(selectedVenue.theme_options);
         // Fetch location list based on selected venue's state
         await getLocationList(selectedVenue?.state?._id);
   
@@ -39,6 +45,14 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
           experience_id: selectedVenue.experience._id|| null
         }));
       }
+    } else if (name === 'wedding_theme') {
+      const selectedTheme = themeList.find((loc) => loc._id === value);
+      setRealWeddingData((prev: any) => ({
+        ...prev,
+        wedding_theme: selectedTheme._id || null,
+        wedding_theme_name: selectedTheme?.name || null,
+        wedding_description: selectedTheme?.description || null,
+      }));
     } else if (name === "state") {
       const selectedState = stateList.find((loc) => loc._id === value);
       setRealWeddingData((prev: any) => ({
@@ -110,15 +124,30 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
     } catch (error) {}
   };
 
-  // useEffect(() => {
-  //   if (!!realWeddingData) getLocationList(realWeddingData?.state?._id);
-  // }, [realWeddingData]);
+  const getDesignList = async () => {
+    try {
+      const res: any = await DesignService.getDesignList();
+      if (res && res.status == 200 && res.data.length) {
+        setDesignList(res.data);
+      }
+    } catch (error) {}
+  }
+
+  const getPhotographerList = async () => {
+    try {
+      const res: any = await PhotographerService.getPhotographerList();
+      if (res && res.status == 200 && res?.data?.data?.length) {
+        setPhotographerList(res.data.data);
+      }
+    } catch (error) {}
+  }
 
   useEffect(() => {
     getExperienceList();
     getStateList();
     getVenueList();
-    
+    getDesignList();
+    getPhotographerList();
   }, []);
 
   // useEffect(()=>{
@@ -258,27 +287,56 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
           <label className="block text-sm font-medium text-gray-700">
             Design Style
           </label>
-          <Input
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="design_style"
+            onChange={handleChange}
+            value={realWeddingData?.design_style || ""}
+          >
+            <option value="">Select Design Style</option>
+            {designList.length
+              ? designList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
+          {/* <Input
             type="text"
             placeholder="Enter Design Style"
             name="design_style"
             onChange={handleChange}
             value={realWeddingData?.design_style || ""}
             className="mt-1 w-full"
-          />
+          /> */}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Photographer
           </label>
-          <Input
-            type="text"
-            placeholder="Enter Photographer"
+          <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             name="photographer"
             onChange={handleChange}
             value={realWeddingData?.photographer || ""}
+          >
+            <option value="">Select Photographer</option>
+            {photographerList.length
+              ? photographerList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
+          {/* <Input
+            type="text"
+            placeholder="Enter Photographer"
             className="mt-1 w-full"
-          />
+          /> */}
         </div>
       </div>
       <Separator className="mt-4" />
@@ -291,14 +349,30 @@ const RealWeddingForm = ({ realWeddingData, setRealWeddingData }: any) => {
             <label className="block text-sm font-medium text-gray-700">
               Wedding Theme
             </label>
-            <Input
+            {/* <Input
               type="text"
               placeholder="Enter Wedding Theme"
               name="wedding_theme"
               onChange={handleChange}
               value={realWeddingData?.wedding_theme || ""}
               className="mt-1 w-full"
-            />
+            /> */}
+            <select
+            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            name="wedding_theme"
+            onChange={handleChange}
+            value={realWeddingData?.wedding_theme || ""}
+          >
+            <option value="">Select Wedding Theme</option>
+            {themeList.length
+              ? themeList.map((loc, index) => (
+                  <option key={index} value={loc._id}>
+                    {" "}
+                    {loc.name}{" "}
+                  </option>
+                ))
+              : null}
+          </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">

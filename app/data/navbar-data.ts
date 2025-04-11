@@ -1,6 +1,6 @@
 import {
     Contact, Fullscreen, GemIcon, Globe2, LayoutDashboard, Lightbulb, MapPin,
-    MapPinHouse, MapPlusIcon, SearchCheckIcon, StarHalf, User2, UtensilsCrossed, Wind, Camera
+    MapPinHouse, MapPlusIcon, SearchCheckIcon, StarHalf, User2, UtensilsCrossed, Wind, Camera, Component
 } from "lucide-react";
 
 export const menuItems = [
@@ -11,7 +11,7 @@ export const menuItems = [
     { name: "Venue", href: "/venue", icon: MapPinHouse },
     { name: "Real Wedding", href: "/real-wedding", icon: GemIcon },
     { name: "Photographer", href: "/photographer", icon: Camera },
-    { name: "Design", href: "/design", icon: Camera },
+    { name: "Design", href: "/design", icon: Component },
     { name: "Venue Search Page", href: "/search-venue", icon: SearchCheckIcon },
     { name: "Experience", href: "/experience", icon: Lightbulb },
     { name: "Location", href: "/location", icon: MapPlusIcon },

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
 import { IRealWeddingImages } from "@/app/types/components/RealWedding";
-import { setRealWeddingImageListItem, setRealWeddingImageModal } from "@/lib/features/real-wedding/RealWeddingImageSlice";
+import { setRealWeddingImageListItem, setRealWeddingImageModal, setRealWeddingImageModalList } from "@/lib/features/real-wedding/RealWeddingImageSlice";
 import { IImages } from "@/app/types/api/request/venue.request";
 
 const RealWeddingImages = ({
@@ -63,8 +63,8 @@ const RealWeddingImages = ({
 
     useEffect(() => {
         return () => {
-            dispatch(setRealWeddingImages([]));
-        }
+            dispatch(setRealWeddingImageModalList([]));
+        }   
     }, [])
 
     return (

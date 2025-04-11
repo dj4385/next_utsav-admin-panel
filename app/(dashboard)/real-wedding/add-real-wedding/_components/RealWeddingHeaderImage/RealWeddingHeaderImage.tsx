@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
 import { IHeaderImage, IVenueImages } from "@/app/types/components/Venue";
-import { setVenueHeaderImageListItem, setVenueHeaderImageModal } from "@/lib/features/venue/VenueHeaderImageSlice";
+import { setVenueHeaderImageListItem, setVenueHeaderImageModal, setVenueHeaderImageModalList } from "@/lib/features/venue/VenueHeaderImageSlice";
 import { IHeaderImages } from "@/app/types/api/request/venue.request";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -66,7 +66,7 @@ const RealWeddingHeaderImage = ({
 
     useEffect(() => {
         return () => {
-            dispatch(setVenueHeaderImageModal(false));
+            dispatch(setVenueHeaderImageModalList([]));
             dispatch(setVenueHeaderImageListItem(null));
         }
     }, [])

@@ -83,6 +83,8 @@ export interface IEventInitialData {
     isAddAQIRequestSuccess: boolean;
     isAddVenueSuccess: boolean;
     isAddStateSuccess: boolean;
+    isAddDesignSuccess: boolean;
+    isAddPhotographerSuccess: boolean;
 }
 
 export interface ILoadingInitialData {

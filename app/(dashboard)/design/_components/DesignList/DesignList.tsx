@@ -6,10 +6,9 @@ import { useAppSelector } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 import { useAppDispatch } from "@/lib/store";
 import { useState } from "react";
-import { CateringService } from "@/services/catering.service";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { Trash2, Pencil } from "lucide-react";
 import { DesignService } from "@/services/design.service";
 
 const DesignList = () => {

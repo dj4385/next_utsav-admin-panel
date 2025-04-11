@@ -62,6 +62,8 @@ const AddRealWeddingForm = () => {
           title: "Real Wedding Added Successfully",
           description: res.message,
         });
+        setRealWeddingImages([]);
+        setRealWeddingHeaderImageList([]);
         back();
       } else {
         toast({

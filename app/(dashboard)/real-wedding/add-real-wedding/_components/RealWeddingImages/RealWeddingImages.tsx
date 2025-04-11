@@ -60,6 +60,13 @@ const RealWeddingImages = ({
         }
     }, [realWeddingImageModalList])
 
+
+    useEffect(() => {
+        return () => {
+            dispatch(setRealWeddingImages([]));
+        }
+    }, [])
+
     return (
         <div className="border-[2px] rounded-lg overflow-hidden w-full bg-white">
             <h2 className="flex flex-row gap-2 p-2 bg-purple-700 text-white items-center text-lg font-medium mb-3"> <GalleryHorizontalEndIcon /> Real Wedding Images</h2>

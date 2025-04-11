@@ -11,7 +11,7 @@ export default function FileUploader({
   urlType,
   onFileUpload
 }: IFileUploader) {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<any>(null);
   const [preview, setPreview] = useState<any>(null);
   const [allowedFileExt, setAllowedFileExt] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
@@ -30,6 +30,36 @@ export default function FileUploader({
   
   const handleUpload = async () => {
     if (!file) return;
+
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    const allowedImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    
+    if(urlType == 'image') {
+      const imageExtension: any = process.env.NEXT_PUBLIC_IMAGE_EXTENSION;
+      if (!allowedImageExtensions.includes(fileExtension)) {
+        toast({
+          title: "Error",
+          description: `Only ${imageExtension} files are allowed`,
+          variant: "destructive"
+        });
+        setFile(null);
+        setPreview(null);
+        return;
+      }
+    } 
+    if(urlType == 'video') {
+      const videoExtension: any = process.env.NEXT_PUBLIC_VIDEO_EXTENSION;
+      if (!allowedImageExtensions.includes(fileExtension)) {
+        toast({
+          title: "Error",
+          description: `Only ${videoExtension} files are allowed`,
+          variant: "destructive"
+        });
+        setFile(null);
+        setPreview(null);
+        return;
+      }
+    }
     
     const formData = new FormData();
     formData.append("image", file);
